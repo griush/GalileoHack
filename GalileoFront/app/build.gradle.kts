@@ -46,6 +46,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
    // implementation("com.google.android.gms:play-services-location:16.0.0")
    // implementation("com.google.guava:guava:16+")
 
