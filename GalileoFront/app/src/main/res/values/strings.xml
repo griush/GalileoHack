@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Galileo Mastermind Boilerplate</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Settings</string>
+
+</resources>
