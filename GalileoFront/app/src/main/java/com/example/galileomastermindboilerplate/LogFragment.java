@@ -32,7 +32,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     public Activity activity;
 
-    private List<String> mData;
+    private List<SatelliteWidgetEntryData> mData;
     private List<Integer>mIcon;
     private RecyclerView recyclerView;
     private RecyclerViewAdapter adapter;
@@ -82,6 +82,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 //                mData = new ArrayList<>();
 //                mIcon = new ArrayList<>();
             // Set layout manager
+            mData.clear();
             adapter = new RecyclerViewAdapter(mData, mIcon);
             recyclerView.setAdapter(adapter);
 
@@ -91,27 +92,35 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
             for (GnssMeasurement measurement : event.getMeasurements()) {
                 builder.append(toStringMeasurement(measurement));
+                // System.out.println(event.getMeasurements().size());
                 builder.append("\n");
 
-                mData.add(builder.toString());
+                System.out.println("LOLOLOLOLOLOLOLOLOLO");
+                System.out.println(measurement.getSvid());
+
+                SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
+                item.SatelliteNumber = String.valueOf(measurement.getSvid());
+                item.Frequency = String.valueOf(measurement.getCarrierFrequencyHz());
+                item.ReceptionForce = String.valueOf(measurement.getSnrInDb());
+
+                mData.add(item);
                 mIcon.add(R.drawable.rawmeas);
 
                 adapter.notifyDataSetChanged();
 
             }
-            recyclerView.scrollToPosition(adapter.getItemCount() -1);
+
+            // recyclerView.scrollToPosition(adapter.getItemCount() -1);
 
         });
-
-
-
-
     }
 
 
     private String toStringMeasurement(GnssMeasurement measurement) {
+       return "";
+       /*
         final String format = "   %-4s = %s\n";
-        StringBuilder builder = new StringBuilder("GnssMeasurement:\n");
+        StringBuilder builder = new StringBuilder("Fuck:\n");
         DecimalFormat numberFormat = new DecimalFormat("#0.000");
         DecimalFormat numberFormat1 = new DecimalFormat("#0.000E00");
         builder.append(String.format(format, "Svid", measurement.getSvid()));
@@ -206,7 +215,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             }
         }
 
-        return builder.toString();
+        return builder.toString();*/
     }
 
     @Override

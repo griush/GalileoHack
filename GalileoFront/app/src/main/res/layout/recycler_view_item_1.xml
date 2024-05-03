@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/aa"
     android:layout_width="match_parent"
@@ -7,19 +8,86 @@
     android:orientation="horizontal"
     android:padding="8dp">
 
-  <ImageView
-      android:id="@+id/imageView1"
-      android:layout_width="50dp"
-      android:layout_height="50dp"
-      tools:src="@drawable/ic_notifications_black_24dp"
-      tools:srcCompat="@drawable/ic_launcher_foreground" />
-
-  <TextView
-      android:id="@+id/textView1"
-      android:layout_width="wrap_content"
+  <LinearLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_gravity="center"
-      android:padding="5dp"
-      android:text="Sample #1"
-      android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+      android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical">
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/SatelliteNumberHeader"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Satellite Id: " />
+
+        <TextView
+            android:id="@+id/SatelliteNumberDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="13" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/FrequencyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Frequency:" />
+
+        <TextView
+            android:id="@+id/FrequencyDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="420.69GHz" />
+
+      </LinearLayout>
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:layout_weight="0"
+          android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/SignalStrengthLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            android:text="Signal Strength: " />
+
+        <TextView
+            android:id="@+id/SignalStrengthDisplay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="-33.0dB" />
+      </LinearLayout>
+    </LinearLayout>
+  </LinearLayout>
 </LinearLayout>

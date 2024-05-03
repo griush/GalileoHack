@@ -1,6 +1,7 @@
 package com.example.galileomastermindboilerplate;
 
 
+import android.location.GnssMeasurement;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +15,11 @@ import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
 
-    private List<String> mData;
+    private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
 
 
-    public RecyclerViewAdapter(List<String> data, List<Integer> icon) {
+    public RecyclerViewAdapter(List<SatelliteWidgetEntryData> data, List<Integer> icon) {
         this.mData = data;
         this.mIcon = icon;
 
@@ -32,11 +33,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        String item = mData.get(position);
+        SatelliteWidgetEntryData item = mData.get(position);
         int icon = mIcon.get(position);
 
-        holder.textView.setText(item);
-        holder.imageView.setImageResource(icon);
+        try {
+                holder.SignalStrength.setText(item.ReceptionForce);
+
+                holder.Frequency.setText(item.Frequency);
+
+            holder.SatelliteNumber.setText(item.SatelliteNumber);
+        } catch (Exception ex)
+        {
+            System.out.println("Exception: " + ex.toString());
+        }
     }
 
     @Override
@@ -44,12 +53,12 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         return mData.size();
     }
 
-    public void updateData(List<String> newData) {
+    public void updateData(List<SatelliteWidgetEntryData> newData) {
         mData = newData;
         notifyDataSetChanged(); // Notify adapter that dataset has changed
     }
 
-    public void addData(List<String> newData) {
+    public void addData(List<SatelliteWidgetEntryData> newData) {
         mData.addAll(newData);
 
 
@@ -57,13 +66,15 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        TextView textView;
-        ImageView imageView;
+        TextView SatelliteNumber;
+        TextView Frequency;
+        TextView SignalStrength;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.textView1);
-            imageView = itemView.findViewById(R.id.imageView1);
+            SatelliteNumber = itemView.findViewById(R.id.SatelliteNumberDisplay);
+            Frequency = itemView.findViewById(R.id.FrequencyDisplay);
+            SignalStrength = itemView.findViewById(R.id.SignalStrengthDisplay);
         }
     }
 }
