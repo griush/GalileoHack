@@ -145,10 +145,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                     || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
                     || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
                     continue;
-
-                System.out.println(measurement.getReceivedSvTimeNanos());
-                System.out.println(event.getClock().getTimeNanos());
-
+                
 
                 SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
                 item.Svid = measurement.getSvid();
