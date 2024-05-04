@@ -3,8 +3,10 @@ package com.example.galileomastermindboilerplate;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.location.GnssMeasurement;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,7 +29,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private RecyclerViewAdapter mAdapter;
-    private List<String> mData;
+    private List<SatelliteWidgetEntryData> mData;
     private List<Integer>mIcon;
 
     private LogFragment ddt;
@@ -46,6 +48,8 @@ public class MainActivity extends AppCompatActivity {
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+
 
         BottomNavigationView navView = findViewById(R.id.nav_view);
         // Passing each menu ID as a set of Ids because each
@@ -71,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(mAdapter);
 
         // Initially populate mData with some data
-        mData.add("State dummy...");
+        /*mData.add("State dummy...");
         mIcon.add(R.drawable.state);
         mData.add("Raw measurement dummy...");
         mIcon.add(R.drawable.rawmeas);
@@ -82,11 +86,11 @@ public class MainActivity extends AppCompatActivity {
         mData.add("AGC dummy...");
         mIcon.add(R.drawable.agc);
         mData.add("Fix dummy...");
-        mIcon.add(R.drawable.fix);
+        mIcon.add(R.drawable.fix);*/
 
 
         // Add more items as needed
-        mAdapter.notifyDataSetChanged();
+        // mAdapter.notifyDataSetChanged();
 
 
 
