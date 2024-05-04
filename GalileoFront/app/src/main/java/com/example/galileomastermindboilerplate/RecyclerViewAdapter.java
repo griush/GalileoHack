@@ -1,19 +1,23 @@
 package com.example.galileomastermindboilerplate;
 
 
-import android.location.GnssMeasurement;
+import static android.location.GnssStatus.*;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.galileomastermindboilerplate.ui.home.HomeViewModel;
+
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -36,16 +40,13 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         SatelliteWidgetEntryData item = mData.get(position);
         int icon = mIcon.get(position);
 
-        try {
-                holder.SignalStrength.setText(item.ReceptionForce);
+        holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " " + String.valueOf(item.Svid));
+        holder.SignalStrength.setText(String.valueOf(item.SnrInDb));
+        holder.Frequency.setText(formatDoubleAsGHz(item.CarrierFrequencyHz));
+        holder.PowerShower.setMax(50);
+        holder.PowerShower.setMin(10);
+        holder.PowerShower.setProgress((int)item.Cn0DbHz);
 
-                holder.Frequency.setText(item.Frequency);
-
-            holder.SatelliteNumber.setText(item.SatelliteNumber);
-        } catch (Exception ex)
-        {
-            System.out.println("Exception: " + ex.toString());
-        }
     }
 
     @Override
@@ -69,13 +70,41 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView SatelliteNumber;
         TextView Frequency;
         TextView SignalStrength;
+        ProgressBar PowerShower;
 
         public ViewHolder(View itemView) {
             super(itemView);
             SatelliteNumber = itemView.findViewById(R.id.SatelliteNumberDisplay);
             Frequency = itemView.findViewById(R.id.FrequencyDisplay);
             SignalStrength = itemView.findViewById(R.id.SignalStrengthDisplay);
+            PowerShower = itemView.findViewById(R.id.ProgressBarCN_0Display);
         }
+    }
+
+    private String formatDoubleAsGHz(double input)
+    {
+        return String.valueOf(input).replace("E9", " GHz").replace("E6", " MHz").replace("E3", " kHz");
+    }
+    private String GetFlagFromId(int id)
+    {
+        if(id == CONSTELLATION_BEIDOU)
+            return "\uD83C\uDDE8\uD83C\uDDF3";
+        else if(id == CONSTELLATION_GALILEO)
+            return "\uD83C\uDDEA\uD83C\uDDFA";
+        else if(id == CONSTELLATION_GLONASS)
+            return "\uD83C\uDDF7\uD83C\uDDFA";
+        else if(id == CONSTELLATION_GPS)
+            return "\uD83C\uDDFA\uD83C\uDDF8";
+        else if(id == CONSTELLATION_QZSS)
+            return "\uD83C\uDDEF\uD83C\uDDF5";
+        else if(id == CONSTELLATION_SBAS)
+            return "\uD83C\uDDF8\uD83C\uDDE7";
+        else if(id == CONSTELLATION_IRNSS)
+            return "\uD83C\uDDEE\uD83C\uDDF3";
+        else if(id == CONSTELLATION_UNKNOWN)
+            return "⁉\uFE0F";
+        else
+            return String.valueOf(id);
     }
 }
 

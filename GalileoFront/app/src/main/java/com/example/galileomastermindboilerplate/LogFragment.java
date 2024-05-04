@@ -20,6 +20,7 @@ import android.location.Location;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.widget.Switch;
 
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,6 +36,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer>mIcon;
     private RecyclerView recyclerView;
+    private Switch GalileoOnlySwitch;
     private RecyclerViewAdapter adapter;
    public LogFragment( Activity _activity){
 
@@ -78,6 +80,8 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
             // Find RecyclerView by ID
             recyclerView = activity.findViewById(R.id.main_list);
+            GalileoOnlySwitch = activity.findViewById(R.id.GalileoOnlySwitch);
+
 
 //                mData = new ArrayList<>();
 //                mIcon = new ArrayList<>();
@@ -91,17 +95,31 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
 
             for (GnssMeasurement measurement : event.getMeasurements()) {
-                builder.append(toStringMeasurement(measurement));
+                // builder.append(toStringMeasurement(measurement));
                 // System.out.println(event.getMeasurements().size());
-                builder.append("\n");
+                // builder.append("\n");
 
-                System.out.println("LOLOLOLOLOLOLOLOLOLO");
-                System.out.println(measurement.getSvid());
+                if(GalileoOnlySwitch.isChecked() && measurement.getConstellationType() != GnssStatus.CONSTELLATION_GALILEO){
+                    continue;
+                }
 
                 SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
-                item.SatelliteNumber = String.valueOf(measurement.getSvid());
-                item.Frequency = String.valueOf(measurement.getCarrierFrequencyHz());
-                item.ReceptionForce = String.valueOf(measurement.getSnrInDb());
+                item.Svid = measurement.getSvid();
+                item.CarrierFrequencyHz = measurement.getCarrierFrequencyHz();
+                item.SnrInDb = measurement.getSnrInDb();
+                item.ReceivedSvTimeNanos = measurement.getReceivedSvTimeNanos();
+                item.TimeOffsetNanos = measurement.getTimeOffsetNanos();
+                item.ReceivedSvTimeUncertaintyNanos = measurement.getReceivedSvTimeUncertaintyNanos();
+                item.Cn0DbHz = measurement.getCn0DbHz();
+                item.PseudorangeRateMetersPerSecond = measurement.getPseudorangeRateMetersPerSecond();
+                item.PseudorangeRateUncertaintyMetersPerSeconds = measurement.getPseudorangeRateUncertaintyMetersPerSecond();
+                item.AccumulatedDeltaRangeState = measurement.getAccumulatedDeltaRangeState();
+                item.AccumulatedDeltaRangeMeters = measurement.getAccumulatedDeltaRangeMeters();
+                item.AccumulatedDeltaRangeUncertaintyMeters = measurement.getAccumulatedDeltaRangeUncertaintyMeters();
+                item.CarrierCycles = measurement.getCarrierCycles();
+                item.CarrierPhase = measurement.getCarrierPhase();
+                item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
+                item.ConstellationType = measurement.getConstellationType();
 
                 mData.add(item);
                 mIcon.add(R.drawable.rawmeas);
@@ -118,6 +136,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     private String toStringMeasurement(GnssMeasurement measurement) {
        return "";
+       // This code must be used as documentation only
        /*
         final String format = "   %-4s = %s\n";
         StringBuilder builder = new StringBuilder("Fuck:\n");
