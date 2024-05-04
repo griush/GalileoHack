@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">Galileo Hack</string>
-    <string name="title_home">Galileo Hack</string>
-    <string name="title_dashboard">Galileo Hack</string>
-    <string name="title_notifications">Galileo Hack</string>
+    <string name="app_name">GalileoHack</string>
+    <string name="title_home">GalileoHack</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Settings</string>
+
 </resources>

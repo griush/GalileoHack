@@ -32,3 +32,11 @@ GnssMeasurement:
   AgcLevelDb                    = 1.0                   # preamp gain (AGC), usually when high indicates compensation for low SNR
   CodeType                      =                       # code type???? idfk its not even on google documentation
 ```
+
+### Pseudo range calculation
+```
+tTx = ReceivedSvTimeNanos + TimeOffsetNanos
+tRx_GNSS = TimeNanos + timeOffsetNanos - (fullInterSignalBiasNanos + satelliteInterSignalBiasNanos)
+tRx = tRx_GNSS % 10e8
+rho = (tRx - tTx)/1e9 * c
+```
