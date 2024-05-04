@@ -45,13 +45,30 @@ async fn main() -> tide::Result<()> {
 
     app.at("/fetch").post(|mut req: Request<()>| async move {
         let body = req.body_string().await?;
+        println!("{:?}", body);
 
         let v: Value = serde_json::from_str(&body)?;
 
         let num_sats = v["SatelliteCount"].as_u64().unwrap();
+        if num_sats == 0 {
+            let mut res = Response::new(200);
+            res.set_body(Body::from_json(&UserLocation{
+                lat: -1.0,
+                lon: -1.0,
+                signal: -1.0,
+            })?);
+
+            return Ok(res);
+        }
+
+        let _time_nanos = v["Satellites"][0]["timeNanos"].as_u64().unwrap();
         let mut sum:f64 = 0.0;
         for i in 0..num_sats {
-            sum += v["Satellites"][i as usize]["Cn0DbHz"].as_f64().unwrap();
+            let sat = &v["Satellites"][i as usize];
+            sum += sat["Cn0DbHz"].as_f64().unwrap();
+
+            let time_offset_nanos = sat["TimeOffsetNanos"].as_u64().unwrap();
+            let _ttx = sat["ReceivedSvTimeNanos"].as_u64().unwrap() + (time_offset_nanos as u64);
         }
 
         let signal = sum / (num_sats as f64);
