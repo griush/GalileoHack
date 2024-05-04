@@ -30,5 +30,5 @@ GnssMeasurement:
   CarrierFrequencyHz            = 1.57542003E9          # self explanatory, RF carrier freq of C/A
   MultipathIndicator            = Unknown               # multipath detection apparently, cool
   AgcLevelDb                    = 1.0                   # preamp gain (AGC), usually when high indicates compensation for low SNR
-  CodeType                      =                       # code type???? idfk its not even on gooogle documentation
+  CodeType                      =                       # code type???? idfk its not even on google documentation
 ```
