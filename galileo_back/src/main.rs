@@ -61,14 +61,10 @@ async fn main() -> tide::Result<()> {
             return Ok(res);
         }
 
-        let _time_nanos = v["Satellites"][0]["timeNanos"].as_u64().unwrap();
         let mut sum:f64 = 0.0;
         for i in 0..num_sats {
             let sat = &v["Satellites"][i as usize];
             sum += sat["Cn0DbHz"].as_f64().unwrap();
-
-            let time_offset_nanos = sat["TimeOffsetNanos"].as_u64().unwrap();
-            let _ttx = sat["ReceivedSvTimeNanos"].as_u64().unwrap() + (time_offset_nanos as u64);
         }
 
         let signal = sum / (num_sats as f64);
