@@ -292,11 +292,15 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
                 item.ConstellationType = measurement.getConstellationType();
 
-                CurrentSignalAverage += item.Cn0DbHz;
-                CurrentSignalCount++;
-
                 mData.add(item);
                 mIcon.add(R.drawable.rawmeas);
+
+            }
+            for (GnssMeasurement measurement : event.getMeasurements()) {
+
+                CurrentSignalAverage += measurement.getCn0DbHz();
+                CurrentSignalCount++;
+
 
 
             }

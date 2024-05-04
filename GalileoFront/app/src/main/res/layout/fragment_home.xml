@@ -10,6 +10,7 @@
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:background="@color/black"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -39,6 +40,7 @@
                         android:layout_weight="1"
                         android:text="Device current location: "
                         android:textAlignment="textEnd"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <TextView
@@ -46,7 +48,8 @@
                         android:layout_width="96dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Loading..." />
+                        android:text="Loading..."
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -61,6 +64,7 @@
                         android:layout_weight="1"
                         android:text="Calculated location: "
                         android:textAlignment="textEnd"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <TextView
@@ -68,7 +72,8 @@
                         android:layout_width="96dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Loading..." />
+                        android:text="Loading..."
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -83,6 +88,7 @@
                         android:layout_weight="1"
                         android:text="Device current C/N0: "
                         android:textAlignment="textEnd"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <TextView
@@ -90,7 +96,8 @@
                         android:layout_width="96dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Loading..." />
+                        android:text="Loading..."
+                        android:textColor="@color/white" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -105,6 +112,7 @@
                         android:layout_weight="1"
                         android:text="Calulated average C/N0: "
                         android:textAlignment="textEnd"
+                        android:textColor="@color/white"
                         android:textStyle="bold" />
 
                     <TextView
@@ -112,7 +120,8 @@
                         android:layout_width="96dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Loading..." />
+                        android:text="Loading..."
+                        android:textColor="@color/white" />
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -130,6 +139,7 @@
                 android:layout_marginEnd="12dp"
                 android:text="ftujyhfgd"
                 android:textAlignment="textStart"
+                android:textColor="@color/white"
                 android:textSize="14sp" />
 
             <TextView
@@ -151,6 +161,7 @@
                 android:paddingRight="6dip"
                 android:paddingBottom="6dip"
                 android:text="Galileo only"
+                android:textColor="@color/white"
                 tools:checked="false" />
 
         </LinearLayout>
