@@ -1,5 +1,7 @@
 package com.example.galileomastermindboilerplate;
 
+import java.util.Vector;
+
 public class SatelliteWidgetEntryData {
     public int Svid = -1;
     public int ConstellationType = -1;
@@ -17,5 +19,10 @@ public class SatelliteWidgetEntryData {
     public double CarrierCycles = -1;
     public double CarrierPhase = -1;
     public double CarrierPhaseUncertainty = -1;
+    public long timeNanos = -1;
+    // timeNanos
 
+    //
 }
+
+

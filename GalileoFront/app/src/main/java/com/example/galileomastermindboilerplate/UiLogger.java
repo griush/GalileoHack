@@ -81,7 +81,7 @@ public class UiLogger implements MeasurementListener {
 
   @Override
   public void onGnssMeasurementsReceived(GnssMeasurementsEvent event) {
-    StringBuilder builder = new StringBuilder("[ GnssMeasurementsEvent:\n\n");
+    /*StringBuilder builder = new StringBuilder("[ GnssMeasurementsEvent:\n\n");
 
     builder.append(toStringClock(event.getClock()));
     builder.append("\n");
@@ -92,11 +92,11 @@ public class UiLogger implements MeasurementListener {
     }
 
     builder.append("]");
-    logMeasurementEvent("onGnssMeasurementsReceived: " + builder.toString());
+    logMeasurementEvent("onGnssMeasurementsReceived: " + builder.toString());*/
   }
 
   private String toStringClock(GnssClock gnssClock) {
-    final String format = "   %-4s = %s\n";
+    /*final String format = "   %-4s = %s\n";
     StringBuilder builder = new StringBuilder("GnssClock:\n");
     DecimalFormat numberFormat = new DecimalFormat("#0.000");
     if (gnssClock.hasLeapSecond()) {
@@ -147,9 +147,13 @@ public class UiLogger implements MeasurementListener {
             gnssClock.getHardwareClockDiscontinuityCount()));
 
     return builder.toString();
+    */
+     return "";
   }
 
   private String toStringMeasurement(GnssMeasurement measurement) {
+    return "";
+    /*
     final String format = "   %-4s = %s\n";
     StringBuilder builder = new StringBuilder("GnssMeasurement:\n");
     DecimalFormat numberFormat = new DecimalFormat("#0.000");
@@ -234,7 +238,7 @@ public class UiLogger implements MeasurementListener {
       }
     }
 
-    return builder.toString();
+    return builder.toString();*/
   }
 
   @Override

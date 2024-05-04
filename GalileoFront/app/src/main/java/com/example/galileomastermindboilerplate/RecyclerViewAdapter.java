@@ -41,7 +41,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         int icon = mIcon.get(position);
 
         holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " " + String.valueOf(item.Svid));
-        holder.SignalStrength.setText(String.valueOf(item.SnrInDb));
+        holder.SignalStrength.setText(String.valueOf(String.format("%.2f", item.Cn0DbHz) + " dBHz"));
         holder.Frequency.setText(formatDoubleAsGHz(item.CarrierFrequencyHz));
         holder.PowerShower.setMax(50);
         holder.PowerShower.setMin(10);
