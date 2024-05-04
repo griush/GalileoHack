@@ -44,6 +44,12 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import static android.location.GnssMeasurement.STATE_GAL_E1C_2ND_CODE_LOCK;
+import static android.location.GnssMeasurement.STATE_TOW_DECODED;
+import static android.location.GnssMeasurement.STATE_TOW_KNOWN;
+import static android.location.GnssStatus.CONSTELLATION_GALILEO;
+import static android.location.GnssStatus.CONSTELLATION_GPS;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -126,7 +132,8 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     final int TOW_DECODED_MEASUREMENT_STATE_BIT = 3;
 
-    public double[] computeGpsPseudorange(GnssClock clock, GnssMeasurement measurement, boolean useE1BC) {
+    //check long to double conversions
+    public double[] computeGalileoPseudorange(GnssClock clock, GnssMeasurement measurement, boolean useE1BC) {
         final int   SECONDS_PER_WEEK = 3600*24*7;
         final double C_METRES_PER_SECOND = 299792458.0;
         final long  NANOSECONDS_PER_SECOND = 1000000000,    NANOSECONDS_PER_E1C_2ND_CODE_PERIOD = 100000000;
@@ -135,19 +142,34 @@ public class LogFragment extends MainActivity implements MeasurementListener {
         long        towRxNanos, tRx;
         double      tTx, tRxSec, tTxSec;
 
+        boolean towAvail = ((measurement.getState()&STATE_TOW_DECODED)>0)||((measurement.getState()&STATE_TOW_KNOWN)>0);
 
-        if (((measurement.getState() & (1L << TOW_DECODED_MEASUREMENT_STATE_BIT)) != 0))
-        {
+        if(towAvail)
             moduloPeriod = NANOSECONDS_PER_SECOND*SECONDS_PER_WEEK;
+        else //PC
+            if ((measurement.getState()&STATE_GAL_E1C_2ND_CODE_LOCK)>0)
+                moduloPeriod = NANOSECONDS_PER_E1C_2ND_CODE_PERIOD;
+            else
+                moduloPeriod = 4000000L;
+
+        if(towAvail||
+                ((measurement.getState()&STATE_GAL_E1C_2ND_CODE_LOCK)>0)||
+                (((measurement.getState()&(1024+32)) == (1024+32))&&useE1BC)) {
 
             long FullBiasNanos = clock.getFullBiasNanos();
             // double BiasNanos = clock.getBiasNanos(); removed because it is double and always 0
 
-            WeekNumber = -clock.getFullBiasNanos()/(SECONDS_PER_WEEK*NANOSECONDS_PER_SECOND);
+            WeekNumber = -clock.getFullBiasNanos() / (SECONDS_PER_WEEK * NANOSECONDS_PER_SECOND);
             //WeekNumber = (long) Math.floor(-clock.getFullBiasNanos()*1e-9/SECONDS_PER_WEEK);
 
             WeekNumberNanos = WeekNumber * NANOSECONDS_PER_SECOND * SECONDS_PER_WEEK;
             towRxNanos = clock.getTimeNanos() - FullBiasNanos - WeekNumberNanos;
+
+            if (towRxNanos > 604800000000000L) {
+                towRxNanos = towRxNanos - 604800000000000L;
+                WeekNumber = WeekNumber + 1;
+            }
+
             tRx = towRxNanos % moduloPeriod; // in ns
             towRxSeconds = towRxNanos*1e-9; // ToW at RX
             tTx = measurement.getReceivedSvTimeNanos() + measurement.getTimeOffsetNanos(); // in ns
@@ -235,7 +257,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 double rho = ((double)tRx - tTx) * 300000000.0 * 1e-9;
                 System.out.println("rho: " + rho);*/
 
-                double rho = computeGpsPseudorange(clock, measurement, true)[0];
+                double rho = computeGalileoPseudorange(clock, measurement, true)[0];
                 System.out.println("rho: " + rho);
                 item.pseudorange = rho;
 
