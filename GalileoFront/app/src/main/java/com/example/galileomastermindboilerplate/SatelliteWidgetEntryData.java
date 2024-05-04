@@ -26,8 +26,7 @@ public class SatelliteWidgetEntryData {
     public double clockBiasedNanos = -1;
     public long clockFullBiasedNanos = -1;
     public double pseudorange = -1;
-
-    //
+    public double AGC = -1;
 }
 
 
