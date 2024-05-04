@@ -24,6 +24,7 @@ import android.location.GnssNavigationMessage;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.widget.CheckBox;
@@ -159,6 +160,11 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.CarrierPhase = measurement.getCarrierPhase();
                 item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
                 item.ConstellationType = measurement.getConstellationType();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    item.FullInterSignalBiasNanos = measurement.getFullInterSignalBiasNanos();
+                    item.FullInterSignalBiasUncertaintyNanos = measurement.getFullInterSignalBiasUncertaintyNanos();
+                    item.SatelliteInterSignalBiasNanos = measurement.getSatelliteInterSignalBiasNanos();
+                }
 
                 GnssClock clock = event.getClock();
 

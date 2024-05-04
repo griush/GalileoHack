@@ -182,7 +182,7 @@
                         android:layout_width="66dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Device current C/N0: "
+                        android:text="Device current SQI: "
                         android:textAlignment="textEnd"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -206,7 +206,7 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Calulated average C/N0: "
+                        android:text="Calulated average SQI: "
                         android:textAlignment="textEnd"
                         android:textColor="@color/white"
                         android:textStyle="bold" />

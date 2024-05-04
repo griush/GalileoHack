@@ -18,6 +18,9 @@ public class SatelliteWidgetEntryData {
     public double CarrierFrequencyHz = -1;
     public double CarrierCycles = -1;
     public double CarrierPhase = -1;
+    public double FullInterSignalBiasNanos = -1;
+    public double FullInterSignalBiasUncertaintyNanos = -1;
+    public double SatelliteInterSignalBiasNanos = -1;
     public double CarrierPhaseUncertainty = -1;
     public long timeNanos = -1;
     // timeNanos
