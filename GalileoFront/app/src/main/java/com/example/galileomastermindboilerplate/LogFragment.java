@@ -75,6 +75,9 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private TextView DeviceLocationDisplay;
     private TextView ServerLocationDisplay;
 
+    private CheckBox SlowPaceCheckBox;
+    private int currentCounter = 0;
+
     private WebView OpenStreetMap;
     private RecyclerViewAdapter adapter;
 
@@ -131,6 +134,10 @@ public class LogFragment extends MainActivity implements MeasurementListener {
         try {
             PauseToggle = activity.findViewById(R.id.PauseCheckBox);
             if(PauseToggle.isChecked())
+                return;
+
+            SlowPaceCheckBox = activity.findViewById(R.id.SlowPaceCheckBox);
+            if((currentCounter++)%4!=0 && SlowPaceCheckBox.isChecked())
                 return;
 
             String json;

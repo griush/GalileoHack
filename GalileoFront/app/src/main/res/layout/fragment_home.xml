@@ -145,7 +145,7 @@
 
                     <TextView
                         android:id="@+id/DeviceLocationDisplay"
-                        android:layout_width="96dip"
+                        android:layout_width="118dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="Loading...\n"
@@ -169,7 +169,7 @@
 
                     <TextView
                         android:id="@+id/CurrentLocationDisplay"
-                        android:layout_width="96dip"
+                        android:layout_width="118dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="Loading...\n"
@@ -193,7 +193,7 @@
 
                     <TextView
                         android:id="@+id/CurrentSignalStrengthDisplay"
-                        android:layout_width="96dip"
+                        android:layout_width="118dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="Loading..."
@@ -217,22 +217,50 @@
 
                     <TextView
                         android:id="@+id/AverageSignalStrength"
-                        android:layout_width="96dip"
+                        android:layout_width="118dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
                         android:text="Loading..."
                         android:textColor="@color/white" />
                 </LinearLayout>
 
-                <CheckBox
-                    android:id="@+id/PauseCheckBox"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                    android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:layoutDirection="rtl"
-                    android:text="Pause"
-                    android:textAlignment="viewStart"
-                    android:textColor="@color/white" />
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1" />
+
+                    <CheckBox
+                        android:id="@+id/SlowPaceCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:layoutDirection="inherit"
+                        android:paddingLeft="4dip"
+                        android:paddingRight="4dip"
+                        android:text="Slow pace"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white" />
+
+                    <CheckBox
+                        android:id="@+id/PauseCheckBox"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0"
+                        android:layoutDirection="inherit"
+                        android:paddingLeft="4dip"
+                        android:paddingRight="12dip"
+                        android:text="Pause"
+                        android:textAlignment="viewStart"
+                        android:textColor="@color/white" />
+                </LinearLayout>
+
             </LinearLayout>
         </LinearLayout>
 
