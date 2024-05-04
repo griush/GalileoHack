@@ -23,6 +23,102 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <CheckBox
+                    android:id="@+id/EuropeToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇪🇺 Galileo"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+
+                <CheckBox
+                    android:id="@+id/AmericaToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇺🇸 GPS"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+
+                <CheckBox
+                    android:id="@+id/RussiaToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇷🇺 GLONASS"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+
+                <CheckBox
+                    android:id="@+id/ChinaToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇨🇳 BeiDou"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+
+                <CheckBox
+                    android:id="@+id/JapanToggle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇯🇵 QZSS"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
@@ -129,42 +225,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <TextView
-                android:id="@+id/text_home"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:layout_marginEnd="12dp"
-                android:text="ftujyhfgd"
-                android:textAlignment="textStart"
-                android:textColor="@color/white"
-                android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Switch
-                android:id="@+id/GalileoOnlySwitch"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:padding="6dip"
-                android:paddingHorizontal="6dip"
-                android:paddingStart="6dip"
-                android:paddingLeft="6dip"
-                android:paddingTop="6dip"
-                android:paddingEnd="6dip"
-                android:paddingRight="6dip"
-                android:paddingBottom="6dip"
-                android:text="Galileo only"
-                android:textColor="@color/white"
-                tools:checked="false" />
-
-        </LinearLayout>
+            android:orientation="horizontal"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_list"

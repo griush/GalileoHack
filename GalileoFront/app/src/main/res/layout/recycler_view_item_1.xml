@@ -18,7 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="8dip"
+        android:paddingRight="8dip">
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -113,7 +115,9 @@
             android:indeterminateBehavior="repeat"
             android:max="50"
             android:maxHeight="48dip"
-            android:minHeight="48dip" />
+            android:minHeight="48dip"
+            android:paddingLeft="4dip"
+            android:paddingTop="2dip" />
 
       </LinearLayout>
     </LinearLayout>
