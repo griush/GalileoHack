@@ -46,6 +46,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.PowerShower.setMax(50);
         holder.PowerShower.setMin(10);
         holder.PowerShower.setProgress((int)item.Cn0DbHz);
+        holder.AGCDisplay.setText(String.format("%.2f", item.AGC) + " dB");
+
 
     }
 
@@ -72,12 +74,19 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView SignalStrength;
         ProgressBar PowerShower;
 
+        TextView AGCDisplay;
+
+        TextView LatOT;
+        TextView LonOT;
+
         public ViewHolder(View itemView) {
             super(itemView);
             SatelliteNumber = itemView.findViewById(R.id.SatelliteNumberDisplay);
             Frequency = itemView.findViewById(R.id.FrequencyDisplay);
             SignalStrength = itemView.findViewById(R.id.SignalStrengthDisplay);
             PowerShower = itemView.findViewById(R.id.ProgressBarCN_0Display);
+            AGCDisplay = itemView.findViewById(R.id.AGCDisplay);
+
         }
     }
 

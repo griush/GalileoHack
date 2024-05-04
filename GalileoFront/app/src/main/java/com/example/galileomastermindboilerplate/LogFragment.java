@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.GnssAutomaticGainControl;
 import android.location.GnssClock;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
@@ -53,6 +54,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class LogFragment extends MainActivity implements MeasurementListener {
@@ -72,6 +74,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private TextView CurrentSignalStrength;
     private TextView DeviceLocationDisplay;
     private TextView ServerLocationDisplay;
+
     private WebView OpenStreetMap;
     private RecyclerViewAdapter adapter;
 
@@ -146,9 +149,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                     || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
                     continue;
 
-                System.out.println(measurement.getReceivedSvTimeNanos());
-                System.out.println(event.getClock().getTimeNanos());
-
 
                 SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
                 item.Svid = measurement.getSvid();
@@ -176,6 +176,19 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 GnssClock clock = event.getClock();
 
                 item.timeNanos = clock.getTimeNanos();
+                item.clockBiasedNanos = clock.getBiasNanos();
+                item.clockFullBiasedNanos = clock.getFullBiasNanos();
+                System.out.println("Time: " + item.timeNanos);
+                System.out.println("BIAS: " + item.clockBiasedNanos);
+                System.out.println("FuBi: " + item.clockFullBiasedNanos);
+                System.out.println("SvTi: " + item.ReceivedSvTimeNanos);
+                System.out.println("Offs: " + measurement.getTimeOffsetNanos());
+                System.out.println("tRx_GNSS: " + (item.timeNanos - (item.clockFullBiasedNanos + item.clockBiasedNanos)));
+                long tow = ((long)(clock.getTimeNanos() - (item.clockFullBiasedNanos + item.clockBiasedNanos))) % (7*24*60*60*1000000000);
+                System.out.println("tRx_GNSS_TOW: " + (tow));
+                double tTx = measurement.getReceivedSvTimeNanos();
+                System.out.println("tTx: " + tTx);
+                System.out.println("rho: " + ((tow - tTx) * 300000000 * 1e-9));
 
                 serializable.Satellites.add(item);
                 serializable.SatelliteCount++;
@@ -273,6 +286,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             ServerLocationDisplay = activity.findViewById(R.id.CurrentLocationDisplay);
             DeviceLocationDisplay = activity.findViewById(R.id.DeviceLocationDisplay);
 
+
             /*if (OpenStreetMap.getUrl() != openstreetmap_url && !openstreetmap_url.isEmpty()) {
                 OpenStreetMap.loadUrl(openstreetmap_url);
             }*/
@@ -319,6 +333,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.CarrierPhase = measurement.getCarrierPhase();
                 item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
                 item.ConstellationType = measurement.getConstellationType();
+                item.AGC = measurement.getAutomaticGainControlLevelDb();
 
                 mData.add(item);
                 mIcon.add(R.drawable.rawmeas);
