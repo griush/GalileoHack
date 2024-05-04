@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp">
+    android:padding="8dp"
+    android:background="@color/light_black">
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -17,7 +18,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingLeft="8dip"
+        android:paddingRight="8dip">
 
       <LinearLayout
           android:layout_width="match_parent"
@@ -29,9 +32,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="Id: "
+            android:text="Satellite "
+            android:textColor="@color/white"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="normal" />
 
         <TextView
             android:id="@+id/SatelliteNumberDisplay"
@@ -39,6 +43,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="13"
+            android:textColor="@color/white"
             android:textSize="20sp" />
 
       </LinearLayout>
@@ -54,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="Frequency: "
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <TextView
@@ -61,7 +67,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="420.69GHz" />
+            android:text="420.69GHz"
+            android:textColor="@color/white" />
 
         <TextView
             android:id="@+id/SignalStrengthLabel"
@@ -69,6 +76,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="Signal Strength: "
+            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <TextView
@@ -76,7 +84,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="-33.0dB" />
+            android:text="-33.0dB"
+            android:textColor="@color/white" />
 
       </LinearLayout>
 
@@ -91,8 +100,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="0"
-            android:text="C/N0 "
+            android:text="SNR "
             android:textAlignment="center"
+            android:textColor="@color/white"
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -105,9 +115,12 @@
             android:indeterminateBehavior="repeat"
             android:max="50"
             android:maxHeight="48dip"
-            android:minHeight="48dip" />
+            android:minHeight="48dip"
+            android:paddingLeft="4dip"
+            android:paddingTop="2dip" />
 
       </LinearLayout>
     </LinearLayout>
   </LinearLayout>
+
 </LinearLayout>

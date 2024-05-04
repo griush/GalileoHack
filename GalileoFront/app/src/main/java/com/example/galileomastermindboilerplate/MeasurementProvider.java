@@ -126,10 +126,10 @@ public class MeasurementProvider {
         public void onGnssMeasurementsReceived(GnssMeasurementsEvent event) {
           if (mLogMeasurements) {
 
-              Log.d("Test", event.getMeasurements().toString());
+              //Log.d("Test", event.getMeasurements().toString());
             for (MeasurementListener logger : mListeners) {
               logger.onGnssMeasurementsReceived(event);
-                Log.d("Test", event.getMeasurements().toString());
+                //Log.d("Test", event.getMeasurements().toString());
             }
           }
         }

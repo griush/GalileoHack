@@ -24,8 +24,11 @@ import android.location.GnssNavigationMessage;
 import android.location.GnssStatus;
 import android.location.Location;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.webkit.WebView;
+import android.widget.CheckBox;
+import android.widget.Checkable;
 import android.widget.Switch;
 import android.widget.TextView;
 
@@ -59,7 +62,12 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
     private RecyclerView recyclerView;
-    private Switch GalileoOnlySwitch;
+    private CheckBox EuropeSwitch;
+    private CheckBox AmericaSwitch;
+    private CheckBox ChinaSwitch;
+    private CheckBox JapanSwitch;
+    private CheckBox RussiaSwitch;
+    private CheckBox PauseToggle;
     private TextView AverageSignalStrength;
     private TextView CurrentSignalStrength;
     private TextView DeviceLocationDisplay;
@@ -118,18 +126,29 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 //        mData = new ArrayList<>();
 //        mIcon = new ArrayList<>();
         try {
+            PauseToggle = activity.findViewById(R.id.PauseCheckBox);
+            if(PauseToggle.isChecked())
+                return;
+
             String json;
             BaseContent serializable = new BaseContent();
 
-            GalileoOnlySwitch = activity.findViewById(R.id.GalileoOnlySwitch);
+            EuropeSwitch = activity.findViewById(R.id.EuropeToggle);
+            AmericaSwitch = activity.findViewById(R.id.AmericaToggle);
+            RussiaSwitch = activity.findViewById(R.id.RussiaToggle);
+            ChinaSwitch = activity.findViewById(R.id.ChinaToggle);
+            JapanSwitch = activity.findViewById(R.id.JapanToggle);
             for (GnssMeasurement measurement : event.getMeasurements()) {
-                if (GalileoOnlySwitch.isChecked() && measurement.getConstellationType() != GnssStatus.CONSTELLATION_GALILEO)
+                if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
+                    || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
+                    || !RussiaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GLONASS
+                    || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
+                    || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
                     continue;
 
+                System.out.println(measurement.getReceivedSvTimeNanos());
+                System.out.println(event.getClock().getTimeNanos());
 
-                if (GalileoOnlySwitch.isChecked() && measurement.getConstellationType() != GnssStatus.CONSTELLATION_GALILEO) {
-                    continue;
-                }
 
                 SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
                 item.Svid = measurement.getSvid();
@@ -148,6 +167,11 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.CarrierPhase = measurement.getCarrierPhase();
                 item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
                 item.ConstellationType = measurement.getConstellationType();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    item.FullInterSignalBiasNanos = measurement.getFullInterSignalBiasNanos();
+                    item.FullInterSignalBiasUncertaintyNanos = measurement.getFullInterSignalBiasUncertaintyNanos();
+                    item.SatelliteInterSignalBiasNanos = measurement.getSatelliteInterSignalBiasNanos();
+                }
 
                 GnssClock clock = event.getClock();
 
@@ -165,7 +189,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             }
 
 
-            URL url = new URL("http://192.168.137.119:4321/fetch");
+            URL url = new URL(ServerHostname.HOSTNAME);
 
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
 
@@ -207,7 +231,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 ObjectMapper objectMapper = new ObjectMapper();
                 FetchResponse dataResponse = objectMapper.readValue(JsonContent, FetchResponse.class);
 
-                ServerLocation = "Lat: " + dataResponse.lat + " Lon: " + dataResponse.lon;
+                ServerLocation = "Lat: " + dataResponse.lat + "\nLon: " + dataResponse.lon;
                 ServerSignalStrength = String.format("%.2f", dataResponse.signal);
 
                 try {
@@ -223,7 +247,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 }*/
                     @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if (lastKnownLocation != null) {
-                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + " Lon: " + String.format("%.4f",lastKnownLocation.getLongitude());
+                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f",lastKnownLocation.getLongitude());
                 }
             } catch (Exception ex)
             {
@@ -270,7 +294,11 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 // System.out.println(event.getMeasurements().size());
                 // builder.append("\n");
 
-                if (GalileoOnlySwitch.isChecked() && measurement.getConstellationType() != GnssStatus.CONSTELLATION_GALILEO) {
+                if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
+                        || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
+                        || !RussiaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GLONASS
+                        || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
+                        || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS) {
                     continue;
                 }
 
@@ -292,12 +320,14 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
                 item.ConstellationType = measurement.getConstellationType();
 
-                CurrentSignalAverage += item.Cn0DbHz;
-                CurrentSignalCount++;
-
                 mData.add(item);
                 mIcon.add(R.drawable.rawmeas);
 
+            }
+            for (GnssMeasurement measurement : event.getMeasurements()) {
+
+                CurrentSignalAverage += measurement.getCn0DbHz();
+                CurrentSignalCount++;
 
             }
             adapter.notifyDataSetChanged();
