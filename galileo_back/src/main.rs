@@ -21,7 +21,7 @@ struct GnssSatelliteData {
     carrier_frequency_hz: f64,
     multipath_indicator: u16,
     agc_level_db: f32,
-    code_type: String,    
+    code_type: String,
 
     // Clock
     time_nanos: u64,
@@ -41,13 +41,13 @@ async fn main() -> tide::Result<()> {
     // Setup end points and server
     let mut app = tide::new();
 
-    app.at("/health").get(|_| async { Ok("Loko funsiona") });
+    app.at("/health").get(|_| async { Ok("Funsiona loko") });
 
     app.at("/fetch").post(|mut req: Request<()>| async move {
         let body = req.body_string().await?;
 
         let v: Value = serde_json::from_str(&body)?;
-        
+
         let num_sats = v["SatelliteCount"].as_u64().unwrap();
         let mut sum:f64 = 0.0;
         for i in 0..num_sats {
