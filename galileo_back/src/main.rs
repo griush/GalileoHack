@@ -1,52 +1,68 @@
 use tide::*;
-use rand::prelude::*;
-use chrono::{DateTime, Utc};
-use influxdb::{Client, InfluxDbWriteable, ReadQuery};
 use serde::*;
+use serde_json::*;
 
-#[derive(InfluxDbWriteable)]
-struct GnssMeasurement {
-    time: DateTime<Utc>,
+#[derive(Debug, Deserialize, Serialize)]
+struct GnssSatelliteData {
+    // Mesurements
     svid: u64,
     constelation: u32,
+    time_offset_nanos: f32,
+    state: u16,
+    recieved_sv_time_nanos: u64,
+    recieved_sv_time_uncertanty_nanos: u64,
+    cn0_db_hz: f64,
+    baseband_cn0_db_hz: f64,
+    pseudorange_rate_meters_per_second: f64,
+    pseudorange_rate_uncertanty_meters_per_second: f64,
+    accumulated_delta_range_state: u16,
+    accumulated_delta_range_meters: f32,
+    accumulated_delta_range_uncertanty_meters: f32,
+    carrier_frequency_hz: f64,
+    multipath_indicator: u16,
+    agc_level_db: f32,
+    code_type: String,    
+
+    // Clock
+    time_nanos: u64,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 struct UserLocation {
     pub lat: f32,
     pub lon: f32,
-    pub signal: f32,
+    pub signal: f64,
 }
 
-#[tokio::main]
-async fn main() -> Result<()> {
-
+#[async_std::main]
+async fn main() -> tide::Result<()> {
     tide::log::start();
-
-    // Setup InfluxDB
-    let client = Client::new("http://84.247.188.251:8086", "galileo_hacker").with_auth("grius", "e231f34805d470c5");
-
-    let read_query = ReadQuery::new("SELECT * FROM gnss_testdata");
-
-    let read_result = client.query(read_query).await?;
-
-    println!("{}", read_result);
 
     // Setup end points and server
     let mut app = tide::new();
 
     app.at("/health").get(|_| async { Ok("Loko funsiona") });
 
-    app.at("/fetch").get(|_| async {
-        let mut rng = thread_rng();
-            let signal: f32 = rng.gen_range(0.0..60.0);
+    app.at("/fetch").post(|mut req: Request<()>| async move {
+        let body = req.body_string().await?;
+
+        let v: Value = serde_json::from_str(&body)?;
+        
+        let num_sats = v["SatelliteCount"].as_u64().unwrap();
+        let mut sum:f64 = 0.0;
+        for i in 0..num_sats {
+            sum += v["Satellites"][i as usize]["Cn0DbHz"].as_f64().unwrap();
+        }
+
+        let signal = sum / (num_sats as f64);
 
         let mut res = Response::new(200);
         res.set_body(Body::from_json(&UserLocation{
-            lat: 41.0543,
-            lon: 2.34254,
-            signal
+            lat: -1.0,
+            lon: -1.0,
+            signal,
         })?);
+
         Ok(res)
     });
 
