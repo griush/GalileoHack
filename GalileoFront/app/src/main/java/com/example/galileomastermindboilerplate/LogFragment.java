@@ -124,7 +124,45 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     String ServerSignalStrength = "UNSET";
     Location currentLocation = null;
 
-    private FusedLocationProviderClient fusedLocationClient;
+    final int TOW_DECODED_MEASUREMENT_STATE_BIT = 3;
+
+    public double[] computeGpsPseudorange(GnssClock clock, GnssMeasurement measurement, boolean useE1BC) {
+        final int   SECONDS_PER_WEEK = 3600*24*7;
+        final double C_METRES_PER_SECOND = 299792458.0;
+        final long  NANOSECONDS_PER_SECOND = 1000000000,    NANOSECONDS_PER_E1C_2ND_CODE_PERIOD = 100000000;
+        long        moduloPeriod, WeekNumberNanos, WeekNumber = 0;
+        double      towRxSeconds=0.0, towTxSeconds=0.0, pseudoRange=0.0;
+        long        towRxNanos, tRx;
+        double      tTx, tRxSec, tTxSec;
+
+
+        if (((measurement.getState() & (1L << TOW_DECODED_MEASUREMENT_STATE_BIT)) != 0))
+        {
+            moduloPeriod = NANOSECONDS_PER_SECOND*SECONDS_PER_WEEK;
+
+            long FullBiasNanos = clock.getFullBiasNanos();
+            // double BiasNanos = clock.getBiasNanos(); removed because it is double and always 0
+
+            WeekNumber = -clock.getFullBiasNanos()/(SECONDS_PER_WEEK*NANOSECONDS_PER_SECOND);
+            //WeekNumber = (long) Math.floor(-clock.getFullBiasNanos()*1e-9/SECONDS_PER_WEEK);
+
+            WeekNumberNanos = WeekNumber * NANOSECONDS_PER_SECOND * SECONDS_PER_WEEK;
+            towRxNanos = clock.getTimeNanos() - FullBiasNanos - WeekNumberNanos;
+            tRx = towRxNanos % moduloPeriod; // in ns
+            towRxSeconds = towRxNanos*1e-9; // ToW at RX
+            tTx = measurement.getReceivedSvTimeNanos() + measurement.getTimeOffsetNanos(); // in ns
+
+            tRxSec = tRx*1e-9;
+            tTxSec = tTx*1e-9;
+
+            pseudoRange  = ((tRxSec - tTxSec) % (moduloPeriod*1e-9))*C_METRES_PER_SECOND; // in meters
+            if (pseudoRange<0.0) // mod operation can return negative values
+                pseudoRange = pseudoRange + (moduloPeriod*1e-9)*C_METRES_PER_SECOND;
+        }
+
+        double[] result = {pseudoRange, towRxSeconds, WeekNumber};
+        return result;
+    }
 
     @Override
     public void onGnssMeasurementsReceived(GnssMeasurementsEvent event) {
@@ -156,6 +194,8 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                     || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
                     continue;
 
+                if (((measurement.getState() & (1L << TOW_DECODED_MEASUREMENT_STATE_BIT)) == 0))
+                    continue;
 
                 SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
                 item.Svid = measurement.getSvid();
@@ -185,20 +225,24 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.timeNanos = clock.getTimeNanos();
                 item.clockBiasedNanos = clock.getBiasNanos();
                 item.clockFullBiasedNanos = clock.getFullBiasNanos();
-                System.out.println("Time: " + item.timeNanos);
-                System.out.println("BIAS: " + item.clockBiasedNanos);
-                System.out.println("FuBi: " + item.clockFullBiasedNanos);
-                System.out.println("SvTi: " + item.ReceivedSvTimeNanos);
-                System.out.println("Offs: " + measurement.getTimeOffsetNanos());
-                System.out.println("tRx_GNSS: " + (item.timeNanos - (item.clockFullBiasedNanos + item.clockBiasedNanos)));
-                long tow = ((long)(clock.getTimeNanos() - (item.clockFullBiasedNanos + item.clockBiasedNanos))) % (7*24*60*60*1000000000);
-                System.out.println("tRx_GNSS_TOW: " + (tow));
-                double tTx = measurement.getReceivedSvTimeNanos();
-                System.out.println("tTx: " + tTx);
-                System.out.println("rho: " + ((tow - tTx) * 300000000 * 1e-9));
+
+                /*double tTx = measurement.getReceivedSvTimeNanos();
+                //System.out.println("tTx: " + tTx);
+                double tRx_GNSS = (double)clock.getTimeNanos() + measurement.getTimeOffsetNanos() - ((double)clock.getFullBiasNanos() + clock.getBiasNanos());
+                //System.out.println("tRx_GNSS: " + tRx_GNSS);
+                long tRx =  (long)tRx_GNSS % 604800000000000L;
+                //System.out.println("tRx: " + tRx);
+                double rho = ((double)tRx - tTx) * 300000000.0 * 1e-9;
+                System.out.println("rho: " + rho);*/
+
+                double rho = computeGpsPseudorange(clock, measurement, true)[0];
+                System.out.println("rho: " + rho);
+                item.pseudorange = rho;
 
                 serializable.Satellites.add(item);
                 serializable.SatelliteCount++;
+
+
             }
 
             try {
@@ -227,6 +271,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             try (OutputStream os = client.getOutputStream()) {
                 byte[] input = json.getBytes("utf-8");
                 os.write(input, 0, input.length);
+                System.out.println(json.getBytes("utf-8"));
             }
 
             String JsonContent = "";
@@ -256,15 +301,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
                 try {
                     locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-                /*if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                }*/
+
                     @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if (lastKnownLocation != null) {
                     DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f",lastKnownLocation.getLongitude());
