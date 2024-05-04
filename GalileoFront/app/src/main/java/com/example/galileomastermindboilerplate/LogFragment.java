@@ -173,6 +173,8 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 GnssClock clock = event.getClock();
 
                 item.timeNanos = clock.getTimeNanos();
+                item.clockBiasedNanos = clock.getBiasNanos();
+                item.clockFullBiasedNanos = mea.getFullInterSignalBiasNanos();
                 System.out.println("Time: " + item.timeNanos);
                 System.out.println("Offs: " + item.ReceivedSvTimeNanos);
 
