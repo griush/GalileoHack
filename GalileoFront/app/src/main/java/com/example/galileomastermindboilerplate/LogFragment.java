@@ -67,6 +67,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private CheckBox ChinaSwitch;
     private CheckBox JapanSwitch;
     private CheckBox RussiaSwitch;
+    private CheckBox PauseToggle;
     private TextView AverageSignalStrength;
     private TextView CurrentSignalStrength;
     private TextView DeviceLocationDisplay;
@@ -125,6 +126,10 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 //        mData = new ArrayList<>();
 //        mIcon = new ArrayList<>();
         try {
+            PauseToggle = activity.findViewById(R.id.PauseCheckBox);
+            if(PauseToggle.isChecked())
+                return;
+
             String json;
             BaseContent serializable = new BaseContent();
 
@@ -141,6 +146,8 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                     || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
                     continue;
 
+                System.out.println(measurement.getReceivedSvTimeNanos());
+                System.out.println(event.getClock().getTimeNanos());
 
 
                 SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
@@ -182,7 +189,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             }
 
 
-            URL url = new URL("http://192.168.137.119:4321/fetch");
+            URL url = new URL(ServerHostname.HOSTNAME);
 
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
 
@@ -224,7 +231,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 ObjectMapper objectMapper = new ObjectMapper();
                 FetchResponse dataResponse = objectMapper.readValue(JsonContent, FetchResponse.class);
 
-                ServerLocation = "Lat: " + dataResponse.lat + " Lon: " + dataResponse.lon;
+                ServerLocation = "Lat: " + dataResponse.lat + "\nLon: " + dataResponse.lon;
                 ServerSignalStrength = String.format("%.2f", dataResponse.signal);
 
                 try {
@@ -240,7 +247,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 }*/
                     @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
                 if (lastKnownLocation != null) {
-                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + " Lon: " + String.format("%.4f",lastKnownLocation.getLongitude());
+                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f",lastKnownLocation.getLongitude());
                 }
             } catch (Exception ex)
             {

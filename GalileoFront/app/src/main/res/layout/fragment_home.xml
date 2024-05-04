@@ -20,7 +20,11 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingStart="0dip"
+            android:paddingLeft="4dip"
+            android:paddingTop="0dip"
+            android:paddingEnd="4dip">
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -144,7 +148,7 @@
                         android:layout_width="96dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Loading..."
+                        android:text="Loading...\n"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -168,7 +172,7 @@
                         android:layout_width="96dip"
                         android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="Loading..."
+                        android:text="Loading...\n"
                         android:textColor="@color/white" />
                 </LinearLayout>
 
@@ -182,7 +186,7 @@
                         android:layout_width="66dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Device current SQI: "
+                        android:text="Device current SNR: "
                         android:textAlignment="textEnd"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -206,7 +210,7 @@
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Calulated average SQI: "
+                        android:text="Calulated average SNR: "
                         android:textAlignment="textEnd"
                         android:textColor="@color/white"
                         android:textStyle="bold" />
@@ -219,6 +223,16 @@
                         android:text="Loading..."
                         android:textColor="@color/white" />
                 </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/PauseCheckBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layoutDirection="rtl"
+                    android:text="Pause"
+                    android:textAlignment="viewStart"
+                    android:textColor="@color/white" />
             </LinearLayout>
         </LinearLayout>
 

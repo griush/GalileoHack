@@ -40,7 +40,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         SatelliteWidgetEntryData item = mData.get(position);
         int icon = mIcon.get(position);
 
-        holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " " + String.valueOf(item.Svid));
+        holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " id " + String.valueOf(item.Svid));
         holder.SignalStrength.setText(String.valueOf(String.format("%.2f", item.Cn0DbHz) + " dBHz"));
         holder.Frequency.setText(formatDoubleAsGHz(item.CarrierFrequencyHz));
         holder.PowerShower.setMax(50);
