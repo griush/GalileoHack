@@ -174,9 +174,18 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
                 item.timeNanos = clock.getTimeNanos();
                 item.clockBiasedNanos = clock.getBiasNanos();
-                item.clockFullBiasedNanos = mea.getFullInterSignalBiasNanos();
+                item.clockFullBiasedNanos = clock.getFullBiasNanos();
                 System.out.println("Time: " + item.timeNanos);
-                System.out.println("Offs: " + item.ReceivedSvTimeNanos);
+                System.out.println("BIAS: " + item.clockBiasedNanos);
+                System.out.println("FuBi: " + item.clockFullBiasedNanos);
+                System.out.println("SvTi: " + item.ReceivedSvTimeNanos);
+                System.out.println("Offs: " + measurement.getTimeOffsetNanos());
+                System.out.println("tRx_GNSS: " + (item.timeNanos - (item.clockFullBiasedNanos + item.clockBiasedNanos)));
+                long tow = ((long)(clock.getTimeNanos() - (item.clockFullBiasedNanos + item.clockBiasedNanos))) % (7*24*60*60*1000000000);
+                System.out.println("tRx_GNSS_TOW: " + (tow));
+                double tTx = measurement.getReceivedSvTimeNanos();
+                System.out.println("tTx: " + tTx);
+                System.out.println("rho: " + ((tow - tTx) * 300000000 * 1e-9));
 
                 serializable.Satellites.add(item);
                 serializable.SatelliteCount++;
