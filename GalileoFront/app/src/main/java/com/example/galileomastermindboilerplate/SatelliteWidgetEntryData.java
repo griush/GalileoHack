@@ -23,6 +23,8 @@ public class SatelliteWidgetEntryData {
     public double SatelliteInterSignalBiasNanos = -1;
     public double CarrierPhaseUncertainty = -1;
     public long timeNanos = -1;
+    public double clockBiasedNanos = -1;
+    public long clockFullBiasedNanos = -1;
     // timeNanos
 
     //
