@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.GnssAutomaticGainControl;
 import android.location.GnssClock;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
@@ -53,6 +54,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class LogFragment extends MainActivity implements MeasurementListener {
@@ -72,6 +74,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private TextView CurrentSignalStrength;
     private TextView DeviceLocationDisplay;
     private TextView ServerLocationDisplay;
+
     private WebView OpenStreetMap;
     private RecyclerViewAdapter adapter;
 
@@ -283,6 +286,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             ServerLocationDisplay = activity.findViewById(R.id.CurrentLocationDisplay);
             DeviceLocationDisplay = activity.findViewById(R.id.DeviceLocationDisplay);
 
+
             /*if (OpenStreetMap.getUrl() != openstreetmap_url && !openstreetmap_url.isEmpty()) {
                 OpenStreetMap.loadUrl(openstreetmap_url);
             }*/
@@ -329,6 +333,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.CarrierPhase = measurement.getCarrierPhase();
                 item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
                 item.ConstellationType = measurement.getConstellationType();
+                item.AGC = measurement.getAutomaticGainControlLevelDb();
 
                 mData.add(item);
                 mIcon.add(R.drawable.rawmeas);
