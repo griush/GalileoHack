@@ -1,4 +1,6 @@
 # GalileoHack
+An application that allows to retrieve and compare data from the different Geolocalization satellite constelations.
+
 
 ### Questions
 - How many Galileo satellites are used on your phone?
