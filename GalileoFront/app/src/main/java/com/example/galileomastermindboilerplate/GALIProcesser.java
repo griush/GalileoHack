@@ -1,0 +1,139 @@
+package com.example.galileomastermindboilerplate;
+
+import android.util.Log;
+
+import java.util.ArrayList;
+
+public class GALIProcesser {
+    private class GALIData {
+        int svid;
+        double t_oe, M0, e, sqa;
+        double Omega0, i0, omega, i_dot;
+        double Omega_dot, dn, cuc, cus, crc, crs;
+        double cic, cis, t_oc, af0, af1, af2;
+    }
+    private ArrayList<GALIData> satellite_ephemeris = new ArrayList<>();
+    public void onNewPage(byte[] page, int svid){
+        boolean isE5bI = (page[0] & 0x80) == 0;
+        if(!isE5bI) return; // E1-B not supported
+        if((page[0] & 0x40) != 0) return; // Alert page not supported
+
+        byte[] data_i = new byte[16];
+        for(int i = 0; i<14; i++)
+            data_i[i] = (byte)(((page[i] & 0x3F) << 2) | (page[i+1] >>> 6));
+
+        data_i[14] = (byte)(((page[14] & 0x0F) << 4) | (page[15] & 0xF0 >>> 4));
+        data_i[15] = (byte)(((page[15] & 0x0F) << 4) | (page[16] & 0xF0 >>> 4));
+
+        Log.i("DEB","NEW NAV/I "+svid);
+
+        onNewData(data_i,svid);
+    }
+
+    private void onNewData(byte[] data,int svid) {
+        int type = data[0] >>> 2;
+        if(type > 4 || type < 1) return;
+
+        boolean in_buffer = false;
+        int entry_index = -1;
+        GALIData gData = null;
+        for (int i = 0; i < satellite_ephemeris.size(); i++)
+        {
+            if(svid == satellite_ephemeris.get(i).svid) {
+                in_buffer = true;
+                entry_index = i;
+                gData = satellite_ephemeris.get(i);
+                break;
+            }
+        }
+
+        if(!in_buffer) gData = new GALIData();
+
+        switch(type) {
+            case 1:
+                short t_oe_raw = (short)((data[3] << 8) | data[4]);
+                t_oe_raw >>>= 2;
+                data = logicalRightShift(data);
+                int M0_raw = data[4] << 24 | data[5] << 16 | data[6] << 8 | data[7];
+                int e_raw = data[8] << 24 | data[9] << 16 | data[10] << 8 | data[11];
+                int sqa_raw = data[12] << 24 | data[13] << 16 | data[14] << 8 | data[15];
+
+                gData.t_oe = t_oe_raw * 60;
+                gData.M0 = M0_raw * Math.pow(2,-31);
+                gData.e = e_raw * Math.pow(2,-33);
+                gData.sqa = sqa_raw * Math.pow(2,-19);
+                break;
+            case 2:
+                int Omega0_raw = data[2] << 24 | data[3] << 16 | data[4] << 8 | data[5];
+                int i0_raw = data[6] << 24 | data[7] << 16 | data[8] << 8 | data[9];
+                int omega_raw = data[10] << 24 | data[11] << 16 | data[12] << 8 | data[13];
+                short i_dot_raw = (short)((data[14] << 8) | data[15]);
+                i_dot_raw >>>= 2;
+
+                gData.Omega0 = Omega0_raw * Math.pow(2,-31);
+                gData.i0 = i0_raw * Math.pow(2,-31);
+                gData.omega = omega_raw * Math.pow(2,-31);
+                gData.i_dot = i_dot_raw * Math.pow(2,-31);
+                break;
+            case 3:
+                int Omega_dot_raw = data[2] << 16 | data[3] << 8 | data[4];
+                short dn_raw = (short)(data[5] << 8 | data[6]);
+                short cuc_raw = (short)(data[7] << 8 | data[8]);
+                short cus_raw = (short)(data[9] << 8 | data[10]);
+                short crc_raw = (short)(data[11] << 8 | data[12]);
+                short crs_raw = (short)(data[13] << 8 | data[14]);
+
+                gData.Omega_dot = Omega_dot_raw * Math.pow(2,-43);
+                gData.dn = dn_raw * Math.pow(2,-43);
+                gData.cuc = cuc_raw * Math.pow(2,-29);
+                gData.cus = cus_raw * Math.pow(2,-29);
+                gData.crc = crc_raw * Math.pow(2,-5);
+                gData.crs = crs_raw * Math.pow(2,-5);
+
+                break;
+            case 4:
+                data = logicalRightShift(data);
+                short cic_raw = (short)(data[3] << 8 | data[4]);
+                short cis_raw = (short)(data[5] << 8 | data[6]);
+                short t_oc_raw = (short)(data[7] << 8 | data[8]);
+                t_oc_raw >>>= 2;
+
+                // af0 b68..98 -> b70..100 => B8b6..B12b4
+                // af1 b99..119 -> b101..121 => B12b5..B15b1
+                // af2 b120..125 -> b122..127 => B15b2..B15b7
+
+                int af0_raw = data[8] << 30 | data[9] << 22 | data[10] << 14 | data[11] << 6 | data[12] >>> 2;
+                af0_raw>>>=1;
+                int af1_raw = (data[12] & 0x03) << 18 | data[13] << 10 | data[14] << 2 | (data[15] >>> 6);
+                byte af2_raw = (byte)(data[15] & 0x3F);
+
+                gData.cic = cic_raw * Math.pow(2,-29);
+                gData.cis = cis_raw * Math.pow(2,-29);
+                gData.t_oc = t_oc_raw * 60;
+                gData.af0 = af0_raw * Math.pow(2,-34);
+                gData.af1 = af1_raw * Math.pow(2,-46);
+                gData.af2 = af2_raw * Math.pow(2,-59);
+                break;
+        }
+
+        if(in_buffer) satellite_ephemeris.set(entry_index,gData);
+        else satellite_ephemeris.add(gData);
+
+        // TODO: send gData to server
+    }
+
+    private static byte[] logicalRightShift(byte[] byteArray) {
+        byte[] shiftedArray = new byte[byteArray.length];
+
+        for (int i = 0; i < byteArray.length; i++) {
+            byte shiftedByte = (byte) (byteArray[i] >>> 2); // Perform logical right shift by 2 bits
+            if (i < byteArray.length - 1) {
+                byte lastTwoBits = (byte) (byteArray[i] & 0b00000011); // Extract last two bits
+                shiftedArray[i + 1] |= lastTwoBits; // Set last two bits in the next byte
+            }
+            shiftedArray[i] = shiftedByte;
+        }
+
+        return shiftedArray;
+    }
+}

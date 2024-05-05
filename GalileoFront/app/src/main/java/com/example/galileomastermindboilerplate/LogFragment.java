@@ -27,6 +27,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.Checkable;
@@ -60,6 +61,7 @@ import java.util.List;
 public class LogFragment extends MainActivity implements MeasurementListener {
 
     public Activity activity;
+    private GALIProcesser processer;
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -86,7 +88,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
         this.activity = _activity;
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
-
+        processer = new GALIProcesser();
     }
 
     LocationManager locationManager;
@@ -383,9 +385,11 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     @Override
     public void onGnssNavigationMessageReceived(GnssNavigationMessage event) {
-
-
-        // here
+        //Log.i("DEB","NEW EVENT "+event.getSvid()+", "+event.getType());
+        if(event.getType() == GnssNavigationMessage.TYPE_GAL_F || event.getType() == GnssNavigationMessage.TYPE_GAL_I)
+            Log.i("DEB","EVENT");
+        if(event.getType() != GnssNavigationMessage.TYPE_GAL_I) return;
+        processer.onNewPage(event.getData(),event.getSvid());
     }
 
     @Override
