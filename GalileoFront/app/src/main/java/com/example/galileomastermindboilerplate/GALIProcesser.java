@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class GALIProcesser {
 
     int pageCount = 0;
-    class FetchResponse {
+    private static class FetchResponse {
         public double lat;
         public double lon;
     }
@@ -36,12 +36,12 @@ public class GALIProcesser {
 
     public Activity activity;
 
-    private class GALIData {
-        int svid;
-        double t_oe, M0, e, sqa;
-        double Omega0, i0, omega, i_dot;
-        double Omega_dot, dn, cuc, cus, crc, crs;
-        double cic, cis, t_oc, af0, af1, af2;
+    public class GALIData {
+        public int svid = 0;
+        public double t_oe = 0, M0 = 0, e = 0, sqa = 0;
+        public double Omega0 = 0, i0 = 0, omega = 0, i_dot = 0;
+        public double Omega_dot = 0, dn = 0, cuc = 0, cus = 0, crc = 0, crs = 0;
+        public double cic = 0, cis = 0, t_oc = 0, af0 = 0, af1 = 0, af2 = 0;
     }
 
     private TextView ServerLocationDisplay;
@@ -171,7 +171,7 @@ public class GALIProcesser {
 
             String json;
             try {
-                json = new ObjectMapper().writeValueAsString(satellite_ephemeris);
+                json = new ObjectMapper().writeValueAsString(satellite_ephemeris.toArray());
                 System.out.println(json);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
