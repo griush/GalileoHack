@@ -24,6 +24,8 @@ import android.location.LocationListener;
 import android.location.OnNmeaMessageListener;
 import android.os.Bundle;
 
+import java.net.MalformedURLException;
+
 /** A class representing an interface for logging a measurement. */
 public interface MeasurementListener {
 
@@ -40,7 +42,7 @@ public interface MeasurementListener {
   /** @see GnssMeasurementsEvent.Callback#onStatusChanged(int) */
   void onGnssMeasurementsStatusChanged(int status);
   /** @see GnssNavigationMessage.Callback# onGnssNavigationMessageReceived(GnssNavigationMessage) */
-  void onGnssNavigationMessageReceived(GnssNavigationMessage event);
+  void onGnssNavigationMessageReceived(GnssNavigationMessage event) throws MalformedURLException;
   /** @see GnssNavigationMessage.Callback#onStatusChanged(int) */
   void onGnssNavigationMessageStatusChanged(int status);
   /** @see GnssStatus.Callback#onSatelliteStatusChanged(GnssStatus) */

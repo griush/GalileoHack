@@ -26,7 +26,7 @@ import com.example.galileomastermindboilerplate.databinding.ActivityMainBinding;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity {
+public class  MainActivity extends AppCompatActivity {
 
     private RecyclerViewAdapter mAdapter;
     private List<SatelliteWidgetEntryData> mData;
