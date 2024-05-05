@@ -3,35 +3,27 @@ use serde::*;
 use serde_json::*;
 
 #[derive(Debug, Deserialize, Serialize)]
-struct GnssSatelliteData {
-    // Mesurements
-    svid: u64,
-    constelation: u32,
-    time_offset_nanos: f32,
-    state: u16,
-    recieved_sv_time_nanos: u64,
-    recieved_sv_time_uncertanty_nanos: u64,
-    cn0_db_hz: f64,
-    baseband_cn0_db_hz: f64,
-    pseudorange_rate_meters_per_second: f64,
-    pseudorange_rate_uncertanty_meters_per_second: f64,
-    accumulated_delta_range_state: u16,
-    accumulated_delta_range_meters: f32,
-    accumulated_delta_range_uncertanty_meters: f32,
-    carrier_frequency_hz: f64,
-    multipath_indicator: u16,
-    agc_level_db: f32,
-    code_type: String,
-
-    // Clock
-    time_nanos: u64,
+struct SNRSignal {
+    pub signal: f64,
 }
 
 #[derive(Debug, Deserialize, Serialize)]
 struct UserLocation {
-    pub lat: f32,
-    pub lon: f32,
-    pub signal: f64,
+    pub lat: f64,
+    pub lon: f64,
+}
+
+fn resolve_pvt(u: &mut UserLocation, v: Value) {
+    // Need at least 3 satellites to determine lat and lon, you also need a 4th for altitude but
+    // not today
+    if v.as_array().unwrap().len() < 3 {
+        *u = UserLocation {
+            lat: -1.0,
+            lon: -1.0,
+        }
+    }
+
+    
 }
 
 #[async_std::main]
@@ -52,9 +44,7 @@ async fn main() -> tide::Result<()> {
         let num_sats = v["SatelliteCount"].as_u64().unwrap();
         if num_sats == 0 {
             let mut res = Response::new(200);
-            res.set_body(Body::from_json(&UserLocation{
-                lat: -1.0,
-                lon: -1.0,
+            res.set_body(Body::from_json(&SNRSignal{
                 signal: -1.0,
             })?);
 
@@ -70,12 +60,33 @@ async fn main() -> tide::Result<()> {
         let signal = sum / (num_sats as f64);
 
         let mut res = Response::new(200);
-        res.set_body(Body::from_json(&UserLocation{
-            lat: -1.0,
-            lon: -1.0,
+        res.set_body(Body::from_json(&SNRSignal{
             signal,
         })?);
 
+        Ok(res)
+    });
+
+    app.at("/ephemeris").post(|mut req: Request<()>| async move {
+        tide::log::warn!("/ephemeris request recieved <==========================>");
+
+        let body = req.body_string().await?;
+        println!("{:?}", body);
+        
+        let v: Value = serde_json::from_str(&body)?;
+
+        let mut u_loc = UserLocation {
+            lat: -1.0,
+            lon: -1.0,
+        };
+
+        resolve_pvt(&mut u_loc, v);
+
+        let mut res = Response::new(200);
+        res.set_body(Body::from_json(&UserLocation{
+            lat: 5.0,
+            lon: 5.0,
+        })?);
         Ok(res)
     });
 
