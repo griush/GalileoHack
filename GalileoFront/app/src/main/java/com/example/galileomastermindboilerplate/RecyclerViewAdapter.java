@@ -3,6 +3,8 @@ package com.example.galileomastermindboilerplate;
 
 import static android.location.GnssStatus.*;
 
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import androidx.appcompat.widget.TintInfo;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.galileomastermindboilerplate.ui.home.HomeViewModel;
@@ -42,13 +45,30 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 
         holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " id " + String.valueOf(item.Svid));
         holder.SignalStrength.setText(String.valueOf(String.format("%.2f", item.Cn0DbHz) + " dBHz"));
+
+        if(item.Cn0DbHz > 20)
+            holder.SignalStrength.setTextColor(new Color().argb(255, 0, 255, 128));
+        else if (item.Cn0DbHz > 10)
+            holder.SignalStrength.setTextColor(new Color().argb(255, 255, 255, 0));
+        else
+            holder.SignalStrength.setTextColor(new Color().argb(255, 255, 50, 0));
+
+        
+
         holder.Frequency.setText(formatDoubleAsGHz(item.CarrierFrequencyHz));
+
+
         holder.PowerShower.setMax(50);
         holder.PowerShower.setMin(10);
         holder.PowerShower.setProgress((int)item.Cn0DbHz);
         holder.AGCDisplay.setText(String.format("%.2f", item.AGC) + " dB");
 
-
+        if(item.AGC < -3)
+            holder.AGCDisplay.setTextColor(new Color().argb(255, 0, 255, 128));
+        else if (item.AGC <= 3)
+            holder.AGCDisplay.setTextColor(new Color().argb(255, 255, 255, 0));
+        else
+            holder.AGCDisplay.setTextColor(new Color().argb(255, 255, 50, 0));
     }
 
     @Override

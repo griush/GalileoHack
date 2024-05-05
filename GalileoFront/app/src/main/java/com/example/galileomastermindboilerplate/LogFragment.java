@@ -27,6 +27,7 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.Checkable;
@@ -66,6 +67,7 @@ import java.util.List;
 public class LogFragment extends MainActivity implements MeasurementListener {
 
     public Activity activity;
+    private GALIProcesser processer;
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -79,7 +81,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private TextView AverageSignalStrength;
     private TextView CurrentSignalStrength;
     private TextView DeviceLocationDisplay;
-    private TextView ServerLocationDisplay;
 
     private CheckBox SlowPaceCheckBox;
     private int currentCounter = 0;
@@ -92,7 +93,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
         this.activity = _activity;
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
-
+        processer = new GALIProcesser(_activity);
     }
 
     LocationManager locationManager;
@@ -120,8 +121,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     private static class FetchResponse {
         // {"lat":41.0543,"lon":2.34254,"signal":35.263653}
-        public double lat;
-        public double lon;
         public double signal;
     }
 
@@ -248,15 +247,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.clockBiasedNanos = clock.getBiasNanos();
                 item.clockFullBiasedNanos = clock.getFullBiasNanos();
 
-                /*double tTx = measurement.getReceivedSvTimeNanos();
-                //System.out.println("tTx: " + tTx);
-                double tRx_GNSS = (double)clock.getTimeNanos() + measurement.getTimeOffsetNanos() - ((double)clock.getFullBiasNanos() + clock.getBiasNanos());
-                //System.out.println("tRx_GNSS: " + tRx_GNSS);
-                long tRx =  (long)tRx_GNSS % 604800000000000L;
-                //System.out.println("tRx: " + tRx);
-                double rho = ((double)tRx - tTx) * 300000000.0 * 1e-9;
-                System.out.println("rho: " + rho);*/
-
                 double rho = computeGalileoPseudorange(clock, measurement, true)[0];
                 System.out.println("rho: " + rho);
                 item.pseudorange = rho;
@@ -269,13 +259,12 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
             try {
                 json = new ObjectMapper().writeValueAsString(serializable);
-                System.out.println(json);
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
 
 
-            URL url = new URL(ServerHostname.HOSTNAME);
+            URL url = new URL(ServerHostname.ENDPOINT_SATELLITE);
 
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
 
@@ -318,7 +307,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 ObjectMapper objectMapper = new ObjectMapper();
                 FetchResponse dataResponse = objectMapper.readValue(JsonContent, FetchResponse.class);
 
-                ServerLocation = "Lat: " + dataResponse.lat + "\nLon: " + dataResponse.lon;
                 ServerSignalStrength = String.format("%.2f", dataResponse.signal);
 
                 try {
@@ -349,7 +337,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
             CurrentSignalStrength = activity.findViewById(R.id.CurrentSignalStrengthDisplay);
             AverageSignalStrength = activity.findViewById(R.id.AverageSignalStrength);
-            ServerLocationDisplay = activity.findViewById(R.id.CurrentLocationDisplay);
             DeviceLocationDisplay = activity.findViewById(R.id.DeviceLocationDisplay);
 
 
@@ -370,9 +357,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             int CurrentSignalCount = 0;
 
             for (GnssMeasurement measurement : event.getMeasurements()) {
-                // builder.append(toStringMeasurement(measurement));
-                // System.out.println(event.getMeasurements().size());
-                // builder.append("\n");
 
                 if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
                         || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
@@ -414,7 +398,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             adapter.notifyDataSetChanged();
             CurrentSignalStrength.setText(String.format("%.2f", (float) (CurrentSignalAverage / CurrentSignalCount)) + " dBHz");
             AverageSignalStrength.setText(ServerSignalStrength + " dBHz");
-            ServerLocationDisplay.setText(ServerLocation);
             DeviceLocationDisplay.setText(DeviceLocation);
 
 
@@ -441,10 +424,13 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     }
 
     @Override
-    public void onGnssNavigationMessageReceived(GnssNavigationMessage event) {
-
-
-        // here
+    public void onGnssNavigationMessageReceived(GnssNavigationMessage event) throws MalformedURLException {
+        System.out.println("NEW EVENT "+event.getSvid()+", "+event.getType());
+        //Log.i("DEB","NEW EVENT "+event.getSvid()+", "+event.getType());
+        if(event.getType() == GnssNavigationMessage.TYPE_GAL_F || event.getType() == GnssNavigationMessage.TYPE_GAL_I)
+            Log.i("DEB","EVENT");
+        if(event.getType() != GnssNavigationMessage.TYPE_GAL_I) return;
+        processer.onNewPage(event.getData(),event.getSvid());
     }
 
     @Override

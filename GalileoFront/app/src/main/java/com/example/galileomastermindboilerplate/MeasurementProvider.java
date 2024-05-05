@@ -30,6 +30,7 @@ import android.util.Log;
 //import com.google.android.gms.location.LocationRequest;
 //import com.google.android.gms.location.LocationServices;
 
+import java.net.MalformedURLException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -150,7 +151,11 @@ public class MeasurementProvider {
         public void onGnssNavigationMessageReceived(GnssNavigationMessage event) {
           if (mLogNavigationMessages) {
             for (MeasurementListener logger : mListeners) {
-              logger.onGnssNavigationMessageReceived(event);
+                try {
+                    logger.onGnssNavigationMessageReceived(event);
+                } catch (MalformedURLException e) {
+                    System.out.println("Error");
+                }
             }
           }
         }
