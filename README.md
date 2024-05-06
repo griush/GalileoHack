@@ -4,4 +4,4 @@
 # GalileoHack 🛰️
 Winner of HackUPC 2024 ESA Challenge. 🏆
 
-An application that allows to retrieve and compare data from the different GNSS satellite constelations.
+An Android application that allows to retrieve and compare data from the different GNSS satellite constelations.
