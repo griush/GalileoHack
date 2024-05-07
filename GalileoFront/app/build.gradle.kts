@@ -1,5 +1,6 @@
 plugins {
     alias(libs.plugins.androidApplication)
+    id("com.google.protobuf") version "0.9.4"
 }
 
 android {
@@ -20,8 +21,8 @@ android {
         release {
             isMinifyEnabled = false
             proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                    getDefaultProguardFile("proguard-android-optimize.txt"),
+                    "proguard-rules.pro"
             )
         }
     }
@@ -53,11 +54,13 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.1")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
     implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
-
-
-    // implementation("com.google.android.gms:play-services-location:16.0.0")
-   // implementation("com.google.guava:guava:16+")
+    implementation("com.google.protobuf:protobuf-java:3.25.1")
+    //implementation("com.google.protobuf:protobuf-javalite:3.25.1")
+    //implementation("com.google.protobuf.nano:protobuf-javanano:3.1.0")
+    implementation("com.google.guava:guava:16.0")
+    implementation("com.google.auto.value:auto-value:1.4")
+    implementation("joda-time:joda-time:2.3")
+    implementation("com.google.gdata:core:1.47.1")
+    implementation("com.google.guava:guava:27.0.1-android")
 
 }
-
-
