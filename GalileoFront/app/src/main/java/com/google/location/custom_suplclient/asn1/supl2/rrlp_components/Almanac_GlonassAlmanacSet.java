@@ -99,34 +99,34 @@ public  class Almanac_GlonassAlmanacSet extends Asn1Sequence {
   }
 
   
-  private Almanac_GlonassAlmanacSet.gloAlmNAType gloAlmNA_;
-  public Almanac_GlonassAlmanacSet.gloAlmNAType getGloAlmNA() {
-    return gloAlmNA_;
+  private gloAlmNAType_UPPER gloAlmNA_UPPER_;
+  public gloAlmNAType_UPPER getGloAlmNA() {
+    return gloAlmNA_UPPER_;
   }
   /**
-   * @throws ClassCastException if value is not a Almanac_GlonassAlmanacSet.gloAlmNAType
+   * @throws ClassCastException if value is not a Almanac_GlonassAlmanacSet.gloAlmNAType_UPPER
    */
   public void setGloAlmNA(Asn1Object value) {
-    this.gloAlmNA_ = (Almanac_GlonassAlmanacSet.gloAlmNAType) value;
+    this.gloAlmNA_UPPER_ = (gloAlmNAType_UPPER) value;
   }
-  public Almanac_GlonassAlmanacSet.gloAlmNAType setGloAlmNAToNewInstance() {
-    gloAlmNA_ = new Almanac_GlonassAlmanacSet.gloAlmNAType();
-    return gloAlmNA_;
+  public gloAlmNAType_UPPER setGloAlmNA_UPPERToNewInstance() {
+    gloAlmNA_UPPER_ = new gloAlmNAType_UPPER();
+    return gloAlmNA_UPPER_;
   }
   
-  private Almanac_GlonassAlmanacSet.gloAlmnAType gloAlmnA_;
-  public Almanac_GlonassAlmanacSet.gloAlmnAType getGloAlmnA() {
-    return gloAlmnA_;
+  private gloAlmnAType_lower gloAlmnA_lower_;
+  public gloAlmnAType_lower getGloAlmnA() {
+    return gloAlmnA_lower_;
   }
   /**
-   * @throws ClassCastException if value is not a Almanac_GlonassAlmanacSet.gloAlmnAType
+   * @throws ClassCastException if value is not a Almanac_GlonassAlmanacSet.gloAlmnAType_lower
    */
   public void setGloAlmnA(Asn1Object value) {
-    this.gloAlmnA_ = (Almanac_GlonassAlmanacSet.gloAlmnAType) value;
+    this.gloAlmnA_lower_ = (gloAlmnAType_lower) value;
   }
-  public Almanac_GlonassAlmanacSet.gloAlmnAType setGloAlmnAToNewInstance() {
-    gloAlmnA_ = new Almanac_GlonassAlmanacSet.gloAlmnAType();
-    return gloAlmnA_;
+  public gloAlmnAType_lower setGloAlmnA_lowerToNewInstance() {
+    gloAlmnA_lower_ = new gloAlmnAType_lower();
+    return gloAlmnA_lower_;
   }
   
   private Almanac_GlonassAlmanacSet.gloAlmHAType gloAlmHA_;
@@ -322,11 +322,11 @@ public  class Almanac_GlonassAlmanacSet extends Asn1Sequence {
           }
 
           @Override public void setToNewInstance() {
-            setGloAlmNAToNewInstance();
+            setGloAlmNA_UPPERToNewInstance();
           }
 
           @Override public Collection<Asn1Tag> getPossibleFirstTags() {
-            return tag == null ? Almanac_GlonassAlmanacSet.gloAlmNAType.getPossibleFirstTags() : ImmutableList.of(tag);
+            return tag == null ? gloAlmNAType_UPPER.getPossibleFirstTags() : ImmutableList.of(tag);
           }
 
           @Override
@@ -365,11 +365,11 @@ public  class Almanac_GlonassAlmanacSet extends Asn1Sequence {
           }
 
           @Override public void setToNewInstance() {
-            setGloAlmnAToNewInstance();
+            setGloAlmnA_lowerToNewInstance();
           }
 
           @Override public Collection<Asn1Tag> getPossibleFirstTags() {
-            return tag == null ? Almanac_GlonassAlmanacSet.gloAlmnAType.getPossibleFirstTags() : ImmutableList.of(tag);
+            return tag == null ? gloAlmnAType_lower.getPossibleFirstTags() : ImmutableList.of(tag);
           }
 
           @Override
@@ -883,13 +883,13 @@ public  class Almanac_GlonassAlmanacSet extends Asn1Sequence {
 /**
  * 
  */
-public static class gloAlmNAType extends Asn1Integer {
+public static class gloAlmNAType_UPPER extends Asn1Integer {
   //
 
   private static final Asn1Tag TAG_gloAlmNAType
       = Asn1Tag.fromClassAndNumber(-1, -1);
 
-  public gloAlmNAType() {
+  public gloAlmNAType_UPPER() {
     super();
     setValueRange(new java.math.BigInteger("1"), new java.math.BigInteger("1461"));
 
@@ -915,19 +915,19 @@ public static class gloAlmNAType extends Asn1Integer {
   }
 
   /**
-   * Creates a new gloAlmNAType from encoded stream.
+   * Creates a new gloAlmNAType_UPPER from encoded stream.
    */
-  public static gloAlmNAType fromPerUnaligned(byte[] encodedBytes) {
-    gloAlmNAType result = new gloAlmNAType();
+  public static gloAlmNAType_UPPER fromPerUnaligned(byte[] encodedBytes) {
+    gloAlmNAType_UPPER result = new gloAlmNAType_UPPER();
     result.decodePerUnaligned(new BitStreamReader(encodedBytes));
     return result;
   }
 
   /**
-   * Creates a new gloAlmNAType from encoded stream.
+   * Creates a new gloAlmNAType_UPPER from encoded stream.
    */
-  public static gloAlmNAType fromPerAligned(byte[] encodedBytes) {
-    gloAlmNAType result = new gloAlmNAType();
+  public static gloAlmNAType_UPPER fromPerAligned(byte[] encodedBytes) {
+    gloAlmNAType_UPPER result = new gloAlmNAType_UPPER();
     result.decodePerAligned(new BitStreamReader(encodedBytes));
     return result;
   }
@@ -953,7 +953,7 @@ public static class gloAlmNAType extends Asn1Integer {
   }
 
   public String toIndentedString(String indent) {
-    return "gloAlmNAType = " + getInteger() + ";\n";
+    return "gloAlmNAType_UPPER = " + getInteger() + ";\n";
   }
 }
 
@@ -969,13 +969,13 @@ public static class gloAlmNAType extends Asn1Integer {
 /**
  * 
  */
-public static class gloAlmnAType extends Asn1Integer {
+public static class gloAlmnAType_lower extends Asn1Integer {
   //
 
   private static final Asn1Tag TAG_gloAlmnAType
       = Asn1Tag.fromClassAndNumber(-1, -1);
 
-  public gloAlmnAType() {
+  public gloAlmnAType_lower() {
     super();
     setValueRange(new java.math.BigInteger("1"), new java.math.BigInteger("24"));
 
@@ -1001,19 +1001,19 @@ public static class gloAlmnAType extends Asn1Integer {
   }
 
   /**
-   * Creates a new gloAlmnAType from encoded stream.
+   * Creates a new gloAlmnAType_lower from encoded stream.
    */
-  public static gloAlmnAType fromPerUnaligned(byte[] encodedBytes) {
-    gloAlmnAType result = new gloAlmnAType();
+  public static gloAlmnAType_lower fromPerUnaligned(byte[] encodedBytes) {
+    gloAlmnAType_lower result = new gloAlmnAType_lower();
     result.decodePerUnaligned(new BitStreamReader(encodedBytes));
     return result;
   }
 
   /**
-   * Creates a new gloAlmnAType from encoded stream.
+   * Creates a new gloAlmnAType_lower from encoded stream.
    */
-  public static gloAlmnAType fromPerAligned(byte[] encodedBytes) {
-    gloAlmnAType result = new gloAlmnAType();
+  public static gloAlmnAType_lower fromPerAligned(byte[] encodedBytes) {
+    gloAlmnAType_lower result = new gloAlmnAType_lower();
     result.decodePerAligned(new BitStreamReader(encodedBytes));
     return result;
   }
@@ -1039,7 +1039,7 @@ public static class gloAlmnAType extends Asn1Integer {
   }
 
   public String toIndentedString(String indent) {
-    return "gloAlmnAType = " + getInteger() + ";\n";
+    return "gloAlmnAType_lower = " + getInteger() + ";\n";
   }
 }
 

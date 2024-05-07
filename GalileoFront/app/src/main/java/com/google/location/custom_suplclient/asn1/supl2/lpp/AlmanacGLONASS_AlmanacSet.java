@@ -119,7 +119,7 @@ public  class AlmanacGLONASS_AlmanacSet extends Asn1Sequence {
     return gloAlmnA_;
   }
   /**
-   * @throws ClassCastException if value is not a AlmanacGLONASS_AlmanacSet.gloAlmnAType
+   * @throws ClassCastException if value is not a AlmanacGLONASS_AlmanacSet.gloAlmnAType_lower
    */
   public void setGloAlmnA(Asn1Object value) {
     this.gloAlmnA_ = (AlmanacGLONASS_AlmanacSet.gloAlmnAType) value;
@@ -1001,7 +1001,7 @@ public static class gloAlmnAType extends Asn1Integer {
   }
 
   /**
-   * Creates a new gloAlmnAType from encoded stream.
+   * Creates a new gloAlmnAType_lower from encoded stream.
    */
   public static gloAlmnAType fromPerUnaligned(byte[] encodedBytes) {
     gloAlmnAType result = new gloAlmnAType();
@@ -1010,7 +1010,7 @@ public static class gloAlmnAType extends Asn1Integer {
   }
 
   /**
-   * Creates a new gloAlmnAType from encoded stream.
+   * Creates a new gloAlmnAType_lower from encoded stream.
    */
   public static gloAlmnAType fromPerAligned(byte[] encodedBytes) {
     gloAlmnAType result = new gloAlmnAType();
@@ -1039,7 +1039,7 @@ public static class gloAlmnAType extends Asn1Integer {
   }
 
   public String toIndentedString(String indent) {
-    return "gloAlmnAType = " + getInteger() + ";\n";
+    return "gloAlmnAType_lower = " + getInteger() + ";\n";
   }
 }
 
