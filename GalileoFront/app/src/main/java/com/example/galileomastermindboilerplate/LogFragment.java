@@ -11,13 +11,9 @@
 
 package com.example.galileomastermindboilerplate;
 
-import static android.net.wifi.WifiConfiguration.Status.strings;
-
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.GnssAutomaticGainControl;
 import android.location.GnssClock;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
@@ -28,46 +24,24 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
-import android.webkit.WebView;
 import android.widget.CheckBox;
-import android.widget.Checkable;
-import android.widget.Switch;
 import android.widget.TextView;
 
 
-import androidx.core.app.ActivityCompat;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.Serializers;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import static android.location.GnssMeasurement.STATE_GAL_E1C_2ND_CODE_LOCK;
 import static android.location.GnssMeasurement.STATE_TOW_DECODED;
 import static android.location.GnssMeasurement.STATE_TOW_KNOWN;
-import static android.location.GnssStatus.CONSTELLATION_GALILEO;
-import static android.location.GnssStatus.CONSTELLATION_GPS;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class LogFragment extends MainActivity implements MeasurementListener {
 
     public Activity activity;
-    private GALIProcesser processer;
+    private GALIProcessor processer;
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -85,7 +59,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private CheckBox SlowPaceCheckBox;
     private int currentCounter = 0;
 
-    private WebView OpenStreetMap;
+    // private WebView OpenStreetMap;
     private RecyclerViewAdapter adapter;
 
     public LogFragment(Activity _activity) {
@@ -93,7 +67,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
         this.activity = _activity;
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
-        processer = new GALIProcesser(_activity);
+        processer = new GALIProcessor(_activity);
     }
 
     LocationManager locationManager;
@@ -124,7 +98,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
         public double signal;
     }
 
-    String ServerLocation = "UNSET";
+    // String ServerLocation = "UNSET";
     String DeviceLocation = "UNSET";
     String ServerSignalStrength = "UNSET";
     Location currentLocation = null;
@@ -133,27 +107,27 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     //check long to double conversions
     public double[] computeGalileoPseudorange(GnssClock clock, GnssMeasurement measurement, boolean useE1BC) {
-        final int   SECONDS_PER_WEEK = 3600*24*7;
+        final int SECONDS_PER_WEEK = 3600 * 24 * 7;
         final double C_METRES_PER_SECOND = 299792458.0;
-        final long  NANOSECONDS_PER_SECOND = 1000000000,    NANOSECONDS_PER_E1C_2ND_CODE_PERIOD = 100000000;
-        long        moduloPeriod, WeekNumberNanos, WeekNumber = 0;
-        double      towRxSeconds=0.0, towTxSeconds=0.0, pseudoRange=0.0;
-        long        towRxNanos, tRx;
-        double      tTx, tRxSec, tTxSec;
+        final long NANOSECONDS_PER_SECOND = 1000000000, NANOSECONDS_PER_E1C_2ND_CODE_PERIOD = 100000000;
+        long moduloPeriod, WeekNumberNanos, WeekNumber = 0;
+        double towRxSeconds = 0.0, towTxSeconds = 0.0, pseudoRange = 0.0;
+        long towRxNanos, tRx;
+        double tTx, tRxSec, tTxSec;
 
-        boolean towAvail = ((measurement.getState()&STATE_TOW_DECODED)>0)||((measurement.getState()&STATE_TOW_KNOWN)>0);
+        boolean towAvail = ((measurement.getState() & STATE_TOW_DECODED) > 0) || ((measurement.getState() & STATE_TOW_KNOWN) > 0);
 
-        if(towAvail)
-            moduloPeriod = NANOSECONDS_PER_SECOND*SECONDS_PER_WEEK;
+        if (towAvail)
+            moduloPeriod = NANOSECONDS_PER_SECOND * SECONDS_PER_WEEK;
         else //PC
-            if ((measurement.getState()&STATE_GAL_E1C_2ND_CODE_LOCK)>0)
+            if ((measurement.getState() & STATE_GAL_E1C_2ND_CODE_LOCK) > 0)
                 moduloPeriod = NANOSECONDS_PER_E1C_2ND_CODE_PERIOD;
             else
                 moduloPeriod = 4000000L;
 
-        if(towAvail||
-                ((measurement.getState()&STATE_GAL_E1C_2ND_CODE_LOCK)>0)||
-                (((measurement.getState()&(1024+32)) == (1024+32))&&useE1BC)) {
+        if (towAvail ||
+                ((measurement.getState() & STATE_GAL_E1C_2ND_CODE_LOCK) > 0) ||
+                (((measurement.getState() & (1024 + 32)) == (1024 + 32)) && useE1BC)) {
 
             long FullBiasNanos = clock.getFullBiasNanos();
             // double BiasNanos = clock.getBiasNanos(); removed because it is double and always 0
@@ -170,15 +144,15 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             }
 
             tRx = towRxNanos % moduloPeriod; // in ns
-            towRxSeconds = towRxNanos*1e-9; // ToW at RX
+            towRxSeconds = towRxNanos * 1e-9; // ToW at RX
             tTx = measurement.getReceivedSvTimeNanos() + measurement.getTimeOffsetNanos(); // in ns
 
-            tRxSec = tRx*1e-9;
-            tTxSec = tTx*1e-9;
+            tRxSec = tRx * 1e-9;
+            tTxSec = tTx * 1e-9;
 
-            pseudoRange  = ((tRxSec - tTxSec) % (moduloPeriod*1e-9))*C_METRES_PER_SECOND; // in meters
-            if (pseudoRange<0.0) // mod operation can return negative values
-                pseudoRange = pseudoRange + (moduloPeriod*1e-9)*C_METRES_PER_SECOND;
+            pseudoRange = ((tRxSec - tTxSec) % (moduloPeriod * 1e-9)) * C_METRES_PER_SECOND; // in meters
+            if (pseudoRange < 0.0) // mod operation can return negative values
+                pseudoRange = pseudoRange + (moduloPeriod * 1e-9) * C_METRES_PER_SECOND;
         }
 
         double[] result = {pseudoRange, towRxSeconds, WeekNumber};
@@ -190,145 +164,81 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
 //        mData = new ArrayList<>();
 //        mIcon = new ArrayList<>();
-        try {
-            PauseToggle = activity.findViewById(R.id.PauseCheckBox);
-            if(PauseToggle.isChecked())
-                return;
+        PauseToggle = activity.findViewById(R.id.PauseCheckBox);
+        if (PauseToggle.isChecked())
+            return;
 
-            SlowPaceCheckBox = activity.findViewById(R.id.SlowPaceCheckBox);
-            if((currentCounter++)%4!=0 && SlowPaceCheckBox.isChecked())
-                return;
+        SlowPaceCheckBox = activity.findViewById(R.id.SlowPaceCheckBox);
+        if ((currentCounter++) % 4 != 0 && SlowPaceCheckBox.isChecked())
+            return;
 
-            String json;
-            BaseContent serializable = new BaseContent();
+        BaseContent serializable = new BaseContent();
 
-            EuropeSwitch = activity.findViewById(R.id.EuropeToggle);
-            AmericaSwitch = activity.findViewById(R.id.AmericaToggle);
-            RussiaSwitch = activity.findViewById(R.id.RussiaToggle);
-            ChinaSwitch = activity.findViewById(R.id.ChinaToggle);
-            JapanSwitch = activity.findViewById(R.id.JapanToggle);
-            for (GnssMeasurement measurement : event.getMeasurements()) {
-                if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
+        EuropeSwitch = activity.findViewById(R.id.EuropeToggle);
+        AmericaSwitch = activity.findViewById(R.id.AmericaToggle);
+        RussiaSwitch = activity.findViewById(R.id.RussiaToggle);
+        ChinaSwitch = activity.findViewById(R.id.ChinaToggle);
+        JapanSwitch = activity.findViewById(R.id.JapanToggle);
+        for (GnssMeasurement measurement : event.getMeasurements()) {
+            if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
                     || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
                     || !RussiaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GLONASS
                     || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
                     || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
-                    continue;
+                continue;
 
-                if (((measurement.getState() & (1L << TOW_DECODED_MEASUREMENT_STATE_BIT)) == 0))
-                    continue;
+            if (((measurement.getState() & (1L << TOW_DECODED_MEASUREMENT_STATE_BIT)) == 0))
+                continue;
 
-                SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
-                item.Svid = measurement.getSvid();
-                item.CarrierFrequencyHz = measurement.getCarrierFrequencyHz();
-                item.SnrInDb = measurement.getSnrInDb();
-                item.ReceivedSvTimeNanos = measurement.getReceivedSvTimeNanos();
-                item.TimeOffsetNanos = measurement.getTimeOffsetNanos();
-                item.ReceivedSvTimeUncertaintyNanos = measurement.getReceivedSvTimeUncertaintyNanos();
-                item.Cn0DbHz = measurement.getCn0DbHz();
-                item.PseudorangeRateMetersPerSecond = measurement.getPseudorangeRateMetersPerSecond();
-                item.PseudorangeRateUncertaintyMetersPerSeconds = measurement.getPseudorangeRateUncertaintyMetersPerSecond();
-                item.AccumulatedDeltaRangeState = measurement.getAccumulatedDeltaRangeState();
-                item.AccumulatedDeltaRangeMeters = measurement.getAccumulatedDeltaRangeMeters();
-                item.AccumulatedDeltaRangeUncertaintyMeters = measurement.getAccumulatedDeltaRangeUncertaintyMeters();
-                item.CarrierCycles = measurement.getCarrierCycles();
-                item.CarrierPhase = measurement.getCarrierPhase();
-                item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
-                item.ConstellationType = measurement.getConstellationType();
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-                    item.FullInterSignalBiasNanos = measurement.getFullInterSignalBiasNanos();
-                    item.FullInterSignalBiasUncertaintyNanos = measurement.getFullInterSignalBiasUncertaintyNanos();
-                    item.SatelliteInterSignalBiasNanos = measurement.getSatelliteInterSignalBiasNanos();
-                }
-
-                GnssClock clock = event.getClock();
-
-                item.timeNanos = clock.getTimeNanos();
-                item.clockBiasedNanos = clock.getBiasNanos();
-                item.clockFullBiasedNanos = clock.getFullBiasNanos();
-
-                double rho = computeGalileoPseudorange(clock, measurement, true)[0];
-                System.out.println("rho: " + rho);
-                item.pseudorange = rho;
-
-                serializable.Satellites.add(item);
-                serializable.SatelliteCount++;
-
-
+            SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
+            item.Svid = measurement.getSvid();
+            item.CarrierFrequencyHz = measurement.getCarrierFrequencyHz();
+            item.SnrInDb = measurement.getSnrInDb();
+            item.ReceivedSvTimeNanos = measurement.getReceivedSvTimeNanos();
+            item.TimeOffsetNanos = measurement.getTimeOffsetNanos();
+            item.ReceivedSvTimeUncertaintyNanos = measurement.getReceivedSvTimeUncertaintyNanos();
+            item.Cn0DbHz = measurement.getCn0DbHz();
+            item.PseudorangeRateMetersPerSecond = measurement.getPseudorangeRateMetersPerSecond();
+            item.PseudorangeRateUncertaintyMetersPerSeconds = measurement.getPseudorangeRateUncertaintyMetersPerSecond();
+            item.AccumulatedDeltaRangeState = measurement.getAccumulatedDeltaRangeState();
+            item.AccumulatedDeltaRangeMeters = measurement.getAccumulatedDeltaRangeMeters();
+            item.AccumulatedDeltaRangeUncertaintyMeters = measurement.getAccumulatedDeltaRangeUncertaintyMeters();
+            item.CarrierCycles = measurement.getCarrierCycles();
+            item.CarrierPhase = measurement.getCarrierPhase();
+            item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
+            item.ConstellationType = measurement.getConstellationType();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                item.FullInterSignalBiasNanos = measurement.getFullInterSignalBiasNanos();
+                item.FullInterSignalBiasUncertaintyNanos = measurement.getFullInterSignalBiasUncertaintyNanos();
+                item.SatelliteInterSignalBiasNanos = measurement.getSatelliteInterSignalBiasNanos();
             }
 
-            try {
-                json = new ObjectMapper().writeValueAsString(serializable);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
+            GnssClock clock = event.getClock();
 
+            item.timeNanos = clock.getTimeNanos();
+            item.clockBiasedNanos = clock.getBiasNanos();
+            item.clockFullBiasedNanos = clock.getFullBiasNanos();
 
-            URL url = new URL(ServerHostname.ENDPOINT_SATELLITE);
+            double rho = computeGalileoPseudorange(clock, measurement, true)[0];
+            System.out.println("rho: " + rho);
+            item.pseudorange = rho;
 
-            HttpURLConnection client = (HttpURLConnection) url.openConnection();
-
-            // on below line setting method as post.
-            client.setRequestMethod("POST");
-
-            // on below line setting content type and accept type.
-            client.setRequestProperty("Content-Type", "application/json");
-            client.setRequestProperty("Accept", "application/json");
-
-            // on below line setting client.
-            client.setDoOutput(true);
-
-            // on below line we are creating an output stream and posting the data.
-            try (OutputStream os = client.getOutputStream()) {
-                byte[] input = json.getBytes("utf-8");
-                os.write(input, 0, input.length);
-                System.out.println(json.getBytes("utf-8"));
-            }
-
-            String JsonContent = "";
-
-            // on below line creating and initializing buffer reader.
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(client.getInputStream(), "utf-8"))) {
-
-                // on below line creating a string builder.
-                StringBuilder response = new StringBuilder();
-
-                // on below line creating a variable for response line.
-                String responseLine = null;
-
-                // on below line writing the response
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-
-                JsonContent = response.toString();
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                FetchResponse dataResponse = objectMapper.readValue(JsonContent, FetchResponse.class);
-
-                ServerSignalStrength = String.format("%.2f", dataResponse.signal);
-
-                try {
-                    locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
-                    @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (lastKnownLocation != null) {
-                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f",lastKnownLocation.getLongitude());
-                }
-            } catch (Exception ex)
-            {
-                DeviceLocation = ex.toString();
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ServerLocation = e.toString();
-            ServerSignalStrength = e.toString();
+            serializable.Satellites.add(item);
+            serializable.SatelliteCount++;
         }
 
+        ServerSignalStrength = String.format("%.2f", 17.40);
 
+        try {
+            locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
+
+            @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (lastKnownLocation != null) {
+                DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f", lastKnownLocation.getLongitude());
+            }
+        } catch (Exception ex) {
+            DeviceLocation = ex.toString();
+        }
 
         activity.runOnUiThread(() -> {
 
@@ -404,18 +314,10 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             // recyclerView.scrollToPosition(adapter.getItemCount() -1);
 
         });
-    } catch (ProtocolException e) {
-            throw new RuntimeException(e);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
 
-
     private String toStringMeasurement(GnssMeasurement measurement) {
-       return "";
+        return "";
     }
 
     @Override
@@ -425,12 +327,12 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
     @Override
     public void onGnssNavigationMessageReceived(GnssNavigationMessage event) throws MalformedURLException {
-        System.out.println("NEW EVENT "+event.getSvid()+", "+event.getType());
+        System.out.println("NEW EVENT " + event.getSvid() + ", " + event.getType());
         //Log.i("DEB","NEW EVENT "+event.getSvid()+", "+event.getType());
-        if(event.getType() == GnssNavigationMessage.TYPE_GAL_F || event.getType() == GnssNavigationMessage.TYPE_GAL_I)
-            Log.i("DEB","EVENT");
-        if(event.getType() != GnssNavigationMessage.TYPE_GAL_I) return;
-        processer.onNewPage(event.getData(),event.getSvid());
+        if (event.getType() == GnssNavigationMessage.TYPE_GAL_F || event.getType() == GnssNavigationMessage.TYPE_GAL_I)
+            Log.i("DEB", "EVENT");
+        if (event.getType() != GnssNavigationMessage.TYPE_GAL_I) return;
+        processer.onNewPage(event.getData(), event.getSvid());
     }
 
     @Override
@@ -457,7 +359,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     public void onTTFFReceived(long l) {
 
     }
-
 }
 
 

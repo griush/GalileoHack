@@ -1,36 +1,22 @@
 package com.example.galileomastermindboilerplate;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
 
 
-public class GALIProcesser {
+public class GALIProcessor {
 
     int pageCount = 0;
+
     private static class FetchResponse {
         public double lat;
         public double lon;
     }
 
-    public GALIProcesser(Activity activity) {
+    public GALIProcessor(Activity activity) {
         this.activity = activity;
     }
 
@@ -65,7 +51,7 @@ public class GALIProcesser {
         onNewData(data_i, svid);
     }
 
-    private void onNewData(byte[] data, int svid) throws MalformedURLException {
+    private void onNewData(byte[] data, int svid) {
         int type = data[0] >>> 2;
         System.out.println("DATA " + type);
         if (type > 4 || type < 1) return;
@@ -153,69 +139,6 @@ public class GALIProcesser {
 
         if (in_buffer) satellite_ephemeris.set(entry_index, gData);
         else satellite_ephemeris.add(gData);
-
-        try {
-            URL url = new URL(ServerHostname.ENDPOINT_LOCATION);
-
-            HttpURLConnection client = (HttpURLConnection) url.openConnection();
-
-            // on below line setting method as post.
-            client.setRequestMethod("POST");
-
-            // on below line setting content type and accept type.
-            client.setRequestProperty("Content-Type", "application/json");
-            client.setRequestProperty("Accept", "application/json");
-
-            // on below line setting client.
-            client.setDoOutput(true);
-
-            String json;
-            try {
-                json = new ObjectMapper().writeValueAsString(satellite_ephemeris.toArray());
-                System.out.println(json);
-            } catch (JsonProcessingException e) {
-                throw new RuntimeException(e);
-            }
-
-            // on below line we are creating an output stream and posting the data.
-            try (OutputStream os = client.getOutputStream()) {
-                byte[] input = json.getBytes("utf-8");
-                os.write(input, 0, input.length);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-
-            String JsonContent = "";
-
-            // on below line creating and initializing buffer reader.
-            try (BufferedReader br = new BufferedReader(new InputStreamReader(client.getInputStream(), "utf-8"))) {
-
-                // on below line creating a string builder.
-                StringBuilder response = new StringBuilder();
-
-                // on below line creating a variable for response line.
-                String responseLine = null;
-
-                // on below line writing the response
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-
-                JsonContent = response.toString();
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                GALIProcesser.FetchResponse dataResponse = objectMapper.readValue(JsonContent, GALIProcesser.FetchResponse.class);
-
-                activity.runOnUiThread(() -> {
-                    ServerLocationDisplay = activity.findViewById(R.id.CurrentLocationDisplay);
-                    ServerLocationDisplay.setText("Lat: " + dataResponse.lat + "\nLon: " + dataResponse.lon);
-                });
-
-
-            }
-        } catch (Exception ex) {
-            System.out.println(ex.toString());
-        }
     }
 
     private static byte[] logicalRightShift(byte[] byteArray) {
