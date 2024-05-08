@@ -21,28 +21,28 @@ package com.google.location.custom_suplclient.supl;
  */
 public final class SuplTester {
 
-  private static final String serverHost = "supl.google.com";
+  public static final String serverHost = "supl.google.com";
 
-  private static final int serverPort = 7275;
+  public static final int serverPort = 7275;
 
-  private static final boolean sslEnabled = true;
+  public static final boolean sslEnabled = true;
 
-  private static final boolean messageLoggingEnabled = true;
+  public static final boolean messageLoggingEnabled = true;
 
-  private static final boolean loggingEnabled = true;
+  public static final boolean loggingEnabled = true;
 
-  private static final long latE7 = 374220030;
+  public static final long latE7 = 374220030;
 
-  private static final long lngE7 = -1220841890;
+  public static final long lngE7 = -1220841890;
 
   public static void main(String[] args) throws Exception {
-    SuplTester tester = new SuplTester();
-    tester.runStepByStepTcpClientTest();
+    //SuplTester tester = new SuplTester();
+    //tester.runStepByStepTcpClientTest();
   }
 
   /** Step by step test of the supl client */
   private void runStepByStepTcpClientTest() {
-    /*SuplConnectionRequest request =
+    SuplConnectionRequest request =
         SuplConnectionRequest.builder()
             .setServerHost(serverHost)
             .setServerPort(serverPort)
@@ -53,7 +53,7 @@ public final class SuplTester {
     SuplController suplController = new SuplController(request);
     // Try to call methods to access SUPL server and see if they report any exception
     suplController.sendSuplRequest(latE7, lngE7);
-    SuplResponse suplResponse = suplController.generateEphResponse(latE7, lngE7);*/
+    SuplResponse suplResponse = suplController.generateEphResponse(latE7, lngE7);
 
     // System.out.println("\n\n");
     // for (int i = 0; i < suplResponse.ephList.size(); i++) {

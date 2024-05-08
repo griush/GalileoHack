@@ -10,6 +10,12 @@ import android.widget.TextView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.location.custom_suplclient.ephemeris.GnssEphemeris;
+import com.google.location.custom_suplclient.supl.Ephemeris;
+import com.google.location.custom_suplclient.supl.SuplConnectionRequest;
+import com.google.location.custom_suplclient.supl.SuplController;
+import com.google.location.custom_suplclient.supl.SuplResponse;
+import com.google.location.custom_suplclient.supl.SuplTester;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +26,7 @@ import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class GALIProcesser {
@@ -48,6 +55,28 @@ public class GALIProcesser {
     private ArrayList<GALIData> satellite_ephemeris = new ArrayList<>();
 
     public void onNewPage(byte[] page, int svid) throws MalformedURLException {
+
+
+
+        SuplConnectionRequest request =
+                SuplConnectionRequest.builder()
+                        .setServerHost(SuplTester.serverHost)
+                        .setServerPort(SuplTester.serverPort)
+                        .setSslEnabled(SuplTester.sslEnabled)
+                        .setMessageLoggingEnabled(SuplTester.messageLoggingEnabled)
+                        .setLoggingEnabled(SuplTester.loggingEnabled)
+                        .build();
+        SuplController suplController = new SuplController(request);
+        // Try to call methods to access SUPL server and see if they report any exception
+        suplController.sendSuplRequest(SuplTester.latE7, SuplTester.lngE7);
+        SuplResponse suplResponse = suplController.generateEphResponse(SuplTester.latE7, SuplTester.lngE7);
+
+        for (int i = 0; i < suplResponse.ephList.size(); i++) {
+            System.out.println("EPH" + suplResponse.ephList.get(i));
+        }
+
+
+
         boolean isE5bI = (page[0] & 0x80) == 0;
         if (!isE5bI) return; // E1-B not supported
         if ((page[0] & 0x40) != 0) return; // Alert page not supported
@@ -68,7 +97,9 @@ public class GALIProcesser {
     private void onNewData(byte[] data, int svid) throws MalformedURLException {
         int type = data[0] >>> 2;
         System.out.println("DATA " + type);
-        if (type > 4 || type < 1) return;
+
+
+        /*if (type > 4 || type < 1) return;
 
         boolean in_buffer = false;
         int entry_index = -1;
@@ -153,6 +184,8 @@ public class GALIProcesser {
 
         if (in_buffer) satellite_ephemeris.set(entry_index, gData);
         else satellite_ephemeris.add(gData);
+
+        */
 
         try {
             URL url = new URL(ServerHostname.ENDPOINT_LOCATION);

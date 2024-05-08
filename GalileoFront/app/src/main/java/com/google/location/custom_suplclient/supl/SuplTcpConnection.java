@@ -31,7 +31,7 @@ import javax.net.ssl.SSLSocketFactory;
  * A TCP client that is used to send and receive SUPL request and responses by the SUPL client. The
  * constructor establishes a connection to the SUPL server specified by a given address and port.
  */
-final class SuplTcpConnection {
+public final class SuplTcpConnection {
 
   private static final Logger logger = Logger.getLogger(SuplTcpConnection.class.getName());
   private static final int READ_TIMEOUT_MILLIS = (int) TimeUnit.SECONDS.toMillis(10);

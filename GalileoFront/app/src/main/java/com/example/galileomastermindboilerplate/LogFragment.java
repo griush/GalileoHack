@@ -44,6 +44,10 @@ import com.fasterxml.jackson.databind.ser.Serializers;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.location.custom_suplclient.supl.SuplConnectionRequest;
+import com.google.location.custom_suplclient.supl.SuplController;
+import com.google.location.custom_suplclient.supl.SuplResponse;
+import com.google.location.custom_suplclient.supl.SuplTester;
 
 import static android.location.GnssMeasurement.STATE_GAL_E1C_2ND_CODE_LOCK;
 import static android.location.GnssMeasurement.STATE_TOW_DECODED;
@@ -248,12 +252,10 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 item.clockFullBiasedNanos = clock.getFullBiasNanos();
 
                 double rho = computeGalileoPseudorange(clock, measurement, true)[0];
-                System.out.println("rho: " + rho);
                 item.pseudorange = rho;
 
                 serializable.Satellites.add(item);
                 serializable.SatelliteCount++;
-
 
             }
 
@@ -284,6 +286,11 @@ public class LogFragment extends MainActivity implements MeasurementListener {
                 os.write(input, 0, input.length);
                 System.out.println(json.getBytes("utf-8"));
             }
+
+
+
+
+
 
             String JsonContent = "";
 

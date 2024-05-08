@@ -20,31 +20,74 @@ import com.google.auto.value.AutoValue;
  * Holds SUPL Connection request parameters.
  */
 @AutoValue
-public abstract class SuplConnectionRequest {
-  public abstract String getServerHost();
+public class SuplConnectionRequest {
+  public String serverHost;
+  public int serverPort;
+  public boolean sslEnabled;
+  public boolean loggingEnabled;
+  public boolean messageLoggingEnabled;
+  public String getServerHost() {
+    return serverHost;}
 
-  public abstract int getServerPort();
+  public int getServerPort() {
+    return serverPort;
+  }
 
-  public abstract boolean isSslEnabled();
+  public boolean isSslEnabled() {
+    return sslEnabled;
+  }
 
-  public abstract boolean isLoggingEnabled();
+  public boolean isLoggingEnabled() {
+    return loggingEnabled;
+  }
 
-  public abstract boolean isMessageLoggingEnabled();
+  public boolean isMessageLoggingEnabled() {
+    return messageLoggingEnabled;
+  }
 
-  /*public static Builder builder() {
-    return new AutoValue_SuplConnectionRequest.Builder()
+  public static Builder builder() {
+    return new SuplConnectionRequest.Builder()
         .setMessageLoggingEnabled(false)
         .setLoggingEnabled(false)
         .setSslEnabled(false);
-  }*/
+  }
 
-  @AutoValue.Builder
-  public abstract static class Builder {
-    public abstract Builder setServerHost(String host);
-    public abstract Builder setServerPort(int port);
-    public abstract Builder setSslEnabled(boolean enableSsl);
-    public abstract Builder setLoggingEnabled(boolean enableLogging);
-    public abstract Builder setMessageLoggingEnabled(boolean enableMessageLogging);
-    public abstract SuplConnectionRequest build();
+  public static class Builder {
+    String host = SuplTester.serverHost;
+    int port = SuplTester.serverPort;
+    boolean ssl = SuplTester.sslEnabled;
+    boolean logging = SuplTester.loggingEnabled;
+    boolean messageLogging = SuplTester.messageLoggingEnabled;
+
+    public Builder setServerHost(String host){
+      this.host = host;
+      return this;
+    }
+    public Builder setServerPort(int port){
+      this.port = port;
+      return this;
+    }
+    public Builder setSslEnabled(boolean enableSsl){
+      ssl = enableSsl;
+      return this;
+    }
+    public Builder setLoggingEnabled(boolean enableLogging){
+      logging = enableLogging;
+      return this;
+    }
+    public Builder setMessageLoggingEnabled(boolean enableMessageLogging){
+      messageLogging = enableMessageLogging;
+      return this;
+    }
+    public SuplConnectionRequest build()
+    {
+        SuplConnectionRequest request = new SuplConnectionRequest();
+        request.serverHost = host;
+        request.serverPort = port;
+        request.sslEnabled = ssl;
+        request.loggingEnabled = logging;
+        request.messageLoggingEnabled = messageLogging;
+        return request;
+    }
   }
 }
