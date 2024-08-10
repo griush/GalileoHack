@@ -11,13 +11,7 @@
 
 package com.example.galileomastermindboilerplate;
 
-import static android.net.wifi.WifiConfiguration.Status.strings;
-
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.content.pm.PackageManager;
-import android.location.GnssAutomaticGainControl;
 import android.location.GnssClock;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
@@ -30,43 +24,28 @@ import android.os.Bundle;
 import android.util.Log;
 import android.webkit.WebView;
 import android.widget.CheckBox;
-import android.widget.Checkable;
-import android.widget.Switch;
 import android.widget.TextView;
 
 
-import androidx.core.app.ActivityCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.Serializers;
-import com.google.android.gms.location.FusedLocationProviderClient;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.tasks.OnSuccessListener;
 
 import static android.location.GnssMeasurement.STATE_GAL_E1C_2ND_CODE_LOCK;
 import static android.location.GnssMeasurement.STATE_TOW_DECODED;
 import static android.location.GnssMeasurement.STATE_TOW_KNOWN;
-import static android.location.GnssStatus.CONSTELLATION_GALILEO;
-import static android.location.GnssStatus.CONSTELLATION_GPS;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
-public class LogFragment extends MainActivity implements MeasurementListener {
+public class SatelliteDataHandler extends MainActivity implements MeasurementListener {
 
     public Activity activity;
+
+    private boolean SET_RECYCLERVIEW_LAYOUT_MANAGER = false;
     private GALIProcesser processer;
 
     private List<SatelliteWidgetEntryData> mData;
@@ -88,7 +67,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
     private WebView OpenStreetMap;
     private RecyclerViewAdapter adapter;
 
-    public LogFragment(Activity _activity) {
+    public SatelliteDataHandler(Activity _activity) {
 
         this.activity = _activity;
         mData = new ArrayList<>();
@@ -207,6 +186,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             RussiaSwitch = activity.findViewById(R.id.RussiaToggle);
             ChinaSwitch = activity.findViewById(R.id.ChinaToggle);
             JapanSwitch = activity.findViewById(R.id.JapanToggle);
+
             for (GnssMeasurement measurement : event.getMeasurements()) {
                 if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
                     || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
@@ -253,8 +233,6 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
                 serializable.Satellites.add(item);
                 serializable.SatelliteCount++;
-
-
             }
 
             try {
@@ -264,7 +242,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             }
 
 
-            URL url = new URL(ServerHostname.ENDPOINT_SATELLITE);
+            /*URL url = new URL(ServerHostname.ENDPOINT_SATELLITE);
 
             HttpURLConnection client = (HttpURLConnection) url.openConnection();
 
@@ -326,7 +304,7 @@ public class LogFragment extends MainActivity implements MeasurementListener {
             e.printStackTrace();
             ServerLocation = e.toString();
             ServerSignalStrength = e.toString();
-        }
+        }*/
 
 
 
@@ -334,10 +312,18 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
             // Find RecyclerView by ID
             recyclerView = activity.findViewById(R.id.main_list);
+            if (recyclerView != null && !SET_RECYCLERVIEW_LAYOUT_MANAGER)
+            {
+                //SET_RECYCLERVIEW_LAYOUT_MANAGER = true;
+                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            }
 
-            CurrentSignalStrength = activity.findViewById(R.id.CurrentSignalStrengthDisplay);
-            AverageSignalStrength = activity.findViewById(R.id.AverageSignalStrength);
-            DeviceLocationDisplay = activity.findViewById(R.id.DeviceLocationDisplay);
+
+
+            // TODO: Add those controls
+            //CurrentSignalStrength = activity.findViewById(R.id.CurrentSignalStrengthDisplay);
+            //AverageSignalStrength = activity.findViewById(R.id.AverageSignalStrength);
+            //DeviceLocationDisplay = activity.findViewById(R.id.DeviceLocationDisplay);
 
 
             /*if (OpenStreetMap.getUrl() != openstreetmap_url && !openstreetmap_url.isEmpty()) {
@@ -396,19 +382,15 @@ public class LogFragment extends MainActivity implements MeasurementListener {
 
             }
             adapter.notifyDataSetChanged();
-            CurrentSignalStrength.setText(String.format("%.2f", (float) (CurrentSignalAverage / CurrentSignalCount)) + " dBHz");
-            AverageSignalStrength.setText(ServerSignalStrength + " dBHz");
-            DeviceLocationDisplay.setText(DeviceLocation);
+            //CurrentSignalStrength.setText(String.format("%.2f", (float) (CurrentSignalAverage / CurrentSignalCount)) + " dBHz");
+            //AverageSignalStrength.setText(ServerSignalStrength + " dBHz");
+            //DeviceLocationDisplay.setText(DeviceLocation);
 
 
             // recyclerView.scrollToPosition(adapter.getItemCount() -1);
 
         });
-    } catch (ProtocolException e) {
-            throw new RuntimeException(e);
-        } catch (MalformedURLException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

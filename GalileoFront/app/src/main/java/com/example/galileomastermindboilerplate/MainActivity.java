@@ -3,10 +3,8 @@ package com.example.galileomastermindboilerplate;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.location.GnssMeasurement;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Window;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -23,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.galileomastermindboilerplate.databinding.ActivityMainBinding;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class  MainActivity extends AppCompatActivity {
@@ -32,7 +29,7 @@ public class  MainActivity extends AppCompatActivity {
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer>mIcon;
 
-    private LogFragment ddt;
+    private SatelliteDataHandler ddt;
     private static final int LOCATION_REQUEST_ID = 1;
     private static final String[] REQUIRED_PERMISSIONS = {
             android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE
@@ -55,46 +52,13 @@ public class  MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.landingPage, R.id.generalStatsPage, R.id.satelliteListPage)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         requestPermissionAndSetupFragments(this);
-
-        RecyclerView recyclerView = findViewById(R.id.main_list);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-        mData = new ArrayList<>();
-        mIcon = new ArrayList<>();
-
-        mAdapter = new RecyclerViewAdapter(mData,mIcon);
-        recyclerView.setAdapter(mAdapter);
-
-        // Initially populate mData with some data
-        /*mData.add("State dummy...");
-        mIcon.add(R.drawable.state);
-        mData.add("Raw measurement dummy...");
-        mIcon.add(R.drawable.rawmeas);
-        mData.add("Navigation message dummy...");
-        mIcon.add(R.drawable.navmsg);
-        mData.add("NMEA dummy...");
-        mIcon.add(R.drawable.nmea);
-        mData.add("AGC dummy...");
-        mIcon.add(R.drawable.agc);
-        mData.add("Fix dummy...");
-        mIcon.add(R.drawable.fix);*/
-
-
-        // Add more items as needed
-        // mAdapter.notifyDataSetChanged();
-
-
-
-
     }
 
     @Override
@@ -106,7 +70,7 @@ public class  MainActivity extends AppCompatActivity {
 
     private void startHere() {
 
-        ddt = new LogFragment(this);
+        ddt = new SatelliteDataHandler(this);
         mMeasurementProvider = new MeasurementProvider(getApplicationContext(), ddt);
       //  mMeasurementProvider = new MeasurementProvider(getApplicationContext());
 

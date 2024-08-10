@@ -3,23 +3,30 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/generalStatsPage">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.galileomastermindboilerplate.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/generalStatsPage"
+        android:name="com.example.galileomastermindboilerplate.GeneralStatsPage"
+        android:label="fragment_general_stats_page"
+        tools:layout="@layout/fragment_general_stats_page" >
+        <action
+            android:id="@+id/action_generalStatsPage_to_landingPage"
+            app:destination="@id/landingPage"
+            app:enterAnim="@anim/nav_default_enter_anim"
+            app:exitAnim="@anim/nav_default_exit_anim"
+            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
+            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
+    </fragment>
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.galileomastermindboilerplate.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/landingPage"
+        android:name="com.example.galileomastermindboilerplate.LandingPage"
+        android:label="fragment_landing_page"
+        tools:layout="@layout/fragment_landing_page" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.galileomastermindboilerplate.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/satelliteListPage"
+        android:name="com.example.galileomastermindboilerplate.SatelliteListPage"
+        android:label="fragment_satellite_list_page"
+        tools:layout="@layout/fragment_satellite_list_page" />
+
 </navigation>

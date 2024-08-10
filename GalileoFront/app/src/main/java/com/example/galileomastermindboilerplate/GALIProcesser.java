@@ -207,8 +207,10 @@ public class GALIProcesser {
                 GALIProcesser.FetchResponse dataResponse = objectMapper.readValue(JsonContent, GALIProcesser.FetchResponse.class);
 
                 activity.runOnUiThread(() -> {
-                    ServerLocationDisplay = activity.findViewById(R.id.CurrentLocationDisplay);
-                    ServerLocationDisplay.setText("Lat: " + dataResponse.lat + "\nLon: " + dataResponse.lon);
+                    // TODO: Add this controls on the Nerd Data page
+
+                    //ServerLocationDisplay = activity.findViewById(R.id.CurrentLocationDisplay);
+                    //ServerLocationDisplay.setText("Lat: " + dataResponse.lat + "\nLon: " + dataResponse.lon);
                 });
 
 

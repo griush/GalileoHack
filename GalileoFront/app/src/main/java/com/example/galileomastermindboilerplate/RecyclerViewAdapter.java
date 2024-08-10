@@ -15,8 +15,6 @@ import android.widget.TextView;
 import androidx.appcompat.widget.TintInfo;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.galileomastermindboilerplate.ui.home.HomeViewModel;
-
 import java.util.List;
 
 public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
