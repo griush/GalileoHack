@@ -43,8 +43,7 @@
                     android:minWidth="0dip"
                     android:minHeight="0dip"
                     android:text="🇪🇺 Galileo"
-                    android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                    android:textAlignment="textEnd" />
 
                 <CheckBox
                     android:id="@+id/AmericaToggle"
@@ -62,7 +61,7 @@
                     android:minHeight="0dip"
                     android:text="🇺🇸 GPS"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                     />
 
                 <CheckBox
                     android:id="@+id/RussiaToggle"
@@ -80,7 +79,7 @@
                     android:minHeight="0dip"
                     android:text="🇷🇺 GLONASS"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                     />
 
                 <CheckBox
                     android:id="@+id/ChinaToggle"
@@ -98,7 +97,7 @@
                     android:minHeight="0dip"
                     android:text="🇨🇳 BeiDou"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                     />
 
                 <CheckBox
                     android:id="@+id/JapanToggle"
@@ -116,7 +115,7 @@
                     android:minHeight="0dip"
                     android:text="🇯🇵 QZSS"
                     android:textAlignment="textEnd"
-                    android:textColor="@color/white" />
+                     />
             </LinearLayout>
 
             <LinearLayout
@@ -146,7 +145,7 @@
                         android:paddingRight="4dip"
                         android:text="Slow pace"
                         android:textAlignment="viewStart"
-                        android:textColor="@color/white" />
+                         />
 
                     <CheckBox
                         android:id="@+id/PauseCheckBox"
@@ -158,7 +157,7 @@
                         android:paddingRight="12dip"
                         android:text="Pause"
                         android:textAlignment="viewStart"
-                        android:textColor="@color/white" />
+                         />
                 </LinearLayout>
 
             </LinearLayout>

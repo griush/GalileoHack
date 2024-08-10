@@ -312,11 +312,12 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
             // Find RecyclerView by ID
             recyclerView = activity.findViewById(R.id.main_list);
-            if (recyclerView != null && !SET_RECYCLERVIEW_LAYOUT_MANAGER)
-            {
-                //SET_RECYCLERVIEW_LAYOUT_MANAGER = true;
-                recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+            if (recyclerView == null) {
+                return;
             }
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
 
 
