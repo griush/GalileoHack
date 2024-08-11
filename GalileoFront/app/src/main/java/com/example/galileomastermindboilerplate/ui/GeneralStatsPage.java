@@ -49,9 +49,13 @@ public class GeneralStatsPage extends Fragment {
             return;
         }
 
+        // Navigations messages
         TextView supportsNavigationMessages = view.findViewById(R.id.supportsNavigationMessages);
         assert supportsNavigationMessages != null;
         supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? "true" : "false");
 
+        TextView supportsMeasurements = view.findViewById(R.id.supportsMeasurements);
+        assert supportsMeasurements != null;
+        supportsMeasurements.setText(Capabilities.hasMeasurements() ? "true" : "false");
     }
 }
