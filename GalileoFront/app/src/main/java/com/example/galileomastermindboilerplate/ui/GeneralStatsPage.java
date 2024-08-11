@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate;
+package com.example.galileomastermindboilerplate.ui;
 
 import android.os.Bundle;
 
@@ -8,12 +8,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.galileomastermindboilerplate.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link LandingPage#newInstance} factory method to
+ * Use the {@link GeneralStatsPage#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class LandingPage extends Fragment {
+public class GeneralStatsPage extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +26,7 @@ public class LandingPage extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public LandingPage() {
+    public GeneralStatsPage() {
         // Required empty public constructor
     }
 
@@ -34,11 +36,11 @@ public class LandingPage extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment LandingPage.
+     * @return A new instance of fragment GeneralStatsPage.
      */
     // TODO: Rename and change types and number of parameters
-    public static LandingPage newInstance(String param1, String param2) {
-        LandingPage fragment = new LandingPage();
+    public static GeneralStatsPage newInstance(String param1, String param2) {
+        GeneralStatsPage fragment = new GeneralStatsPage();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -59,6 +61,6 @@ public class LandingPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_landing_page, container, false);
+        return inflater.inflate(R.layout.fragment_general_stats_page, container, false);
     }
 }

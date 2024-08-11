@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/generalStatsPage"
-        android:name="com.example.galileomastermindboilerplate.GeneralStatsPage"
+        android:name="com.example.galileomastermindboilerplate.ui.GeneralStatsPage"
         android:label="fragment_general_stats_page"
         tools:layout="@layout/fragment_general_stats_page" >
         <action
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/landingPage"
-        android:name="com.example.galileomastermindboilerplate.LandingPage"
+        android:name="com.example.galileomastermindboilerplate.ui.LandingPage"
         android:label="fragment_landing_page"
         tools:layout="@layout/fragment_landing_page" />
     <fragment
         android:id="@+id/satelliteListPage"
-        android:name="com.example.galileomastermindboilerplate.SatelliteListPage"
+        android:name="com.example.galileomastermindboilerplate.ui.SatelliteListPage"
         android:label="fragment_satellite_list_page"
         tools:layout="@layout/fragment_satellite_list_page" />
 

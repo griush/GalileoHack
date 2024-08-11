@@ -1,9 +1,8 @@
-package com.example.galileomastermindboilerplate;
+package com.example.galileomastermindboilerplate.ui;
 
 
 import static android.location.GnssStatus.*;
 
-import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,8 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
-import androidx.appcompat.widget.TintInfo;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.galileomastermindboilerplate.R;
+import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
 
 import java.util.List;
 

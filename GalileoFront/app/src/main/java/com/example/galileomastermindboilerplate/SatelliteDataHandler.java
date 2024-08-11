@@ -30,6 +30,8 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.galileomastermindboilerplate.ui.MainActivity;
+import com.example.galileomastermindboilerplate.ui.RecyclerViewAdapter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

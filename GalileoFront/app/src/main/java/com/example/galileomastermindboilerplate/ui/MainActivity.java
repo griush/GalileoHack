@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate;
+package com.example.galileomastermindboilerplate.ui;
 
 import android.Manifest;
 import android.app.Activity;
@@ -7,6 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 
 
+import com.example.galileomastermindboilerplate.MeasurementProvider;
+import com.example.galileomastermindboilerplate.R;
+import com.example.galileomastermindboilerplate.SatelliteDataHandler;
+import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,8 +20,6 @@ import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.galileomastermindboilerplate.databinding.ActivityMainBinding;
 
