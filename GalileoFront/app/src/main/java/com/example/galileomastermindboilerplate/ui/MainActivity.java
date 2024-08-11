@@ -3,6 +3,7 @@ package com.example.galileomastermindboilerplate.ui;
 import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
+import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -74,6 +75,10 @@ public class  MainActivity extends AppCompatActivity {
         ddt = new SatelliteDataHandler(this);
         mMeasurementProvider = new MeasurementProvider(getApplicationContext(), ddt);
       //  mMeasurementProvider = new MeasurementProvider(getApplicationContext());
+
+        // Pass capabilities to stats page
+        LocationManager locationManager = mMeasurementProvider.getLocationManager();
+        GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
 
         mMeasurementProvider.registerAll();
 
