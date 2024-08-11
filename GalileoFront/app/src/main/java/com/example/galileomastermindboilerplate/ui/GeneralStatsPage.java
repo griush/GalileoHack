@@ -2,6 +2,7 @@ package com.example.galileomastermindboilerplate.ui;
 
 import android.app.Activity;
 import android.location.GnssCapabilities;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -54,12 +55,20 @@ public class GeneralStatsPage extends Fragment {
 
         // Navigations messages
         TextView supportsNavigationMessages = view.findViewById(R.id.supportsNavigationMessages);
-        assert supportsNavigationMessages != null;
-        supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? "true" : "false");
-
         TextView supportsMeasurements = view.findViewById(R.id.supportsMeasurements);
-        assert supportsMeasurements != null;
-        supportsMeasurements.setText(Capabilities.hasMeasurements() ? "true" : "false");
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            assert supportsNavigationMessages != null;
+            supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? "true" : "false");
+
+            assert supportsMeasurements != null;
+            supportsMeasurements.setText(Capabilities.hasMeasurements() ? "true" : "false");
+        }
+        else
+        {
+            supportsNavigationMessages.setText("Not supported by the OS");
+            supportsMeasurements.setText("Not supported by the OS");
+        }
 
         TextView hardwareYear = view.findViewById(R.id.gnssHardwareYear);
         assert hardwareYear != null;
