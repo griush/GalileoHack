@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.GeneralStatsPage">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content" >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="GNSS Chipset:"
+            android:textStyle="bold"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Model year: "
+                android:paddingLeft="16dp" />
+            <TextView
+                android:id="@+id/gnssHardwareYear"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown (before 2016)" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Navigation Messages: "
+                android:paddingLeft="16dp" />
+            <TextView
+                android:id="@+id/supportsNavigationMessages"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content" >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Measurements: "
+                android:paddingLeft="16dp" />
+            <TextView
+                android:id="@+id/supportsMeasurements"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+</FrameLayout>

@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:padding="8dp"
-    android:background="@color/light_black">
+    android:padding="8dp">
 
   <LinearLayout
       android:layout_width="match_parent"
@@ -33,7 +32,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="Satellite "
-            android:textColor="@color/white"
             android:textSize="20sp"
             android:textStyle="normal" />
 
@@ -43,7 +41,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="13"
-            android:textColor="@color/white"
             android:textSize="20sp" />
 
       </LinearLayout>
@@ -59,7 +56,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="Frequency: "
-            android:textColor="@color/white"
             android:textStyle="bold" />
 
         <TextView
@@ -67,8 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="420.69GHz"
-            android:textColor="@color/white" />
+            android:text="420.69GHz" />
 
         <TextView
             android:id="@+id/SignalStrengthLabel"
@@ -76,7 +71,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0"
             android:text="SNR: "
-            android:textColor="@color/white"
+
             android:textStyle="bold" />
 
         <TextView
@@ -85,7 +80,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="-33.0dB"
-            android:textColor="@color/white" />
+ />
 
         <TextView
             android:id="@+id/textView8"
@@ -94,7 +89,7 @@
             android:layout_weight="0"
             android:text="AGC: "
             android:textAlignment="textEnd"
-            android:textColor="@color/white"
+
             android:textStyle="bold" />
 
         <TextView
@@ -103,7 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="33 dB"
-            android:textColor="@color/white" />
+ />
 
       </LinearLayout>
 
@@ -120,7 +115,7 @@
             android:layout_weight="0"
             android:text="SNR "
             android:textAlignment="center"
-            android:textColor="@color/white"
+
             android:textSize="13sp"
             android:textStyle="bold" />
 
@@ -138,48 +133,6 @@
             android:paddingTop="2dip" />
 
       </LinearLayout>
-
-      <!--LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="match_parent"
-          android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="LatOT: "
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/LatitudeOverTimeDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@color/white" />
-
-        <TextView
-            android:id="@+id/textView5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="LonOT: "
-            android:textAlignment="textEnd"
-            android:textColor="@color/white"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/LongitudeOverTimeDisplay"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="TextView"
-            android:textColor="@color/white" />
-      </LinearLayout -->
     </LinearLayout>
   </LinearLayout>
 

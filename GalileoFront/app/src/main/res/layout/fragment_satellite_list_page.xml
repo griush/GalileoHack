@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ui.SatelliteListPage">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/linearLayout"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:orientation="horizontal"
+            android:paddingStart="0dip"
+            android:paddingLeft="4dip"
+            android:paddingTop="0dip"
+            android:paddingEnd="4dip"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="100dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0"
+                        android:paddingVertical="5dp"
+                        android:text="Refresh Speed"
+                        android:textAlignment="viewEnd" />
+
+                    <SeekBar
+                        android:id="@+id/speed_selector"
+                        android:layout_width="wrap_content"
+                        android:layout_height="30dp"
+                        android:layout_weight="1"
+                        android:max="10"
+                        android:min="0"
+                        android:progress="8" />
+
+                    <TextView
+                        android:id="@+id/speed_label"
+                        android:layout_width="20dp"
+                        android:layout_height="30dp"
+                        android:layout_weight="0"
+                        android:paddingVertical="5dp"
+                        android:text="0"
+                        android:textAlignment="viewStart" />
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/EuropeToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇪🇺 Galileo"
+                    android:textAlignment="viewStart" />
+
+                <CheckBox
+                    android:id="@+id/AmericaToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇺🇸 GPS"
+                    android:textAlignment="viewStart" />
+
+                <CheckBox
+                    android:id="@+id/RussiaToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇷🇺 GLONASS"
+                    android:textAlignment="viewStart" />
+
+                <CheckBox
+                    android:id="@+id/ChinaToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇨🇳 BeiDou"
+                    android:textAlignment="viewStart" />
+
+                <CheckBox
+                    android:id="@+id/JapanToggle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dip"
+                    android:layout_marginHorizontal="0dip"
+                    android:layout_marginVertical="0dip"
+                    android:layout_marginStart="0dip"
+                    android:layout_marginLeft="0dip"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:layoutDirection="inherit"
+                    android:minWidth="0dip"
+                    android:minHeight="0dip"
+                    android:text="🇯🇵 QZSS"
+                    android:textAlignment="viewStart" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="horizontal"/>
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="0dp"
+            android:elevation="12dip"
+            android:fastScrollEnabled="false"
+            android:isScrollContainer="false"
+            android:overScrollMode="ifContentScrolls"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
+            app:layout_constraintHorizontal_bias="0.539"
+            app:layout_constraintStart_toEndOf="@+id/linearLayout"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+            tools:itemCount="5"
+            tools:listitem="@layout/recycler_view_item_1" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

@@ -8,7 +8,7 @@ android {
 
     defaultConfig {
         applicationId = "com.example.galileomastermindboilerplate"
-        minSdk = 28
+        minSdk = 31
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -48,11 +48,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.gms:play-services-location:17.0.0")
-    testImplementation("junit:junit:4.12")
-    androidTestImplementation("androidx.test.ext:junit:1.1.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.2.0")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.0")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
+    testImplementation("junit:junit:4.13.2")
+    androidTestImplementation("androidx.test.ext:junit:1.2.1")
+    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
+    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
 
 
     // implementation("com.google.android.gms:play-services-location:16.0.0")

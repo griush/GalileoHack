@@ -1,7 +1,4 @@
 <resources>
-    <string name="app_name">GalileoHack</string>
-    <string name="title_home">GalileoHack</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Settings</string>
-
+    <string name="app_name">GNSS Tracker</string>
+    <string name="title_home">GNSS Tracker</string>
 </resources>
