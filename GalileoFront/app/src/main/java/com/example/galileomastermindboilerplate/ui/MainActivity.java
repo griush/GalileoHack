@@ -35,7 +35,7 @@ public class  MainActivity extends AppCompatActivity {
     private SatelliteDataHandler ddt;
     private static final int LOCATION_REQUEST_ID = 1;
     private static final String[] REQUIRED_PERMISSIONS = {
-            android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE
+            android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
     };
     private ActivityMainBinding binding;
 
@@ -78,23 +78,22 @@ public class  MainActivity extends AppCompatActivity {
 
         // Pass capabilities to stats page
         LocationManager locationManager = mMeasurementProvider.getLocationManager();
-        GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
-
-        mMeasurementProvider.registerAll();
-
+        // Check for permissions to avoid crash on firs startup
+        if (hasPermissions(this)) {
+            GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
+            GeneralStatsPage.GnssModelYear = locationManager.getGnssYearOfHardware();
+            mMeasurementProvider.registerAll();
+        }
     }
 
     private boolean hasPermissions(Activity activity) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            // Permissions granted at install time.
-            return true;
-        }
         for (String p : REQUIRED_PERMISSIONS) {
             if (ContextCompat.checkSelfPermission(activity, p) != PackageManager.PERMISSION_GRANTED) {
                 return false;
             }
         }
-        startHere();
+        // wtf is this here
+        // startHere();
 
         return true;
     }

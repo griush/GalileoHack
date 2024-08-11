@@ -14,9 +14,12 @@ import android.widget.TextView;
 
 import com.example.galileomastermindboilerplate.R;
 
+import java.util.Locale;
+
 public class GeneralStatsPage extends Fragment {
 
     public static GnssCapabilities Capabilities = null;
+    public static int GnssModelYear = 0;
 
 
     public static GeneralStatsPage newInstance() {
@@ -57,5 +60,9 @@ public class GeneralStatsPage extends Fragment {
         TextView supportsMeasurements = view.findViewById(R.id.supportsMeasurements);
         assert supportsMeasurements != null;
         supportsMeasurements.setText(Capabilities.hasMeasurements() ? "true" : "false");
+
+        TextView hardwareYear = view.findViewById(R.id.gnssHardwareYear);
+        assert hardwareYear != null;
+        hardwareYear.setText(GnssModelYear != 0 ? String.format(Locale.US , "%d", GnssModelYear) : "Unknown (before 2016)");
     }
 }
