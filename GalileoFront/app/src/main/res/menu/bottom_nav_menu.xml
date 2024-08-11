@@ -3,17 +3,17 @@
 
     <item
         android:id="@+id/landingPage"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/home"
         android:title="Home" />
 
     <item
         android:id="@+id/generalStatsPage"
-        android:icon="@android:drawable/ic_dialog_map"
+        android:icon="@drawable/stats"
         android:title="General stats" />
 
     <item
         android:id="@+id/satelliteListPage"
-        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:icon="@drawable/satellite"
         android:title="Satellite list" />
 
 </menu>
