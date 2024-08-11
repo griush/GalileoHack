@@ -9,7 +9,7 @@
     <item
         android:id="@+id/generalStatsPage"
         android:icon="@drawable/stats"
-        android:title="General stats" />
+        android:title="GNSS Stats" />
 
     <item
         android:id="@+id/satelliteListPage"

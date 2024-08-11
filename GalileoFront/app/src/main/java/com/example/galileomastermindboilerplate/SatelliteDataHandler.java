@@ -32,6 +32,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.galileomastermindboilerplate.ui.MainActivity;
 import com.example.galileomastermindboilerplate.ui.RecyclerViewAdapter;
+import com.example.galileomastermindboilerplate.ui.SatelliteListPage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -168,35 +169,14 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
     @Override
     public void onGnssMeasurementsReceived(GnssMeasurementsEvent event) {
+        // Add event for handling on the SatellitesPageView
+        SatelliteListPage.lastEvent = event;
 
-//        mData = new ArrayList<>();
-//        mIcon = new ArrayList<>();
         try {
-            PauseToggle = activity.findViewById(R.id.PauseCheckBox);
-            if(PauseToggle.isChecked())
-                return;
-
-            SlowPaceCheckBox = activity.findViewById(R.id.SlowPaceCheckBox);
-            if((currentCounter++)%4!=0 && SlowPaceCheckBox.isChecked())
-                return;
-
             String json;
             BaseContent serializable = new BaseContent();
 
-            EuropeSwitch = activity.findViewById(R.id.EuropeToggle);
-            AmericaSwitch = activity.findViewById(R.id.AmericaToggle);
-            RussiaSwitch = activity.findViewById(R.id.RussiaToggle);
-            ChinaSwitch = activity.findViewById(R.id.ChinaToggle);
-            JapanSwitch = activity.findViewById(R.id.JapanToggle);
-
             for (GnssMeasurement measurement : event.getMeasurements()) {
-                if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
-                    || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
-                    || !RussiaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GLONASS
-                    || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
-                    || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS)
-                    continue;
-
                 if (((measurement.getState() & (1L << TOW_DECODED_MEASUREMENT_STATE_BIT)) == 0))
                     continue;
 
@@ -309,92 +289,8 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
         }*/
 
 
-
-        activity.runOnUiThread(() -> {
-
-            // Find RecyclerView by ID
-            recyclerView = activity.findViewById(R.id.main_list);
-
-            if (recyclerView == null) {
-                return;
-            }
-
-            recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
-
-
-            // TODO: Add those controls
-            //CurrentSignalStrength = activity.findViewById(R.id.CurrentSignalStrengthDisplay);
-            //AverageSignalStrength = activity.findViewById(R.id.AverageSignalStrength);
-            //DeviceLocationDisplay = activity.findViewById(R.id.DeviceLocationDisplay);
-
-
-            /*if (OpenStreetMap.getUrl() != openstreetmap_url && !openstreetmap_url.isEmpty()) {
-                OpenStreetMap.loadUrl(openstreetmap_url);
-            }*/
-
-
-//                mData = new ArrayList<>();
-//                mIcon = new ArrayList<>();
-            // Set layout manager
-            mData.clear();
-            adapter = new RecyclerViewAdapter(mData, mIcon);
-            recyclerView.setAdapter(adapter);
-
-
-            double CurrentSignalAverage = 0;
-            int CurrentSignalCount = 0;
-
-            for (GnssMeasurement measurement : event.getMeasurements()) {
-
-                if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
-                        || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
-                        || !RussiaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GLONASS
-                        || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
-                        || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS) {
-                    continue;
-                }
-
-                SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
-                item.Svid = measurement.getSvid();
-                item.CarrierFrequencyHz = measurement.getCarrierFrequencyHz();
-                item.SnrInDb = measurement.getSnrInDb();
-                item.ReceivedSvTimeNanos = measurement.getReceivedSvTimeNanos();
-                item.TimeOffsetNanos = measurement.getTimeOffsetNanos();
-                item.ReceivedSvTimeUncertaintyNanos = measurement.getReceivedSvTimeUncertaintyNanos();
-                item.Cn0DbHz = measurement.getCn0DbHz();
-                item.PseudorangeRateMetersPerSecond = measurement.getPseudorangeRateMetersPerSecond();
-                item.PseudorangeRateUncertaintyMetersPerSeconds = measurement.getPseudorangeRateUncertaintyMetersPerSecond();
-                item.AccumulatedDeltaRangeState = measurement.getAccumulatedDeltaRangeState();
-                item.AccumulatedDeltaRangeMeters = measurement.getAccumulatedDeltaRangeMeters();
-                item.AccumulatedDeltaRangeUncertaintyMeters = measurement.getAccumulatedDeltaRangeUncertaintyMeters();
-                item.CarrierCycles = measurement.getCarrierCycles();
-                item.CarrierPhase = measurement.getCarrierPhase();
-                item.CarrierPhaseUncertainty = measurement.getCarrierPhaseUncertainty();
-                item.ConstellationType = measurement.getConstellationType();
-                item.AGC = measurement.getAutomaticGainControlLevelDb();
-
-                mData.add(item);
-                mIcon.add(R.drawable.rawmeas);
-
-            }
-            for (GnssMeasurement measurement : event.getMeasurements()) {
-
-                CurrentSignalAverage += measurement.getCn0DbHz();
-                CurrentSignalCount++;
-
-            }
-            adapter.notifyDataSetChanged();
-            //CurrentSignalStrength.setText(String.format("%.2f", (float) (CurrentSignalAverage / CurrentSignalCount)) + " dBHz");
-            //AverageSignalStrength.setText(ServerSignalStrength + " dBHz");
-            //DeviceLocationDisplay.setText(DeviceLocation);
-
-
-            // recyclerView.scrollToPosition(adapter.getItemCount() -1);
-
-        });
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        }
+        catch (Exception e) {
         }
     }
 

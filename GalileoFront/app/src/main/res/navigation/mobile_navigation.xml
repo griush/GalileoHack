@@ -3,30 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/generalStatsPage">
+    app:startDestination="@+id/landingPage">
 
     <fragment
         android:id="@+id/generalStatsPage"
         android:name="com.example.galileomastermindboilerplate.ui.GeneralStatsPage"
-        android:label="fragment_general_stats_page"
-        tools:layout="@layout/fragment_general_stats_page" >
-        <action
-            android:id="@+id/action_generalStatsPage_to_landingPage"
-            app:destination="@id/landingPage"
-            app:enterAnim="@anim/nav_default_enter_anim"
-            app:exitAnim="@anim/nav_default_exit_anim"
-            app:popEnterAnim="@anim/nav_default_pop_enter_anim"
-            app:popExitAnim="@anim/nav_default_pop_exit_anim" />
-    </fragment>
+        android:label="GNSS Stats"
+        tools:layout="@layout/fragment_general_stats_page" />
     <fragment
         android:id="@+id/landingPage"
         android:name="com.example.galileomastermindboilerplate.ui.LandingPage"
-        android:label="fragment_landing_page"
+        android:label="Home"
         tools:layout="@layout/fragment_landing_page" />
     <fragment
         android:id="@+id/satelliteListPage"
         android:name="com.example.galileomastermindboilerplate.ui.SatelliteListPage"
-        android:label="fragment_satellite_list_page"
+        android:label="Satellite list"
         tools:layout="@layout/fragment_satellite_list_page" />
 
 </navigation>
