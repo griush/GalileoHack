@@ -31,6 +31,7 @@ import com.example.galileomastermindboilerplate.databinding.RecyclerViewItem1Bin
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.slider.Slider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,7 +58,7 @@ public class SatelliteListPage extends Fragment {
     public static GnssMeasurementsEvent lastEvent = null;
 
     FloatingActionButton FiltersButton;
-    SeekBar SpeedSelector;
+    Slider SpeedSelector;
     TextView SpeedLabel;
     ProgressBar LoadingIndicator;
     CheckBox AmericaSwitch;
@@ -117,13 +118,17 @@ public class SatelliteListPage extends Fragment {
         JapanSwitch.setOnCheckedChangeListener(onCheckedChange);
 
         FiltersButton.setOnClickListener(v -> {});
-        SpeedSelector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){}
-            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
-            @Override public void onStopTrackingTouch(SeekBar seekBar)  {
-                Activity act = getActivity();
-                if(act != null) act.runOnUiThread(() -> UpdateSpeed());
-            }});
+        SpeedSelector.addOnChangeListener(new Slider.OnChangeListener() {
+            @Override
+            public void onValueChange(Slider slider, float value, boolean fromUser) {
+                UpdateSpeed();
+            }
+        });
+
+        FiltersButton.setOnClickListener(v -> {
+            SatelliteFiltersModalPane modalBottomSheet = new SatelliteFiltersModalPane();
+            modalBottomSheet.show(getParentFragmentManager(), "SatelliteFiltersModalPane");
+        });
 
         Activity act = getActivity();
         if(act != null) act.runOnUiThread(this::UpdateSpeed);
@@ -131,8 +136,8 @@ public class SatelliteListPage extends Fragment {
 
     private void UpdateSpeed()
     {
-        int SPEED = SpeedSelector.getProgress();
-        SpeedLabel.setText(String.valueOf(SpeedSelector.getProgress()));
+        int SPEED = (int)SpeedSelector.getValue();
+        SpeedLabel.setText(String.valueOf(SPEED));
 
         // Set timers again
         if(dataTimer != null) dataTimer.cancel();

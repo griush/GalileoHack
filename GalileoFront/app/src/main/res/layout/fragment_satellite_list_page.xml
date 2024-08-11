@@ -10,6 +10,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/main_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:elevation="-20dip"
+            android:fastScrollEnabled="false"
+            android:isScrollContainer="false"
+            android:overScrollMode="ifContentScrolls"
+            android:translationZ="-20dp"
+            app:elevation="-20dp"
+            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:itemCount="5"
+            tools:listitem="@layout/recycler_view_item_1" />
+
         <LinearLayout
             android:id="@+id/linearLayout"
             android:layout_width="match_parent"
@@ -19,9 +34,7 @@
             android:paddingLeft="4dip"
             android:paddingTop="0dip"
             android:paddingEnd="4dip"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintBottom_toBottomOf="parent">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -35,21 +48,33 @@
 
                     <TextView
                         android:id="@+id/textView3"
-                        android:layout_width="100dp"
-                        android:layout_height="30dp"
+                        android:layout_width="120dp"
+                        android:layout_height="50dp"
                         android:layout_weight="0"
-                        android:paddingVertical="5dp"
+                        android:paddingVertical="15dp"
                         android:text="Refresh Speed"
-                        android:textAlignment="viewEnd" />
+                        android:textAlignment="textEnd"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
 
-                    <SeekBar
+                    <com.google.android.material.slider.Slider
                         android:id="@+id/speed_selector"
                         android:layout_width="wrap_content"
-                        android:layout_height="30dp"
+                        android:layout_height="50dp"
                         android:layout_weight="1"
                         android:max="10"
                         android:min="0"
-                        android:progress="8" />
+                        android:stepSize="1"
+                        android:value="5"
+                        android:valueFrom="0"
+                        android:valueTo="10"
+                        app:thumbHeight="24dp"
+                        app:thumbRadius="1dp"
+                        app:thumbTrackGapSize="4dp"
+                        app:thumbWidth="2dp"
+                        app:tickVisible="false"
+                        app:trackHeight="6dp"
+                        app:trackInsideCornerSize="2dp" />
 
                     <TextView
                         android:id="@+id/speed_label"
@@ -58,7 +83,9 @@
                         android:layout_weight="0"
                         android:paddingVertical="5dp"
                         android:text="0"
-                        android:textAlignment="viewStart" />
+                        android:textAlignment="viewStart"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
                 </LinearLayout>
 
                 <CheckBox
@@ -156,28 +183,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:orientation="horizontal"/>
+                    android:orientation="horizontal" />
 
             </LinearLayout>
         </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_list"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_margin="0dp"
-            android:elevation="-20dip"
-            android:fastScrollEnabled="false"
-            android:isScrollContainer="false"
-            android:overScrollMode="ifContentScrolls"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintStart_toEndOf="@+id/linearLayout"
-            app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-            tools:itemCount="5"
-            android:translationZ="-20dp"
-            app:elevation="-20dp"
-            tools:listitem="@layout/recycler_view_item_1" />
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -189,9 +198,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
-            style="@style/Widget.Material3.ExtendedFloatingActionButton.Secondary"
-
             android:id="@+id/floatingActionButton"
+
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
@@ -201,7 +210,7 @@
             android:src="@drawable/ic_settings_black_24dp"
             android:translationZ="2000dp"
             app:elevation="2000dp"
-            app:layout_constraintBottom_toBottomOf="@+id/main_list"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/main_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
