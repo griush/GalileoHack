@@ -166,16 +166,17 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_margin="0dp"
-            android:elevation="12dip"
+            android:elevation="-20dip"
             android:fastScrollEnabled="false"
             android:isScrollContainer="false"
             android:overScrollMode="ifContentScrolls"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/linearLayout"
-            app:layout_constraintHorizontal_bias="0.539"
             app:layout_constraintStart_toEndOf="@+id/linearLayout"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout"
             tools:itemCount="5"
+            android:translationZ="-20dp"
+            app:elevation="-20dp"
             tools:listitem="@layout/recycler_view_item_1" />
 
         <ProgressBar
@@ -186,6 +187,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            style="@style/Widget.Material3.ExtendedFloatingActionButton.Secondary"
+
+            android:id="@+id/floatingActionButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:enabled="true"
+            android:src="@drawable/ic_settings_black_24dp"
+            android:translationZ="2000dp"
+            app:elevation="2000dp"
+            app:layout_constraintBottom_toBottomOf="@+id/main_list"
+            app:layout_constraintEnd_toEndOf="@+id/main_list" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -8,6 +8,7 @@ import android.location.GnssStatus;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,9 +25,12 @@ import android.widget.ToggleButton;
 
 import com.example.galileomastermindboilerplate.BaseContent;
 import com.example.galileomastermindboilerplate.R;
+import com.example.galileomastermindboilerplate.RecyclerViewAdapter;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
+import com.example.galileomastermindboilerplate.databinding.RecyclerViewItem1Binding;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -43,18 +47,43 @@ import kotlin.collections.ArrayDeque;
 public class SatelliteListPage extends Fragment {
 
     private int CURRENT_STEP = 0;
+
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
+
+    // TODO: Rename parameter arguments, choose names that match
+    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private RecyclerViewAdapter mAdapter;
     private Timer dataTimer;
     public static GnssMeasurementsEvent lastEvent = null;
+
+    FloatingActionButton FiltersButton;
+    SeekBar SpeedSelector;
+    TextView SpeedLabel;
+    ProgressBar LoadingIndicator;
+    CheckBox AmericaSwitch;
+    CheckBox EuropeSwitch;
+    CheckBox RussiaSwitch;
+    CheckBox ChinaSwitch;
+    CheckBox JapanSwitch;
+
 
     public SatelliteListPage() {
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
     }
 
-    public static SatelliteListPage newInstance() {
+    /**
+     * Use this factory method to create a new instance of
+     * this fragment using the provided parameters.
+     *
+     * @param param1 Parameter 1.
+     * @param param2 Parameter 2.
+     * @return A new instance of fragment SatelliteListPage.
+     */
+    // TODO: Rename and change types and number of parameters
+    public static SatelliteListPage newInstance(String param1, String param2) {
         SatelliteListPage fragment = new SatelliteListPage();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -70,14 +99,55 @@ public class SatelliteListPage extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        dataTimer = new Timer("SatelliteDataTimer");
-        dataTimer.schedule(new TimerTask() {
-            @Override
-            public void run() {
-                PrintEventDataToLayout();
-            }
-        }, 0, 333);
+
         return inflater.inflate(R.layout.fragment_satellite_list_page, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        FiltersButton = view.findViewById(R.id.floatingActionButton);
+        SpeedLabel = view.findViewById(R.id.speed_label);
+        SpeedSelector = view.findViewById(R.id.speed_selector);
+        LoadingIndicator = view.findViewById(R.id.progressBar);
+        AmericaSwitch = view.findViewById(R.id.AmericaToggle);
+        EuropeSwitch = view.findViewById(R.id.EuropeToggle);
+        RussiaSwitch = view.findViewById(R.id.RussiaToggle);
+        ChinaSwitch = view.findViewById(R.id.ChinaToggle);
+        JapanSwitch = view.findViewById(R.id.JapanToggle);
+
+        FiltersButton.setOnClickListener(v -> {});
+        SpeedSelector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){}
+            @Override public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override public void onStopTrackingTouch(SeekBar seekBar)  {
+                getActivity().runOnUiThread(() -> UpdateSpeed());
+            }});
+
+
+
+        getActivity().runOnUiThread(this::UpdateSpeed);
+    }
+
+    private void UpdateSpeed()
+    {
+        Activity activity = getActivity();
+        if(activity == null) return;
+        int SPEED = SpeedSelector.getProgress();
+        SpeedLabel.setText(String.valueOf(SpeedSelector.getProgress()));
+
+        // Set timers again
+        if(dataTimer != null) dataTimer.cancel();
+
+        if(SPEED != 0) {
+            dataTimer = new Timer("SatelliteDataTimer");
+            dataTimer.schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    PrintEventDataToLayout();
+                }
+            }, 0, ((11-SPEED)*333L));
+        }
     }
 
     private void PrintEventDataToLayout() {
@@ -93,30 +163,12 @@ public class SatelliteListPage extends Fragment {
             return;
         }
 
-        SeekBar speedSelector = activity.findViewById(R.id.speed_selector);
-        TextView SpeedText = activity.findViewById(R.id.speed_label);
-        activity.runOnUiThread(() -> SpeedText.setText(String.valueOf(speedSelector.getProgress())));
-
-        CURRENT_STEP++;
-        if(speedSelector.getProgress() == 0)
-            return;
-        else if(CURRENT_STEP%(11-speedSelector.getProgress()) != 0)
-            return;
-
-        ProgressBar loadingIndicator = activity.findViewById(R.id.progressBar);
-        CheckBox AmericaSwitch = activity.findViewById(R.id.AmericaToggle);
-        CheckBox EuropeSwitch = activity.findViewById(R.id.EuropeToggle);
-        CheckBox RussiaSwitch = activity.findViewById(R.id.RussiaToggle);
-        CheckBox ChinaSwitch = activity.findViewById(R.id.ChinaToggle);
-        CheckBox JapanSwitch = activity.findViewById(R.id.JapanToggle);
-
-
         if (lastEvent != null) {
             GnssMeasurementsEvent event = lastEvent;
 
             activity.runOnUiThread(() ->
             {
-                loadingIndicator.setVisibility(View.GONE);
+                LoadingIndicator.setVisibility(View.GONE);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
                 mData.clear();
                 mIcon.clear();
@@ -154,11 +206,10 @@ public class SatelliteListPage extends Fragment {
                     mData.add(item);
                     mIcon.add(R.drawable.rawmeas);
                 }
-                // adapter.notifyDataSetChanged();
             });
         }
         else {
-            activity.runOnUiThread(() -> loadingIndicator.setVisibility(View.VISIBLE));
+            activity.runOnUiThread(() -> LoadingIndicator.setVisibility(View.VISIBLE));
         }
 
     }
