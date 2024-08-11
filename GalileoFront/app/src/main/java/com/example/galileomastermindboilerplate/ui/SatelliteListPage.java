@@ -18,6 +18,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -25,7 +26,6 @@ import android.widget.ToggleButton;
 
 import com.example.galileomastermindboilerplate.BaseContent;
 import com.example.galileomastermindboilerplate.R;
-import com.example.galileomastermindboilerplate.RecyclerViewAdapter;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
 import com.example.galileomastermindboilerplate.databinding.RecyclerViewItem1Binding;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -45,8 +45,6 @@ import kotlin.collections.ArrayDeque;
  * create an instance of this fragment.
  */
 public class SatelliteListPage extends Fragment {
-
-    private int CURRENT_STEP = 0;
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -74,15 +72,6 @@ public class SatelliteListPage extends Fragment {
         mIcon = new ArrayList<>();
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SatelliteListPage.
-     */
-    // TODO: Rename and change types and number of parameters
     public static SatelliteListPage newInstance(String param1, String param2) {
         SatelliteListPage fragment = new SatelliteListPage();
         Bundle args = new Bundle();
@@ -116,23 +105,32 @@ public class SatelliteListPage extends Fragment {
         ChinaSwitch = view.findViewById(R.id.ChinaToggle);
         JapanSwitch = view.findViewById(R.id.JapanToggle);
 
+        CompoundButton.OnCheckedChangeListener onCheckedChange = (buttonView, isChecked) -> {
+            Activity act = getActivity();
+            if(act != null) act.runOnUiThread(this::PrintEventDataToLayout);
+        };
+
+        AmericaSwitch.setOnCheckedChangeListener(onCheckedChange);
+        EuropeSwitch.setOnCheckedChangeListener(onCheckedChange);
+        RussiaSwitch.setOnCheckedChangeListener(onCheckedChange);
+        ChinaSwitch.setOnCheckedChangeListener(onCheckedChange);
+        JapanSwitch.setOnCheckedChangeListener(onCheckedChange);
+
         FiltersButton.setOnClickListener(v -> {});
         SpeedSelector.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){}
             @Override public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override public void onStopTrackingTouch(SeekBar seekBar)  {
-                getActivity().runOnUiThread(() -> UpdateSpeed());
+                Activity act = getActivity();
+                if(act != null) act.runOnUiThread(() -> UpdateSpeed());
             }});
 
-
-
-        getActivity().runOnUiThread(this::UpdateSpeed);
+        Activity act = getActivity();
+        if(act != null) act.runOnUiThread(this::UpdateSpeed);
     }
 
     private void UpdateSpeed()
     {
-        Activity activity = getActivity();
-        if(activity == null) return;
         int SPEED = SpeedSelector.getProgress();
         SpeedLabel.setText(String.valueOf(SpeedSelector.getProgress()));
 
