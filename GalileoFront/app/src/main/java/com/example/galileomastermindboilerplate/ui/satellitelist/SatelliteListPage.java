@@ -38,9 +38,6 @@ public class SatelliteListPage extends Fragment {
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
     private RecyclerViewAdapter mAdapter;
     private Timer dataTimer;
     public static GnssMeasurementsEvent lastEvent = null;

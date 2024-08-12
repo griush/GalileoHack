@@ -69,7 +69,6 @@ public class  MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-
     private void startHere() {
 
         ddt = new SatelliteDataHandler(this);
@@ -110,6 +109,4 @@ public class  MainActivity extends AppCompatActivity {
             startHere();
         }
     }
-
-
 }
