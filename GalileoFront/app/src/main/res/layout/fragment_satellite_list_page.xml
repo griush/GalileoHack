@@ -4,11 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.SatelliteListPage">
+    tools:context=".ui.satellitelist.SatelliteListPage">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/SwipeToRefreshSatellites"
+            style="@style/Widget.MaterialComponents.SwipeRefreshLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/main_list"
@@ -20,173 +27,11 @@
             android:overScrollMode="ifContentScrolls"
             android:translationZ="-20dp"
             app:elevation="-20dp"
-            app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:itemCount="5"
             tools:listitem="@layout/recycler_view_item_1" />
-
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:orientation="horizontal"
-            android:paddingStart="0dip"
-            android:paddingLeft="4dip"
-            android:paddingTop="0dip"
-            android:paddingEnd="4dip"
-            app:layout_constraintBottom_toBottomOf="parent">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="120dp"
-                        android:layout_height="50dp"
-                        android:layout_weight="0"
-                        android:paddingVertical="15dp"
-                        android:text="Refresh Speed"
-                        android:textAlignment="textEnd"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-
-                    <com.google.android.material.slider.Slider
-                        android:id="@+id/speed_selector"
-                        android:layout_width="wrap_content"
-                        android:layout_height="50dp"
-                        android:layout_weight="1"
-                        android:max="10"
-                        android:min="0"
-                        android:stepSize="1"
-                        android:value="5"
-                        android:valueFrom="0"
-                        android:valueTo="10"
-                        app:thumbHeight="24dp"
-                        app:thumbRadius="1dp"
-                        app:thumbTrackGapSize="4dp"
-                        app:thumbWidth="2dp"
-                        app:tickVisible="false"
-                        app:trackHeight="6dp"
-                        app:trackInsideCornerSize="2dp" />
-
-                    <TextView
-                        android:id="@+id/speed_label"
-                        android:layout_width="20dp"
-                        android:layout_height="30dp"
-                        android:layout_weight="0"
-                        android:paddingVertical="5dp"
-                        android:text="0"
-                        android:textAlignment="viewStart"
-                        android:textSize="16sp"
-                        android:textStyle="bold" />
-                </LinearLayout>
-
-                <CheckBox
-                    android:id="@+id/EuropeToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dip"
-                    android:layout_marginHorizontal="0dip"
-                    android:layout_marginVertical="0dip"
-                    android:layout_marginStart="0dip"
-                    android:layout_marginLeft="0dip"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:layoutDirection="inherit"
-                    android:minWidth="0dip"
-                    android:minHeight="0dip"
-                    android:text="🇪🇺 Galileo"
-                    android:textAlignment="viewStart" />
-
-                <CheckBox
-                    android:id="@+id/AmericaToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dip"
-                    android:layout_marginHorizontal="0dip"
-                    android:layout_marginVertical="0dip"
-                    android:layout_marginStart="0dip"
-                    android:layout_marginLeft="0dip"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:layoutDirection="inherit"
-                    android:minWidth="0dip"
-                    android:minHeight="0dip"
-                    android:text="🇺🇸 GPS"
-                    android:textAlignment="viewStart" />
-
-                <CheckBox
-                    android:id="@+id/RussiaToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dip"
-                    android:layout_marginHorizontal="0dip"
-                    android:layout_marginVertical="0dip"
-                    android:layout_marginStart="0dip"
-                    android:layout_marginLeft="0dip"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:layoutDirection="inherit"
-                    android:minWidth="0dip"
-                    android:minHeight="0dip"
-                    android:text="🇷🇺 GLONASS"
-                    android:textAlignment="viewStart" />
-
-                <CheckBox
-                    android:id="@+id/ChinaToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dip"
-                    android:layout_marginHorizontal="0dip"
-                    android:layout_marginVertical="0dip"
-                    android:layout_marginStart="0dip"
-                    android:layout_marginLeft="0dip"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:layoutDirection="inherit"
-                    android:minWidth="0dip"
-                    android:minHeight="0dip"
-                    android:text="🇨🇳 BeiDou"
-                    android:textAlignment="viewStart" />
-
-                <CheckBox
-                    android:id="@+id/JapanToggle"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="0dip"
-                    android:layout_marginHorizontal="0dip"
-                    android:layout_marginVertical="0dip"
-                    android:layout_marginStart="0dip"
-                    android:layout_marginLeft="0dip"
-                    android:layout_weight="1"
-                    android:checked="true"
-                    android:layoutDirection="inherit"
-                    android:minWidth="0dip"
-                    android:minHeight="0dip"
-                    android:text="🇯🇵 QZSS"
-                    android:textAlignment="viewStart" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:orientation="horizontal" />
-
-            </LinearLayout>
-        </LinearLayout>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
         <ProgressBar
             android:id="@+id/progressBar"
@@ -197,9 +42,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/floatingActionButton"
-
             style="@style/Widget.Material3.ExtendedFloatingActionButton.Secondary"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -207,11 +51,16 @@
             android:layout_marginBottom="24dp"
             android:clickable="true"
             android:enabled="true"
+            android:layoutDirection="ltr"
             android:src="@drawable/ic_settings_black_24dp"
+            android:textAlignment="center"
             android:translationZ="2000dp"
             app:elevation="2000dp"
+            app:icon="@drawable/filters"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/main_list" />
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Edit filters" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,16 +4,16 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
-    tools:context=".ui.SatelliteListPage">
+    tools:context=".ui.satellitelist.SatelliteListPage">
 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24sp"
-        android:layout_marginEnd="16sp"
-        android:layout_marginBottom="24sp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:layout_weight="1"
         android:text="Filters"
         android:textAlignment="center"
@@ -22,10 +22,10 @@
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_marginStart="8dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="4dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -50,13 +50,13 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="4dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
-        android:id="@+id/AmericaToggle"
+        android:id="@+id/UnitedStatesToggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -77,9 +77,9 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="4dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -104,9 +104,9 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="4dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -131,9 +131,9 @@
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         android:layout_marginBottom="4dp" />
 
 
@@ -156,13 +156,12 @@
         android:textAlignment="viewStart"
         android:textSize="18sp"  />
 
-
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="0dp"
         android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="0dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1" />
 
@@ -171,9 +170,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="24sp"
-        android:layout_marginEnd="16sp"
-        android:layout_marginBottom="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="12dp"
         android:layout_weight="1"
         android:text="Refresh frequency"
         android:textAlignment="center"
@@ -181,12 +180,50 @@
         android:textStyle="bold" />
 
     <com.google.android.material.slider.Slider
+        android:id="@+id/SpeedSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16sp"
         android:layout_marginEnd="16sp"
-        android:layout_marginBottom="24sp"
+        android:layout_marginBottom="16sp"
         android:stepSize="1"
+        android:value="8"
         android:valueFrom="0"
         android:valueTo="10" />
+
+    <com.google.android.material.divider.MaterialDivider
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Space
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <Button
+            android:id="@+id/ApplyButton"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="120dp"
+            android:layout_height="60dp"
+            android:layout_marginStart="4dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            android:layout_marginBottom="4dp"
+            android:text="Apply"
+            android:textAlignment="center"
+            android:textSize="14dp" />
+    </LinearLayout>
+
+
 </LinearLayout>

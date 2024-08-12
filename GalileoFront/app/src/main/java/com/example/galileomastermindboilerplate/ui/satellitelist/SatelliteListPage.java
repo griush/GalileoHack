@@ -1,44 +1,33 @@
-package com.example.galileomastermindboilerplate.ui;
+package com.example.galileomastermindboilerplate.ui.satellitelist;
 
 import android.app.Activity;
-import android.location.GnssClock;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
 import android.location.GnssStatus;
-import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
-import android.widget.SeekBar;
-import android.widget.TextView;
-import android.widget.ToggleButton;
 
-import com.example.galileomastermindboilerplate.BaseContent;
 import com.example.galileomastermindboilerplate.R;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
-import com.example.galileomastermindboilerplate.databinding.RecyclerViewItem1Binding;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.slider.Slider;
+import com.example.galileomastermindboilerplate.ui.RecyclerViewAdapter;
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import kotlin.collections.ArrayDeque;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,15 +45,17 @@ public class SatelliteListPage extends Fragment {
     private Timer dataTimer;
     public static GnssMeasurementsEvent lastEvent = null;
 
-    FloatingActionButton FiltersButton;
-    Slider SpeedSelector;
-    TextView SpeedLabel;
+    private int Speed = 8;
+    private boolean Europe = true;
+    private boolean UnitedStates = true;
+    private boolean Russia = true;
+    private boolean China = true;
+    private boolean Japan = true;
+
+    SatelliteFiltersModalPane ModalBottomFiltersPanel;
+    ExtendedFloatingActionButton FiltersButton;
+    SwipeRefreshLayout PullToRefresh;
     ProgressBar LoadingIndicator;
-    CheckBox AmericaSwitch;
-    CheckBox EuropeSwitch;
-    CheckBox RussiaSwitch;
-    CheckBox ChinaSwitch;
-    CheckBox JapanSwitch;
 
 
     public SatelliteListPage() {
@@ -95,39 +86,41 @@ public class SatelliteListPage extends Fragment {
     public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        ModalBottomFiltersPanel = new SatelliteFiltersModalPane();
         FiltersButton = view.findViewById(R.id.floatingActionButton);
-        SpeedLabel = view.findViewById(R.id.speed_label);
-        SpeedSelector = view.findViewById(R.id.speed_selector);
         LoadingIndicator = view.findViewById(R.id.progressBar);
-        AmericaSwitch = view.findViewById(R.id.AmericaToggle);
-        EuropeSwitch = view.findViewById(R.id.EuropeToggle);
-        RussiaSwitch = view.findViewById(R.id.RussiaToggle);
-        ChinaSwitch = view.findViewById(R.id.ChinaToggle);
-        JapanSwitch = view.findViewById(R.id.JapanToggle);
 
         CompoundButton.OnCheckedChangeListener onCheckedChange = (buttonView, isChecked) -> {
             Activity act = getActivity();
             if(act != null) act.runOnUiThread(this::PrintEventDataToLayout);
         };
 
-        AmericaSwitch.setOnCheckedChangeListener(onCheckedChange);
-        EuropeSwitch.setOnCheckedChangeListener(onCheckedChange);
-        RussiaSwitch.setOnCheckedChangeListener(onCheckedChange);
-        ChinaSwitch.setOnCheckedChangeListener(onCheckedChange);
-        JapanSwitch.setOnCheckedChangeListener(onCheckedChange);
+        ModalBottomFiltersPanel.setCancelable(true);
+        ModalBottomFiltersPanel.onValuesChanged = (Integer result) -> {
+            Europe = ModalBottomFiltersPanel.EuropeToggle.isChecked();
+            UnitedStates = ModalBottomFiltersPanel.UnitedStatesToggle.isChecked();
+            Russia = ModalBottomFiltersPanel.RussiaToggle.isChecked();
+            China = ModalBottomFiltersPanel.ChinaToggle.isChecked();
+            Japan = ModalBottomFiltersPanel.JapanToggle.isChecked();
+            Speed = (int)ModalBottomFiltersPanel.SpeedSlider.getValue();
 
-        FiltersButton.setOnClickListener(v -> {});
-        SpeedSelector.addOnChangeListener(new Slider.OnChangeListener() {
-            @Override
-            public void onValueChange(Slider slider, float value, boolean fromUser) {
-                UpdateSpeed();
+            Activity act = getActivity();
+            if(act != null) act.runOnUiThread(this::UpdateSpeed);
+        };
+
+        FiltersButton.setOnClickListener(v -> {
+            ModalBottomFiltersPanel.show(getParentFragmentManager(), "SatelliteFiltersModalPane");
+        });
+
+        PullToRefresh = view.findViewById(R.id.SwipeToRefreshSatellites);
+        PullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override public void onRefresh()
+            {
+                PrintEventDataToLayout();
+                PullToRefresh.setRefreshing(false);//if false then refresh progress dialog will disappear when page loading finish, but if it is true then always the refresh load dialog show even after the page load or not
             }
         });
 
-        FiltersButton.setOnClickListener(v -> {
-            SatelliteFiltersModalPane modalBottomSheet = new SatelliteFiltersModalPane();
-            modalBottomSheet.show(getParentFragmentManager(), "SatelliteFiltersModalPane");
-        });
 
         Activity act = getActivity();
         if(act != null) act.runOnUiThread(this::UpdateSpeed);
@@ -135,21 +128,25 @@ public class SatelliteListPage extends Fragment {
 
     private void UpdateSpeed()
     {
-        int SPEED = (int)SpeedSelector.getValue();
-        SpeedLabel.setText(String.valueOf(SPEED));
-
         // Set timers again
         if(dataTimer != null) dataTimer.cancel();
 
-        if(SPEED != 0) {
+        if(Speed != 0) {
+            PullToRefresh.setEnabled(false);
             dataTimer = new Timer("SatelliteDataTimer");
             dataTimer.schedule(new TimerTask() {
                 @Override
                 public void run() {
                     PrintEventDataToLayout();
                 }
-            }, 0, ((11-SPEED)*333L));
+            }, 0, ((11-Speed)*333L));
         }
+        else
+        {
+            PullToRefresh.setEnabled(true);
+        }
+
+        PrintEventDataToLayout();
     }
 
     private void PrintEventDataToLayout() {
@@ -178,13 +175,13 @@ public class SatelliteListPage extends Fragment {
                 recyclerView.setAdapter(adapter);
 
                 for (GnssMeasurement measurement : event.getMeasurements()) {
-                    if (!EuropeSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GALILEO
-                            || !AmericaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GPS
-                            || !RussiaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_GLONASS
-                            || !ChinaSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_BEIDOU
-                            || !JapanSwitch.isChecked() && measurement.getConstellationType() == GnssStatus.CONSTELLATION_QZSS) {
+                    int type = measurement.getConstellationType();
+                    if (!Europe && type == GnssStatus.CONSTELLATION_GALILEO
+                            || !UnitedStates && type == GnssStatus.CONSTELLATION_GPS
+                            || !Russia && type == GnssStatus.CONSTELLATION_GLONASS
+                            || !China && type == GnssStatus.CONSTELLATION_BEIDOU
+                            || !Japan && type == GnssStatus.CONSTELLATION_QZSS)
                         continue;
-                    }
 
                     SatelliteWidgetEntryData item = new SatelliteWidgetEntryData();
                     item.Svid = measurement.getSvid();
