@@ -84,6 +84,7 @@ public class  MainActivity extends AppCompatActivity {
         // not updated, until fully restarting the app
         if (hasPermissions(this)) {
             GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
+            GeneralStatsPage.GnssModelName = locationManager.getGnssHardwareModelName();
             GeneralStatsPage.GnssModelYear = locationManager.getGnssYearOfHardware();
             mMeasurementProvider.registerAll();
         }

@@ -20,7 +20,8 @@ import java.util.Locale;
 public class GeneralStatsPage extends Fragment {
 
     public static GnssCapabilities Capabilities = null;
-    public static int GnssModelYear = 0;
+    public static String GnssModelName = null;
+    public static int GnssModelYear = 0; // 0 is Unknown
 
     public static GeneralStatsPage newInstance() {
         GeneralStatsPage fragment = new GeneralStatsPage();
@@ -96,5 +97,9 @@ public class GeneralStatsPage extends Fragment {
         TextView hardwareYear = view.findViewById(R.id.gnssHardwareYear);
         assert hardwareYear != null;
         hardwareYear.setText(GnssModelYear != 0 ? String.format(Locale.US , "%d", GnssModelYear) : "Unknown (before 2016)");
+
+        TextView hardwareName = view.findViewById(R.id.gnssHardwareName);
+        assert hardwareName != null;
+        hardwareName.setText(GnssModelName == null ? "Unknown" : GnssModelName);
     }
 }
