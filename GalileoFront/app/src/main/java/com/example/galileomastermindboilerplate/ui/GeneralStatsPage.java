@@ -53,7 +53,7 @@ public class GeneralStatsPage extends Fragment {
             return;
         }
 
-        // Navigations messages
+        // Navigation messages
         TextView supportsNavigationMessages = view.findViewById(R.id.supportsNavigationMessages);
         TextView supportsMeasurements = view.findViewById(R.id.supportsMeasurements);
 
@@ -66,8 +66,8 @@ public class GeneralStatsPage extends Fragment {
         }
         else
         {
-            supportsNavigationMessages.setText("Not supported by the OS");
-            supportsMeasurements.setText("Not supported by the OS");
+            supportsNavigationMessages.setText("Not supported by your OS version");
+            supportsMeasurements.setText("Not supported by your OS version");
         }
 
         TextView hardwareYear = view.findViewById(R.id.gnssHardwareYear);

@@ -79,6 +79,10 @@ public class  MainActivity extends AppCompatActivity {
         // Pass capabilities to stats page
         LocationManager locationManager = mMeasurementProvider.getLocationManager();
         // Check for permissions to avoid crash on firs startup
+
+        // TODO: There is a bug here when the first time launching the app
+        // it asks for permissions and when the user accepts, Capabilities are
+        // not updated, until fully restarting the app
         if (hasPermissions(this)) {
             GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
             GeneralStatsPage.GnssModelYear = locationManager.getGnssYearOfHardware();

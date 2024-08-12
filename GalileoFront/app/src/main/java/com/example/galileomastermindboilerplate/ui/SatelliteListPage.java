@@ -46,7 +46,6 @@ import kotlin.collections.ArrayDeque;
  * create an instance of this fragment.
  */
 public class SatelliteListPage extends Fragment {
-
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
 
@@ -73,7 +72,7 @@ public class SatelliteListPage extends Fragment {
         mIcon = new ArrayList<>();
     }
 
-    public static SatelliteListPage newInstance(String param1, String param2) {
+    public static SatelliteListPage newInstance() {
         SatelliteListPage fragment = new SatelliteListPage();
         Bundle args = new Bundle();
         fragment.setArguments(args);
