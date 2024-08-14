@@ -4,7 +4,6 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
-import android.os.Build;
 import android.os.Bundle;
 
 
@@ -12,6 +11,7 @@ import com.example.galileomastermindboilerplate.MeasurementProvider;
 import com.example.galileomastermindboilerplate.R;
 import com.example.galileomastermindboilerplate.SatelliteDataHandler;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
+import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +28,7 @@ import java.util.List;
 
 public class  MainActivity extends AppCompatActivity {
 
-    private RecyclerViewAdapter mAdapter;
+    private SatelliteRecyclerViewHandler mAdapter;
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer>mIcon;
 

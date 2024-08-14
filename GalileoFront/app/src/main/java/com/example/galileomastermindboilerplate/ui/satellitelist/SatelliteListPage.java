@@ -21,7 +21,6 @@ import android.widget.ProgressBar;
 
 import com.example.galileomastermindboilerplate.R;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
-import com.example.galileomastermindboilerplate.ui.RecyclerViewAdapter;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;
@@ -35,15 +34,17 @@ import java.util.TimerTask;
  * create an instance of this fragment.
  */
 public class SatelliteListPage extends Fragment {
-    private List<SatelliteWidgetEntryData> mData;
-    private List<Integer> mIcon;
+    private List<SatelliteWidgetEntryData> CurrentSatelliteData;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 
-    private RecyclerViewAdapter mAdapter;
+    private SatelliteRecyclerViewHandler mAdapter;
     private Timer dataTimer;
     public static GnssMeasurementsEvent lastEvent = null;
+
+    private RecyclerView SatellitesView;
+    private SatelliteRecyclerViewHandler SatellitesViewHandler;
 
     private int Speed = 8;
     private boolean Europe = true;
@@ -59,8 +60,7 @@ public class SatelliteListPage extends Fragment {
 
 
     public SatelliteListPage() {
-        mData = new ArrayList<>();
-        mIcon = new ArrayList<>();
+        CurrentSatelliteData = new ArrayList<>();
     }
 
     public static SatelliteListPage newInstance() {
@@ -76,10 +76,10 @@ public class SatelliteListPage extends Fragment {
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-
+    public View onCreateView(LayoutInflater inflater,
+                             ViewGroup container,
+                             Bundle savedInstanceState)
+    {
         return inflater.inflate(R.layout.fragment_satellite_list_page, container, false);
     }
 
@@ -89,11 +89,6 @@ public class SatelliteListPage extends Fragment {
         ModalBottomFiltersPanel = new SatelliteFiltersModalPane();
         FiltersButton = view.findViewById(R.id.floatingActionButton);
         LoadingIndicator = view.findViewById(R.id.progressBar);
-
-        CompoundButton.OnCheckedChangeListener onCheckedChange = (buttonView, isChecked) -> {
-            Activity act = getActivity();
-            if(act != null) act.runOnUiThread(this::PrintEventDataToLayout);
-        };
 
         ModalBottomFiltersPanel.setCancelable(true);
         ModalBottomFiltersPanel.onValuesChanged = (Integer result) -> {
@@ -113,14 +108,16 @@ public class SatelliteListPage extends Fragment {
         });
 
         PullToRefresh = view.findViewById(R.id.SwipeToRefreshSatellites);
-        PullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override public void onRefresh()
-            {
-                PrintEventDataToLayout();
-                PullToRefresh.setRefreshing(false);//if false then refresh progress dialog will disappear when page loading finish, but if it is true then always the refresh load dialog show even after the page load or not
-            }
+        PullToRefresh.setOnRefreshListener(() -> {
+            PrintEventDataToLayout();
+            PullToRefresh.setRefreshing(false);
         });
 
+
+        SatellitesViewHandler = new SatelliteRecyclerViewHandler(CurrentSatelliteData);
+        SatellitesView = view.findViewById(R.id.SatellitesRecyclerView);
+        SatellitesView.setAdapter(SatellitesViewHandler);
+        SatellitesView.setLayoutManager(new LinearLayoutManager(getContext()));
 
         Activity act = getActivity();
         if(act != null) act.runOnUiThread(this::UpdateSpeed);
@@ -156,25 +153,19 @@ public class SatelliteListPage extends Fragment {
             return;
         }
 
-        RecyclerView recyclerView = activity.findViewById(R.id.main_list);
-        if (recyclerView == null) {
+
+        if (SatellitesView == null) {
             Log.wtf("SatelliteListPage", "RecyclerView is null but the action is not!");
             return;
         }
 
         if (lastEvent != null) {
-            GnssMeasurementsEvent event = lastEvent;
-
             activity.runOnUiThread(() ->
             {
-                LoadingIndicator.setVisibility(View.GONE);
-                recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-                mData.clear();
-                mIcon.clear();
-                RecyclerViewAdapter adapter = new RecyclerViewAdapter(mData, mIcon);
-                recyclerView.setAdapter(adapter);
+                LoadingIndicator.setVisibility(View.INVISIBLE);
+                CurrentSatelliteData.clear();
 
-                for (GnssMeasurement measurement : event.getMeasurements()) {
+                for (GnssMeasurement measurement : lastEvent.getMeasurements()) {
                     int type = measurement.getConstellationType();
                     if (!Europe && type == GnssStatus.CONSTELLATION_GALILEO
                             || !UnitedStates && type == GnssStatus.CONSTELLATION_GPS
@@ -202,8 +193,8 @@ public class SatelliteListPage extends Fragment {
                     item.ConstellationType = measurement.getConstellationType();
                     item.AGC = measurement.getAutomaticGainControlLevelDb();
 
-                    mData.add(item);
-                    mIcon.add(R.drawable.rawmeas);
+                    CurrentSatelliteData.add(item);
+                    SatellitesViewHandler.updateData(CurrentSatelliteData);
                 }
             });
         }

@@ -30,7 +30,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.galileomastermindboilerplate.ui.MainActivity;
-import com.example.galileomastermindboilerplate.ui.RecyclerViewAdapter;
+import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteListPage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -67,7 +67,7 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
     private int currentCounter = 0;
 
     private WebView OpenStreetMap;
-    private RecyclerViewAdapter adapter;
+    private SatelliteRecyclerViewHandler adapter;
 
     public SatelliteDataHandler(Activity _activity) {
 

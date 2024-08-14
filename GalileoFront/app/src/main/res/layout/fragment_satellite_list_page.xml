@@ -17,7 +17,7 @@
             android:layout_height="match_parent">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/main_list"
+            android:id="@+id/SatellitesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:elevation="-20dip"
