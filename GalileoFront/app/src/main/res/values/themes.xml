@@ -1,3 +1,11 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.GalileoMastermindBoilerplate" parent="Theme.Material3.DynamicColors.DayNight"/>
+    <style name="Theme.GalileoMastermindBoilerplate" parent="Theme.Material3.DynamicColors.DayNight">
+        <item name="android:statusBarColor">#000000</item>
+    </style>
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/icon_splashscreen</item>
+        <item name="windowSplashScreenAnimationDuration">2000</item>
+        <item name="postSplashScreenTheme">@style/Theme.GalileoMastermindBoilerplate</item>
+        <item name="windowSplashScreenBackground">#FFFFFF</item>
+    </style>
 </resources>

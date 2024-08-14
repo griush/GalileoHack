@@ -55,9 +55,7 @@ dependencies {
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
     implementation(libs.jackson.databind)
-
-
-    // implementation("com.google.android.gms:play-services-location:16.0.0")
+    implementation(libs.core.splashscreen)
    // implementation("com.google.guava:guava:16+")
 
 }

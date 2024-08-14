@@ -28,7 +28,7 @@ public class SatelliteRecyclerViewHandler extends RecyclerView.Adapter<Satellite
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.satellite_recycler_view_item, parent, false);
         return new ViewHolder(view);
     }
 

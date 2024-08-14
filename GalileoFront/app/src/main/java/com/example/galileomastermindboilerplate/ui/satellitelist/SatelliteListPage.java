@@ -1,5 +1,7 @@
 package com.example.galileomastermindboilerplate.ui.satellitelist;
 
+import static java.lang.Math.min;
+
 import android.app.Activity;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
@@ -100,6 +102,7 @@ public class SatelliteListPage extends Fragment {
             if(act != null) act.runOnUiThread(this::UpdateSpeed);
         };
 
+        FiltersButton.extend();
         FiltersButton.setOnClickListener(v -> {
             ModalBottomFiltersPanel.show(getParentFragmentManager(), "SatelliteFiltersModalPane");
         });
@@ -162,6 +165,8 @@ public class SatelliteListPage extends Fragment {
                 LoadingIndicator.setVisibility(View.INVISIBLE);
                 CurrentSatelliteData.clear();
 
+                int currentScrollPosition = SatellitesView.getVerticalScrollbarPosition();
+
                 for (GnssMeasurement measurement : lastEvent.getMeasurements()) {
                     int type = measurement.getConstellationType();
                     if (!Europe && type == GnssStatus.CONSTELLATION_GALILEO
@@ -192,6 +197,8 @@ public class SatelliteListPage extends Fragment {
 
                     CurrentSatelliteData.add(item);
                     SatellitesViewHandler.updateData(CurrentSatelliteData);
+
+                    SatellitesView.setVerticalScrollbarPosition(currentScrollPosition);
                 }
             });
         }
