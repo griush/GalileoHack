@@ -36,9 +36,6 @@ import java.util.TimerTask;
 public class SatelliteListPage extends Fragment {
     private List<SatelliteWidgetEntryData> CurrentSatelliteData;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-
     private SatelliteRecyclerViewHandler mAdapter;
     private Timer dataTimer;
     public static GnssMeasurementsEvent lastEvent = null;
