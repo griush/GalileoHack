@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.location.LocationRequest;
 import android.os.Bundle;
 
 
