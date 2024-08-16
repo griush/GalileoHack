@@ -6,7 +6,9 @@ import android.location.LocationManager;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,6 +28,8 @@ public class GeneralStatsPage extends Fragment {
     public static double Latitude = 0.0, Longitude = 0.0 , Altitude = 0.0, Accuracy = 0.0;
     public static float Bearing = 0.0f, BearingAccuracy = 0.0f;
 
+    SwipeRefreshLayout PullToRefresh;
+
     public static GeneralStatsPage newInstance() {
         GeneralStatsPage fragment = new GeneralStatsPage();
         Bundle args = new Bundle();
@@ -41,9 +45,17 @@ public class GeneralStatsPage extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_general_stats_page, container, false);
+        return inflater.inflate(R.layout.fragment_general_stats_page, container, false);
+    }
+
+    public void onViewCreated(@NonNull View view, Bundle savedInstanceState) {
+        PullToRefresh = view.findViewById(R.id.SwipeToRefreshLocation);
+        PullToRefresh.setOnRefreshListener(() -> {
+            DrawCapabilities(view);
+            PullToRefresh.setRefreshing(false);
+        });
+
         DrawCapabilities(view);
-        return view;
     }
 
     private void DrawCapabilities(View view) {
