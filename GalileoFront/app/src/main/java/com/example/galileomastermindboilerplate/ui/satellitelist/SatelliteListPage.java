@@ -3,6 +3,8 @@ package com.example.galileomastermindboilerplate.ui.satellitelist;
 import static java.lang.Math.min;
 
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
 import android.location.GnssStatus;
@@ -23,6 +25,7 @@ import android.widget.ProgressBar;
 
 import com.example.galileomastermindboilerplate.R;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 
 import java.util.ArrayList;

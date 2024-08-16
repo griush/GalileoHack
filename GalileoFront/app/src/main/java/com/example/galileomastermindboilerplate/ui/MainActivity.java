@@ -2,10 +2,20 @@ package com.example.galileomastermindboilerplate.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
 import android.location.LocationRequest;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.Window;
 
 
 import com.example.galileomastermindboilerplate.MeasurementProvider;
@@ -15,6 +25,9 @@ import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
 import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -25,6 +38,9 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.galileomastermindboilerplate.databinding.ActivityMainBinding;
+import com.google.android.material.color.ColorRoles;
+import com.google.android.material.color.MaterialColors;
+import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.List;
 
@@ -51,9 +67,6 @@ public class  MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.landingPage, R.id.generalStatsPage, R.id.satelliteListPage)
                 .build();
@@ -63,6 +76,18 @@ public class  MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         requestPermissionAndSetupFragments(this);
+
+        int color = SurfaceColors.SURFACE_2.getColor(this);
+
+        Window window = getWindow();
+        window.setNavigationBarColor(color);
+        window.setStatusBarColor(color);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+
+        BottomNavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setBackgroundColor(color);
+
     }
 
     @Override
@@ -72,7 +97,6 @@ public class  MainActivity extends AppCompatActivity {
     }
 
     private void startHere() {
-
         ddt = new SatelliteDataHandler(this);
         mMeasurementProvider = new MeasurementProvider(getApplicationContext(), ddt);
       //  mMeasurementProvider = new MeasurementProvider(getApplicationContext());
