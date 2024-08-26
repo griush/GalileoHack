@@ -23,4 +23,6 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x ./GalileoFront/gradlew
     - name: Build with Gradle
-      run: ./GalileoFront/gradlew build
+      run: |
+          cd GalileoFront
+          ./gradlew build
