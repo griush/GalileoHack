@@ -16,18 +16,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import android.os.CountDownTimer;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.example.galileomastermindboilerplate.R;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
+import com.google.android.material.progressindicator.CircularProgressIndicator;
 
+import java.time.DateTimeException;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Timer;
@@ -41,8 +46,10 @@ import java.util.TimerTask;
 public class SatelliteListPage extends Fragment {
     private List<SatelliteWidgetEntryData> CurrentSatelliteData;
 
+
+
     private SatelliteRecyclerViewHandler mAdapter;
-    private Timer dataTimer;
+    private CountDownTimer dataTimer;
     public static GnssMeasurementsEvent lastEvent = null;
 
     private RecyclerView SatellitesView;
@@ -59,6 +66,8 @@ public class SatelliteListPage extends Fragment {
     ExtendedFloatingActionButton FiltersButton;
     SwipeRefreshLayout PullToRefresh;
     ProgressBar LoadingIndicator;
+    CircularProgressIndicator TimerProgressBar;
+    TextView TimerTextView;
 
 
     public SatelliteListPage() {
@@ -91,6 +100,8 @@ public class SatelliteListPage extends Fragment {
         ModalBottomFiltersPanel = new SatelliteFiltersModalPane();
         FiltersButton = view.findViewById(R.id.floatingActionButton);
         LoadingIndicator = view.findViewById(R.id.progressBar);
+        TimerTextView = view.findViewById(R.id.timerTextView);
+        TimerProgressBar = view.findViewById(R.id.timerProgressBar);
 
         ModalBottomFiltersPanel.setCancelable(true);
         ModalBottomFiltersPanel.onValuesChanged = (Integer result) -> {
@@ -133,17 +144,30 @@ public class SatelliteListPage extends Fragment {
 
         if(Speed != 0) {
             PullToRefresh.setEnabled(false);
-            dataTimer = new Timer("SatelliteDataTimer");
-            dataTimer.schedule(new TimerTask() {
+            int MIN = 0;
+            int MAX = (11-Speed)*333;
+            dataTimer = new CountDownTimer(MAX, 10) {
                 @Override
-                public void run() {
-                    PrintEventDataToLayout();
+                public void onTick(long l) {
+                        TimerProgressBar.setProgress(/*MAX - */(int)l);
                 }
-            }, 0, ((11-Speed)*333L));
+
+                @Override
+                public void onFinish() {
+                    PrintEventDataToLayout();
+                    dataTimer.start();
+                }
+            };
+            dataTimer.start();
+            TimerProgressBar.setMin(MIN);
+            TimerProgressBar.setMax(MAX);
         }
         else
         {
             PullToRefresh.setEnabled(true);
+            TimerProgressBar.setMin(0);
+            TimerProgressBar.setMax(1);
+            TimerProgressBar.setProgress(0);
         }
 
         PrintEventDataToLayout();
@@ -165,6 +189,8 @@ public class SatelliteListPage extends Fragment {
         if (lastEvent != null) {
             activity.runOnUiThread(() ->
             {
+                TimerTextView.setText("Last updated: " + LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")));
+                TimerProgressBar.setVisibility(View.VISIBLE);
                 LoadingIndicator.setVisibility(View.INVISIBLE);
                 CurrentSatelliteData.clear();
 
