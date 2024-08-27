@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.galileomastermindboilerplate;
+package com.gnsstracker.mainapp;
 
 import android.location.GnssMeasurementsEvent;
 import android.location.GnssNavigationMessage;

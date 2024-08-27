@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate.ui.satellitelist;
+package com.gnsstracker.mainapp.ui.satellitelist;
 
 
 import static android.location.GnssStatus.*;
@@ -13,8 +13,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.galileomastermindboilerplate.R;
-import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
+import com.gnsstracker.mainapp.R;
+import com.gnsstracker.mainapp.SatelliteWidgetEntryData;
 
 import java.util.List;
 

@@ -1,10 +1,8 @@
-package com.example.galileomastermindboilerplate.ui.satellitelist;
+package com.gnsstracker.mainapp.ui.satellitelist;
 
 import static java.lang.Math.min;
 
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
 import android.location.GnssMeasurement;
 import android.location.GnssMeasurementsEvent;
 import android.location.GnssStatus;
@@ -21,22 +19,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.example.galileomastermindboilerplate.R;
-import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.gnsstracker.mainapp.R;
+import com.gnsstracker.mainapp.SatelliteWidgetEntryData;
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
-import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * A simple {@link Fragment} subclass.

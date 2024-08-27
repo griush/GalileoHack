@@ -3,11 +3,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.galileomastermindboilerplate"
+    namespace = "com.gnsstracker.mainapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.example.galileomastermindboilerplate"
+        applicationId = "com.gnsstracker.mainapp"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
@@ -36,7 +36,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
@@ -47,18 +46,10 @@ dependencies {
     implementation(libs.play.services.maps)
     implementation(libs.legacy.support.v4)
     implementation(libs.recyclerview)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
     implementation(libs.play.services.location)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.ext.junit)
-    androidTestImplementation(libs.espresso.core)
     implementation(libs.jackson.databind)
     implementation(libs.core.splashscreen)
     implementation(libs.osmdroid.android)
-   // implementation("com.google.guava:guava:16+")
-
 }
 
 

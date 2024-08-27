@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate;
+package com.gnsstracker.mainapp;
 
 public class ServerHostname {
   

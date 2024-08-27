@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/generalStatsPage"
-        android:name="com.example.galileomastermindboilerplate.ui.GeneralStatsPage"
+        android:name="com.gnsstracker.mainapp.ui.GeneralStatsPage"
         android:label="GNSS Stats"
         tools:layout="@layout/fragment_general_stats_page" />
     <fragment
         android:id="@+id/landingPage"
-        android:name="com.example.galileomastermindboilerplate.ui.LandingPage"
+        android:name="com.gnsstracker.mainapp.ui.LandingPage"
         android:label="Home"
         tools:layout="@layout/fragment_landing_page" />
     <fragment
         android:id="@+id/satelliteListPage"
-        android:name="com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteListPage"
+        android:name="com.gnsstracker.mainapp.ui.satellitelist.SatelliteListPage"
         android:label="Satellite list"
         tools:layout="@layout/fragment_satellite_list_page" />
 

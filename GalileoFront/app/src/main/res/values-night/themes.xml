@@ -1,5 +1,5 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <style name="Theme.GalileoMastermindBoilerplate" parent="Theme.Material3.Dark">
+    <style name="Theme.GNSSTracker" parent="Theme.Material3.Dark">
         <item name="android:statusBarColor">#00123456</item>
         <item name="android:navigationBarColor">#00123456</item>
 "
@@ -7,7 +7,7 @@
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
         <item name="windowSplashScreenAnimatedIcon">@drawable/icon_splashscreen</item>
         <item name="windowSplashScreenAnimationDuration">2000</item>
-        <item name="postSplashScreenTheme">@style/Theme.GalileoMastermindBoilerplate</item>
+        <item name="postSplashScreenTheme">@style/Theme.GNSSTracker</item>
         <item name="windowSplashScreenBackground">#101010</item>
     </style>
 </resources>

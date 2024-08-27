@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.galileomastermindboilerplate;
+package com.gnsstracker.mainapp;
 
 import android.content.Context;
 import android.location.GnssMeasurementsEvent;
@@ -25,12 +25,11 @@ import android.location.LocationManager;
 import android.location.OnNmeaMessageListener;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.util.Log;
 
 //import com.google.android.gms.location.LocationRequest;
 //import com.google.android.gms.location.LocationServices;
 
-import com.example.galileomastermindboilerplate.ui.GeneralStatsPage;
+import com.gnsstracker.mainapp.ui.GeneralStatsPage;
 
 import java.net.MalformedURLException;
 import java.util.Arrays;

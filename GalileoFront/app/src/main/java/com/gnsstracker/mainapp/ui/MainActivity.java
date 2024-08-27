@@ -1,33 +1,21 @@
-package com.example.galileomastermindboilerplate.ui;
+package com.gnsstracker.mainapp.ui;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.ColorFilter;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
-import android.location.LocationRequest;
 import android.os.Bundle;
-import android.util.AttributeSet;
-import android.view.View;
 import android.view.Window;
 
 
-import com.example.galileomastermindboilerplate.MeasurementProvider;
-import com.example.galileomastermindboilerplate.R;
-import com.example.galileomastermindboilerplate.SatelliteDataHandler;
-import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
-import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteRecyclerViewHandler;
+import com.gnsstracker.mainapp.MeasurementProvider;
+import com.gnsstracker.mainapp.R;
+import com.gnsstracker.mainapp.SatelliteDataHandler;
+import com.gnsstracker.mainapp.SatelliteWidgetEntryData;
+import com.gnsstracker.mainapp.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import androidx.activity.EdgeToEdge;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
@@ -37,9 +25,7 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import com.example.galileomastermindboilerplate.databinding.ActivityMainBinding;
-import com.google.android.material.color.ColorRoles;
-import com.google.android.material.color.MaterialColors;
+import com.gnsstracker.mainapp.databinding.ActivityMainBinding;
 import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.List;

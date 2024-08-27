@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate.ui.satellitelist;
+package com.gnsstracker.mainapp.ui.satellitelist;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -6,7 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
 
-import com.example.galileomastermindboilerplate.R;
+import com.gnsstracker.mainapp.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import android.view.LayoutInflater;
@@ -14,13 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.example.galileomastermindboilerplate.databinding.FragmentSatelliteFiltersModalPaneListDialogBinding;
 import com.google.android.material.materialswitch.MaterialSwitch;
 import com.google.android.material.slider.Slider;
 
 import java.util.function.Consumer;
-
-import kotlin.Unit;
 
 public class SatelliteFiltersModalPane extends BottomSheetDialogFragment {
 
