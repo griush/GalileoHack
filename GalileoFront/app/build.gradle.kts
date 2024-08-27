@@ -4,14 +4,14 @@ plugins {
 
 android {
     namespace = "com.example.galileomastermindboilerplate"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "com.example.galileomastermindboilerplate"
-        minSdk = 31
-        targetSdk = 34
+        minSdk = 30
+        targetSdk = 35
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -27,8 +27,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     buildFeatures {
         viewBinding = true
@@ -45,17 +45,18 @@ dependencies {
     implementation(libs.navigation.fragment)
     implementation(libs.navigation.ui)
     implementation(libs.play.services.maps)
+    implementation(libs.legacy.support.v4)
+    implementation(libs.recyclerview)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    implementation("com.google.android.gms:play-services-location:21.3.0")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.2.1")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.6.1")
-    implementation("com.fasterxml.jackson.core:jackson-databind:2.17.2")
-
-
-    // implementation("com.google.android.gms:play-services-location:16.0.0")
+    implementation(libs.play.services.location)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.ext.junit)
+    androidTestImplementation(libs.espresso.core)
+    implementation(libs.jackson.databind)
+    implementation(libs.core.splashscreen)
+    implementation(libs.osmdroid.android)
    // implementation("com.google.guava:guava:16+")
 
 }

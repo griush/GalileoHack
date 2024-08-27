@@ -7,25 +7,47 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="GNSS Chipset:"
-            android:textStyle="bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:paddingStart="8dp"
-            android:paddingTop="8dp"/>
+            android:paddingTop="8dp"
+            android:text="GNSS Chipset:"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Model year: "
-                android:paddingLeft="16dp" />
+                android:paddingLeft="16dp"
+                android:text="Model name: " />
+
+            <TextView
+                android:id="@+id/gnssHardwareName"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Model year: " />
+
             <TextView
                 android:id="@+id/gnssHardwareYear"
                 android:layout_width="match_parent"
@@ -36,13 +58,15 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Navigation Messages: "
-                android:paddingLeft="16dp" />
+                android:paddingLeft="16dp"
+                android:text="Navigation Messages: " />
+
             <TextView
                 android:id="@+id/supportsNavigationMessages"
                 android:layout_width="match_parent"
@@ -50,15 +74,18 @@
                 android:text="Unknown" />
 
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="wrap_content"
-            android:orientation="horizontal"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Measurements: "
-                android:paddingLeft="16dp" />
+                android:paddingLeft="16dp"
+                android:text="Measurements: " />
+
             <TextView
                 android:id="@+id/supportsMeasurements"
                 android:layout_width="match_parent"
@@ -67,7 +94,179 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="ADR: " />
+
+            <TextView
+                android:id="@+id/hasADR"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Msa: " />
+
+            <TextView
+                android:id="@+id/hasMsa"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Satellite PVT: " />
+
+            <TextView
+                android:id="@+id/supportsSatellitePvt"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
+            android:text="Location:"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Latitude: " />
+
+            <TextView
+                android:id="@+id/deviceLatitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Longitude: " />
+
+            <TextView
+                android:id="@+id/deviceLongitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Altitude: " />
+
+            <TextView
+                android:id="@+id/deviceAltitude"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Accuracy: " />
+
+            <TextView
+                android:id="@+id/deviceAccuracy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Bearing: " />
+
+            <TextView
+                android:id="@+id/deviceBearing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="16dp"
+                android:text="Bearing Accuracy: " />
+
+            <TextView
+                android:id="@+id/deviceBearingAccuracy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Unknown" />
+        </LinearLayout>
+
     </LinearLayout>
-
-
 </FrameLayout>

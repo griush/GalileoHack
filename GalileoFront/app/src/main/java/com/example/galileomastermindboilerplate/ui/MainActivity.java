@@ -2,33 +2,51 @@ package com.example.galileomastermindboilerplate.ui;
 
 import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.location.LocationManager;
-import android.os.Build;
+import android.location.LocationRequest;
 import android.os.Bundle;
+import android.util.AttributeSet;
+import android.view.View;
+import android.view.Window;
 
 
 import com.example.galileomastermindboilerplate.MeasurementProvider;
 import com.example.galileomastermindboilerplate.R;
 import com.example.galileomastermindboilerplate.SatelliteDataHandler;
 import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
+import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.splashscreen.SplashScreen;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.example.galileomastermindboilerplate.databinding.ActivityMainBinding;
+import com.google.android.material.color.ColorRoles;
+import com.google.android.material.color.MaterialColors;
+import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.List;
 
 public class  MainActivity extends AppCompatActivity {
 
-    private RecyclerViewAdapter mAdapter;
+    private SatelliteRecyclerViewHandler mAdapter;
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer>mIcon;
 
@@ -43,15 +61,12 @@ public class  MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
+        SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.landingPage, R.id.generalStatsPage, R.id.satelliteListPage)
                 .build();
@@ -61,6 +76,18 @@ public class  MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navView, navController);
 
         requestPermissionAndSetupFragments(this);
+
+        int color = SurfaceColors.SURFACE_2.getColor(this);
+
+        Window window = getWindow();
+        window.setNavigationBarColor(color);
+        window.setStatusBarColor(color);
+
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
+
+        BottomNavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setBackgroundColor(color);
+
     }
 
     @Override
@@ -69,9 +96,7 @@ public class  MainActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-
     private void startHere() {
-
         ddt = new SatelliteDataHandler(this);
         mMeasurementProvider = new MeasurementProvider(getApplicationContext(), ddt);
       //  mMeasurementProvider = new MeasurementProvider(getApplicationContext());
@@ -79,8 +104,13 @@ public class  MainActivity extends AppCompatActivity {
         // Pass capabilities to stats page
         LocationManager locationManager = mMeasurementProvider.getLocationManager();
         // Check for permissions to avoid crash on firs startup
+
+        // TODO: There is a bug here when the first time launching the app
+        // it asks for permissions and when the user accepts, Capabilities are
+        // not updated, until fully restarting the app
         if (hasPermissions(this)) {
             GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
+            GeneralStatsPage.GnssModelName = locationManager.getGnssHardwareModelName();
             GeneralStatsPage.GnssModelYear = locationManager.getGnssYearOfHardware();
             mMeasurementProvider.registerAll();
         }
@@ -106,6 +136,4 @@ public class  MainActivity extends AppCompatActivity {
             startHere();
         }
     }
-
-
 }

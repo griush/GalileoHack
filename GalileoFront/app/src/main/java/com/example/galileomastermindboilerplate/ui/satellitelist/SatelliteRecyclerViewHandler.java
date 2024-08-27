@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate.ui;
+package com.example.galileomastermindboilerplate.ui.satellitelist;
 
 
 import static android.location.GnssStatus.*;
@@ -18,44 +18,35 @@ import com.example.galileomastermindboilerplate.SatelliteWidgetEntryData;
 
 import java.util.List;
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapter.ViewHolder> {
+public class SatelliteRecyclerViewHandler extends RecyclerView.Adapter<SatelliteRecyclerViewHandler.ViewHolder> {
 
+    private List<SatelliteWidgetEntryData> SatellitesData;
 
-    private List<SatelliteWidgetEntryData> mData;
-    private List<Integer> mIcon;
-
-
-    public RecyclerViewAdapter(List<SatelliteWidgetEntryData> data, List<Integer> icon) {
-        this.mData = data;
-        this.mIcon = icon;
-
+    public SatelliteRecyclerViewHandler(List<SatelliteWidgetEntryData> data) {
+        this.SatellitesData = data;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_view_item_1, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.satellite_recycler_view_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        SatelliteWidgetEntryData item = mData.get(position);
-        int icon = mIcon.get(position);
+        SatelliteWidgetEntryData item = SatellitesData.get(position);
 
-        holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " id " + String.valueOf(item.Svid));
-        holder.SignalStrength.setText(String.valueOf(String.format("%.2f", item.Cn0DbHz) + " dBHz"));
+        holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " id " + item.Svid);
+        holder.SignalStrength.setText(String.format("%.2f", item.Cn0DbHz) + " dBHz");
 
         if(item.Cn0DbHz > 20)
-            holder.SignalStrength.setTextColor(new Color().argb(255, 0, 255, 128));
+            holder.SignalStrength.setTextColor(Color.argb(255, 0, 255, 128));
         else if (item.Cn0DbHz > 10)
-            holder.SignalStrength.setTextColor(new Color().argb(255, 255, 255, 0));
+            holder.SignalStrength.setTextColor(Color.argb(255, 255, 255, 0));
         else
-            holder.SignalStrength.setTextColor(new Color().argb(255, 255, 50, 0));
-
-        
+            holder.SignalStrength.setTextColor(Color.argb(255, 255, 50, 0));
 
         holder.Frequency.setText(formatDoubleAsGHz(item.CarrierFrequencyHz));
-
 
         holder.PowerShower.setMax(50);
         holder.PowerShower.setMin(10);
@@ -63,27 +54,20 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         holder.AGCDisplay.setText(String.format("%.2f", item.AGC) + " dB");
 
         if(item.AGC < -3)
-            holder.AGCDisplay.setTextColor(new Color().argb(255, 0, 255, 128));
+            holder.AGCDisplay.setTextColor(Color.argb(255, 0, 255, 128));
         else if (item.AGC <= 3)
-            holder.AGCDisplay.setTextColor(new Color().argb(255, 255, 255, 0));
+            holder.AGCDisplay.setTextColor(Color.argb(255, 255, 255, 0));
         else
-            holder.AGCDisplay.setTextColor(new Color().argb(255, 255, 50, 0));
+            holder.AGCDisplay.setTextColor(Color.argb(255, 255, 50, 0));
     }
 
     @Override
     public int getItemCount() {
-        return mData.size();
+        return SatellitesData.size();
     }
 
     public void updateData(List<SatelliteWidgetEntryData> newData) {
-        mData = newData;
-        notifyDataSetChanged(); // Notify adapter that dataset has changed
-    }
-
-    public void addData(List<SatelliteWidgetEntryData> newData) {
-        mData.addAll(newData);
-
-
+        SatellitesData = newData;
         notifyDataSetChanged(); // Notify adapter that dataset has changed
     }
 
@@ -92,11 +76,8 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
         TextView Frequency;
         TextView SignalStrength;
         ProgressBar PowerShower;
-
         TextView AGCDisplay;
 
-        TextView LatOT;
-        TextView LonOT;
 
         public ViewHolder(View itemView) {
             super(itemView);

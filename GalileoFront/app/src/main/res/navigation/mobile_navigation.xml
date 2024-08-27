@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_landing_page" />
     <fragment
         android:id="@+id/satelliteListPage"
-        android:name="com.example.galileomastermindboilerplate.ui.SatelliteListPage"
+        android:name="com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteListPage"
         android:label="Satellite list"
         tools:layout="@layout/fragment_satellite_list_page" />
 
