@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.galileomastermindboilerplate;
+package com.gnsstracker.mainapp;
 
 import android.graphics.Color;
 import android.location.GnssClock;
@@ -26,14 +26,6 @@ import android.location.Location;
 import android.location.LocationProvider;
 import android.os.Bundle;
 import android.util.Log;
-
-
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * A class representing a UI logger for the application. Its responsibility is show information in

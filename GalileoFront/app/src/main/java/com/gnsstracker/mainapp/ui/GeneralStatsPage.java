@@ -1,4 +1,4 @@
-package com.example.galileomastermindboilerplate.ui;
+package com.gnsstracker.mainapp.ui;
 
 import android.app.Activity;
 import android.location.GnssCapabilities;
@@ -13,7 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.example.galileomastermindboilerplate.R;
+import com.gnsstracker.mainapp.R;
 
 import java.util.Locale;
 import java.util.Timer;

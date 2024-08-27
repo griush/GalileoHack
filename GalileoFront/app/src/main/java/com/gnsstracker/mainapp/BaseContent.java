@@ -1,6 +1,4 @@
-package com.example.galileomastermindboilerplate;
-
-import android.location.GnssMeasurement;
+package com.gnsstracker.mainapp;
 
 import java.util.Vector;
 

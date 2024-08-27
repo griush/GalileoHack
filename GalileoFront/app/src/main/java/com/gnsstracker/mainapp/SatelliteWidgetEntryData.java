@@ -1,6 +1,4 @@
-package com.example.galileomastermindboilerplate;
-
-import java.util.Vector;
+package com.gnsstracker.mainapp;
 
 public class SatelliteWidgetEntryData {
     public int Svid = -1;

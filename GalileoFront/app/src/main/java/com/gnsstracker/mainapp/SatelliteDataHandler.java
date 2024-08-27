@@ -9,7 +9,7 @@
 //import androidx.recyclerview.widget.LinearLayoutManager;
 //import androidx.recyclerview.widget.RecyclerView;
 
-package com.example.galileomastermindboilerplate;
+package com.gnsstracker.mainapp;
 
 import android.app.Activity;
 import android.location.GnssClock;
@@ -29,9 +29,9 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.galileomastermindboilerplate.ui.MainActivity;
-import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteRecyclerViewHandler;
-import com.example.galileomastermindboilerplate.ui.satellitelist.SatelliteListPage;
+import com.gnsstracker.mainapp.ui.MainActivity;
+import com.gnsstracker.mainapp.ui.satellitelist.SatelliteRecyclerViewHandler;
+import com.gnsstracker.mainapp.ui.satellitelist.SatelliteListPage;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 

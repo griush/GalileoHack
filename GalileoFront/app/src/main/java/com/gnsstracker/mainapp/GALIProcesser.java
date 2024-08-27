@@ -1,11 +1,6 @@
-package com.example.galileomastermindboilerplate;
+package com.gnsstracker.mainapp;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
-import android.location.Location;
-import android.location.LocationManager;
-import android.util.Log;
 import android.widget.TextView;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -17,7 +12,6 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.util.ArrayList;
 
