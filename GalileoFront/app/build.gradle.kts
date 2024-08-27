@@ -56,6 +56,7 @@ dependencies {
     androidTestImplementation(libs.espresso.core)
     implementation(libs.jackson.databind)
     implementation(libs.core.splashscreen)
+    implementation(libs.osmdroid.android)
    // implementation("com.google.guava:guava:16+")
 
 }

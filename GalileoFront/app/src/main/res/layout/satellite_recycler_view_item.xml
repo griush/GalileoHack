@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_width="fill_parent"
     style="@style/Widget.Material3.CardView.Filled"
-    android:clickable="true"
+    android:clickable="false"
     android:focusable="false"
     android:checkable="false"
     app:cardCornerRadius="16dp"
