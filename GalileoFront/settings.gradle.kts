@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Galileo Mastermind Boilerplate"
+rootProject.name = "GNSS Tracker"
 include(":app")
  
