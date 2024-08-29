@@ -4,4 +4,21 @@
     <string name="title_home">GNSS Tracker</string>
     <string name="location">Ubicación:</string>
     <string name="unknown">Desconocido</string>
+    <string name="supported">Disponible</string>
+    <string name="unsupported">No disponible</string>
+    <string name="gnss_chipset">Chip GNSS: </string>
+    <string name="model_name">Nombre:&#160;</string>
+    <string name="model_year">Año:&#160;</string>
+    <string name="unknown_before_2016">Desconocido (antes del 2016)</string>
+    <string name="navigation_messages">Mensajes de navegación:&#160;</string>
+    <string name="measurements">Measurements:&#160;</string>
+    <string name="adr">ADR:&#160;</string>
+    <string name="msa">Msa:&#160;</string>
+    <string name="satellite_pvt">PVT de satélites:&#160;</string>
+    <string name="latitude">Latitud:&#160;</string>
+    <string name="longitude">Longitud:&#160;</string>
+    <string name="altitude">Altitud:&#160;</string>
+    <string name="accuracy">Precisión:&#160;</string>
+    <string name="bearing">Rumbo:&#160;</string>
+    <string name="bearing_accuracy">Precisión del rumbo:&#160;</string>
 </resources>

@@ -15,8 +15,9 @@
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
-            android:text="GNSS Chipset:"
-            android:textStyle="bold" />
+            android:text="@string/gnss_chipset"
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -26,8 +27,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Model name: " />
+                android:paddingStart="16dp"
+                android:text="@string/model_name"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/gnssHardwareName"
@@ -45,14 +47,15 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Model year: " />
+                android:paddingStart="16dp"
+                android:text="@string/model_year"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/gnssHardwareYear"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown (before 2016)" />
+                android:text="@string/unknown_before_2016" />
 
         </LinearLayout>
 
@@ -64,8 +67,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Navigation Messages: " />
+                android:paddingStart="16dp"
+                android:text="@string/navigation_messages"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/supportsNavigationMessages"
@@ -83,8 +87,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Measurements: " />
+                android:paddingStart="16dp"
+                android:text="@string/measurements"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/supportsMeasurements"
@@ -102,8 +107,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="ADR: " />
+                android:paddingStart="16dp"
+                android:text="@string/adr"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/hasADR"
@@ -121,8 +127,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Msa: " />
+                android:paddingStart="16dp"
+                android:text="@string/msa"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/hasMsa"
@@ -140,8 +147,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Satellite PVT: " />
+                android:paddingStart="16dp"
+                android:text="@string/satellite_pvt"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/supportsSatellitePvt"
@@ -157,7 +165,8 @@
             android:paddingStart="8dp"
             android:paddingTop="8dp"
             android:text="@string/location"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            tools:ignore="RtlSymmetry" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -167,8 +176,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Latitude: " />
+                android:paddingStart="16dp"
+                android:text="@string/latitude"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/deviceLatitude"
@@ -186,8 +196,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Longitude: " />
+                android:paddingStart="16dp"
+                android:text="@string/longitude"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/deviceLongitude"
@@ -204,8 +215,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Altitude: " />
+                android:paddingStart="16dp"
+                android:text="@string/altitude"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/deviceAltitude"
@@ -222,8 +234,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Accuracy: " />
+                android:paddingStart="16dp"
+                android:text="@string/accuracy"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/deviceAccuracy"
@@ -240,8 +253,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Bearing: " />
+                android:paddingStart="16dp"
+                android:text="@string/bearing"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/deviceBearing"
@@ -258,8 +272,9 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:paddingLeft="16dp"
-                android:text="Bearing Accuracy: " />
+                android:paddingStart="16dp"
+                android:text="@string/bearing_accuracy"
+                tools:ignore="RtlSymmetry" />
 
             <TextView
                 android:id="@+id/deviceBearingAccuracy"
