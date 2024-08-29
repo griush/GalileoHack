@@ -33,7 +33,7 @@
                 android:id="@+id/gnssHardwareName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -71,7 +71,7 @@
                 android:id="@+id/supportsNavigationMessages"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -90,7 +90,7 @@
                 android:id="@+id/supportsMeasurements"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -109,7 +109,7 @@
                 android:id="@+id/hasADR"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -128,7 +128,7 @@
                 android:id="@+id/hasMsa"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -147,7 +147,7 @@
                 android:id="@+id/supportsSatellitePvt"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -156,7 +156,7 @@
             android:layout_height="wrap_content"
             android:paddingStart="8dp"
             android:paddingTop="8dp"
-            android:text="Location:"
+            android:text="@string/location"
             android:textStyle="bold" />
 
         <LinearLayout
@@ -174,7 +174,7 @@
                 android:id="@+id/deviceLatitude"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
 
         </LinearLayout>
 
@@ -193,7 +193,7 @@
                 android:id="@+id/deviceLongitude"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
         </LinearLayout>
 
         <LinearLayout
@@ -211,7 +211,7 @@
                 android:id="@+id/deviceAltitude"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
         </LinearLayout>
 
         <LinearLayout
@@ -229,7 +229,7 @@
                 android:id="@+id/deviceAccuracy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
         </LinearLayout>
 
         <LinearLayout
@@ -247,7 +247,7 @@
                 android:id="@+id/deviceBearing"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
         </LinearLayout>
 
         <LinearLayout
@@ -265,7 +265,7 @@
                 android:id="@+id/deviceBearingAccuracy"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="Unknown" />
+                android:text="@string/unknown" />
         </LinearLayout>
 
     </LinearLayout>

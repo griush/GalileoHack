@@ -104,14 +104,16 @@ public class GeneralStatsPage extends Fragment {
             return;
         }
 
+        String unknown = getString(R.string.unknown);
+
         // Navigation messages
 
         // API 34 Data
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
             int support = Capabilities.hasAccumulatedDeltaRange();
-            String adrText = "Unknown";
+            String adrText = unknown;
             switch (support) {
-                case GnssCapabilities.CAPABILITY_UNKNOWN -> adrText = "Unknown";
+                case GnssCapabilities.CAPABILITY_UNKNOWN -> adrText = unknown;
                 case GnssCapabilities.CAPABILITY_SUPPORTED -> adrText = "Supported";
                 case GnssCapabilities.CAPABILITY_UNSUPPORTED -> adrText = "Unsupported";
             }
@@ -127,13 +129,13 @@ public class GeneralStatsPage extends Fragment {
             }
         } else {
             if (hasADR != null) {
-                hasADR.setText("Unknown");
+                hasADR.setText(unknown);
             }
             if (hasMsa != null) {
-                hasMsa.setText("Unknown");
+                hasMsa.setText(unknown);
             }
             if (supportsSatellitePvt != null) {
-                supportsSatellitePvt.setText("Unknown");
+                supportsSatellitePvt.setText(unknown);
             }
         }
 
@@ -147,10 +149,10 @@ public class GeneralStatsPage extends Fragment {
             }
         } else {
             if (supportsNavigationMessages != null) {
-                supportsNavigationMessages.setText("Unknown");
+                supportsNavigationMessages.setText(unknown);
             }
             if (supportsMeasurements != null) {
-                supportsMeasurements.setText("Unknown");
+                supportsMeasurements.setText(unknown);
             }
         }
 
@@ -159,7 +161,7 @@ public class GeneralStatsPage extends Fragment {
             hardwareYear.setText(GnssModelYear != 0 ? String.format(Locale.US, "%d", GnssModelYear) : "Unknown (before 2016)");
         }
         if( hardwareName != null) {
-            hardwareName.setText(GnssModelName == null ? "Unknown" : GnssModelName);
+            hardwareName.setText(GnssModelName == null ? unknown : GnssModelName);
         }
         if (deviceLatitude != null) {
             deviceLatitude.setText(String.valueOf(Latitude));
