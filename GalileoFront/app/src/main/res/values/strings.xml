@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">GNSS Tracker</string>
     <string name="title_home">GNSS Tracker</string>
@@ -20,4 +21,14 @@
     <string name="accuracy">Accuracy:&#160;</string>
     <string name="bearing">Bearing:&#160;</string>
     <string name="bearing_accuracy">Bearing Accuracy:&#160;</string>
+    <string name="home">Home</string>
+    <string name="satellite_list">Satellite list</string>
+    <string name="gnss_stats">GNSS Stats</string>
+    <string name="gnss_tracker_icon_description">GNSS Tracker icon</string>
+    <string name="gnss_tracker_description">This app aims to provide valuable GNSS data collected by the sensors located on your phone. \n\nGNSS Tracker is the result of the 2024 HackUPC Hackaton.</string>
+    <string name="view_gnss_tracker_on_github">View GNSS Tracker on GitHub</string>
+    <string name="your_current_location">Your current location:</string>
+    <string name="gps_location">GPS location</string>
+    <string name="network_location">Network location</string>
+    <string name="fused_gps_network_location_android_12">Fused (GPS + Network) location (Android 12+)</string>
 </resources>

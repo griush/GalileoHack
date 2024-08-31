@@ -25,15 +25,16 @@
                android:layout_width="80dp"
                android:layout_height="80dp"
                android:layout_weight="0"
+               android:contentDescription="@string/gnss_tracker_icon_description"
                android:src="@drawable/icon_splashscreen"
-               />
+               tools:ignore="InefficientWeight" />
 
            <TextView
                android:layout_width="wrap_content"
                android:layout_height="80dip"
                android:gravity="center"
-               android:text="GNSS Tracker"
-               android:textSize="40dp"
+               android:text="@string/app_name"
+               android:textSize="40sp"
                android:textStyle="bold" />
 
        </LinearLayout>
@@ -42,32 +43,32 @@
        <TextView
            android:layout_height="wrap_content"
            android:layout_width="match_parent"
-           android:gravity="left"
-           android:text="This app aims to provide valuable GNSS data collected by the sensors located on your phone. \n\nGNSS Tracker is the result of the 2024 HackUPC Hackaton." />
+           android:gravity="start"
+           android:text="@string/gnss_tracker_description" />
 
        <Button
            android:id="@+id/GitHubButton"
            android:layout_width="match_parent"
            android:layout_height="wrap_content"
            android:layout_margin="8dp"
-           android:text="View GNSS Tracker on GitHub" />
+           android:text="@string/view_gnss_tracker_on_github" />
 
        <TextView
            android:layout_marginTop="20dip"
            android:layout_height="wrap_content"
            android:layout_width="match_parent"
-           android:gravity="left"
+           android:gravity="start"
            android:textStyle="bold"
-           android:text="Your current location:" />
+           android:text="@string/your_current_location" />
 
        <TextView
            android:id="@+id/PrecisionLabel1"
            android:layout_marginVertical="2dp"
            android:layout_height="wrap_content"
            android:layout_width="match_parent"
-           android:gravity="left"
+           android:gravity="start"
            android:textColor="#0080f7"
-           android:text="GPS location" />
+           android:text="@string/gps_location" />
 
        <TextView
            android:id="@+id/PrecisionLabel3"
@@ -75,17 +76,17 @@
            android:layout_height="wrap_content"
            android:layout_width="match_parent"
            android:textColor="#f700ef"
-           android:gravity="left"
-           android:text="Network location" />
+           android:gravity="start"
+           android:text="@string/network_location" />
 
        <TextView
            android:id="@+id/PrecisionLabel2"
            android:layout_marginVertical="2dp"
            android:layout_height="wrap_content"
            android:layout_width="match_parent"
-           android:gravity="left"
+           android:gravity="start"
            android:textColor="#bf8600"
-           android:text="Fused (GPS + Network) location (Android 12+)" />
+           android:text="@string/fused_gps_network_location_android_12" />
 
        <org.osmdroid.views.MapView
            android:layout_width="match_parent"

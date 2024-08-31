@@ -4,15 +4,15 @@
     <item
         android:id="@+id/landingPage"
         android:icon="@drawable/home"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item
         android:id="@+id/satelliteListPage"
         android:icon="@drawable/satellite"
-        android:title="Satellite list" />
+        android:title="@string/satellite_list" />
     <item
         android:id="@+id/generalStatsPage"
         android:icon="@drawable/stats"
-        android:title="GNSS Stats" />
+        android:title="@string/gnss_stats" />
 
 </menu>
