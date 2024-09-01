@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GNSS Tracker</string>
+    <string name="title_home">GNSS Tracker</string>
+    <string name="location">Ubicación:</string>
+    <string name="unknown">Desconocido</string>
+    <string name="supported">Disponible</string>
+    <string name="unsupported">No disponible</string>
+    <string name="gnss_chipset">Chip GNSS: </string>
+    <string name="model_name">Nombre:&#160;</string>
+    <string name="model_year">Año:&#160;</string>
+    <string name="unknown_before_2016">Desconocido (antes del 2016)</string>
+    <string name="navigation_messages">Mensajes de navegación:&#160;</string>
+    <string name="measurements">Mediciones:&#160;</string>
+    <string name="adr">ADR:&#160;</string>
+    <string name="msa">Msa:&#160;</string>
+    <string name="satellite_pvt">PVT de satélites:&#160;</string>
+    <string name="latitude">Latitud:&#160;</string>
+    <string name="longitude">Longitud:&#160;</string>
+    <string name="altitude">Altitud:&#160;</string>
+    <string name="accuracy">Precisión:&#160;</string>
+    <string name="bearing">Rumbo:&#160;</string>
+    <string name="bearing_accuracy">Precisión del rumbo:&#160;</string>
+    <string name="home">Inicio</string>
+    <string name="satellite_list">Lista de satélites</string>
+    <string name="gnss_stats">Estadisticas</string>
+    <string name="gnss_tracker_icon_description">GNSS Tracker icon</string>
+    <string name="gnss_tracker_description">Esta aplicacióm muestra información captada por los sensores GNSS del teléfono. \n\nGNSS Tracker es el resultado de la HackUPC 2024.</string>
+    <string name="view_gnss_tracker_on_github">Ver GNSS Tracker en GitHub</string>
+    <string name="your_current_location">Ubicación actual:</string>
+    <string name="gps_location">Ubicación GNSS</string>
+    <string name="network_location">Ubicación de internet</string>
+    <string name="fused_gps_network_location_android_12">Ubicación real (GPS + Network) (Android 12+)</string>
+    <string name="filters">Filtros</string>
+    <string name="galileo">🇪🇺 Galileo</string>
+    <string name="gps">🇺🇸 GPS</string>
+    <string name="glonass">🇷🇺 GLONASS</string>
+    <string name="beidou">🇨🇳 BeiDou</string>
+    <string name="qzss">🇯🇵 QZSS</string>
+    <string name="refresh_frequency">Frecuéncia de actualización</string>
+    <string name="apply">Aplicar</string>
+    <string name="satellite">Satélite&#160;</string>
+    <string name="frequency">Frecuéncia:&#160;</string>
+    <string name="snr">SNR:&#160;</string>
+    <string name="agc">AGC:&#160;</string>
+    <string name="last_updated">Última actualización:&#160;</string>
+</resources>

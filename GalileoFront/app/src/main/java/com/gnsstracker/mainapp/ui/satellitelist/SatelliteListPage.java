@@ -182,7 +182,8 @@ public class SatelliteListPage extends Fragment {
         if (lastEvent != null) {
             activity.runOnUiThread(() ->
             {
-                TimerTextView.setText("Last updated: " + LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")));
+                String lastUpdatedString = getString(R.string.last_updated);
+                TimerTextView.setText(lastUpdatedString + LocalDateTime.now().format(java.time.format.DateTimeFormatter.ofPattern("HH:mm:ss")));
                 TimerProgressBar.setVisibility(View.VISIBLE);
                 LoadingIndicator.setVisibility(View.INVISIBLE);
                 CurrentSatelliteData.clear();

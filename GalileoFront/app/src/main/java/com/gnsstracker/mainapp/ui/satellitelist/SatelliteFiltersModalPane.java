@@ -25,7 +25,7 @@ public class SatelliteFiltersModalPane extends BottomSheetDialogFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         return this.getLayoutInflater().inflate(
                 R.layout.fragment_satellite_filters_modal_pane_list_dialog,
