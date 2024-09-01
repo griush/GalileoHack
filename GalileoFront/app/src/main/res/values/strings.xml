@@ -31,4 +31,17 @@
     <string name="gps_location">GPS location</string>
     <string name="network_location">Network location</string>
     <string name="fused_gps_network_location_android_12">Fused (GPS + Network) location (Android 12+)</string>
+    <string name="filters">Filters</string>
+    <string name="galileo">🇪🇺 Galileo</string>
+    <string name="gps">🇺🇸 GPS</string>
+    <string name="glonass">🇷🇺 GLONASS</string>
+    <string name="beidou">🇨🇳 BeiDou</string>
+    <string name="qzss">🇯🇵 QZSS</string>
+    <string name="refresh_frequency">Refresh frequency</string>
+    <string name="apply">Apply</string>
+    <string name="satellite">Satellite&#160;</string>
+    <string name="frequency">Frequency:&#160;</string>
+    <string name="snr">SNR:&#160;</string>
+    <string name="agc">AGC:&#160;</string>
+    <string name="last_updated">Last updated:&#160;</string>
 </resources>

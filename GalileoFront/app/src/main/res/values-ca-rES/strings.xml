@@ -31,4 +31,17 @@
     <string name="gps_location">Ubicació GNSS</string>
     <string name="network_location">Ubicació d\'internet</string>
     <string name="fused_gps_network_location_android_12">Ubicació real (GPS + Network) (Android 12+)</string>
+    <string name="filters">Filtres</string>
+    <string name="galileo">🇪🇺 Galileo</string>
+    <string name="gps">🇺🇸 GPS</string>
+    <string name="glonass">🇷🇺 GLONASS</string>
+    <string name="beidou">🇨🇳 BeiDou</string>
+    <string name="qzss">🇯🇵 QZSS</string>
+    <string name="refresh_frequency">Frequència d\'actualització</string>
+    <string name="apply">Aplicar</string>
+    <string name="satellite">Satèl·lit&#160;</string>
+    <string name="frequency">Frequència:&#160;</string>
+    <string name="snr">SNR:&#160;</string>
+    <string name="agc">AGC:&#160;</string>
+    <string name="last_updated">Última actualizació:&#160;</string>
 </resources>

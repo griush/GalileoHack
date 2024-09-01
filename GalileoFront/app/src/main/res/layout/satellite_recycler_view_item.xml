@@ -45,7 +45,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="0"
-              android:text="Satellite "
+              android:text="@string/satellite"
               android:textSize="20sp"
               android:textStyle="normal" />
 
@@ -69,7 +69,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="0"
-              android:text="Frequency: "
+              android:text="@string/frequency"
               android:textStyle="bold" />
 
           <TextView
@@ -84,7 +84,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="0"
-              android:text="SNR: "
+              android:text="@string/snr"
 
               android:textStyle="bold" />
 
@@ -101,7 +101,7 @@
               android:layout_width="wrap_content"
               android:layout_height="wrap_content"
               android:layout_weight="0"
-              android:text="AGC: "
+              android:text="@string/agc"
               android:textAlignment="textEnd"
 
               android:textStyle="bold" />
