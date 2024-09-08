@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GNSS Tracker</string>
-    <string name="title_home">GNSS Tracker</string>
+    <string name="app_name" translatable="false">GNSS Tracker</string>
+    <string name="title_home" translatable="false">GNSS Tracker</string>
     <string name="location">Location:</string>
     <string name="unknown">Unknown</string>
     <string name="supported">Supported</string>
@@ -32,16 +32,17 @@
     <string name="network_location">Network location</string>
     <string name="fused_gps_network_location_android_12">Fused (GPS + Network) location (Android 12+)</string>
     <string name="filters">Filters</string>
-    <string name="galileo">🇪🇺 Galileo</string>
-    <string name="gps">🇺🇸 GPS</string>
-    <string name="glonass">🇷🇺 GLONASS</string>
-    <string name="beidou">🇨🇳 BeiDou</string>
-    <string name="qzss">🇯🇵 QZSS</string>
+    <string name="galileo" translatable="false">🇪🇺 Galileo</string>
+    <string name="gps" translatable="false">🇺🇸 GPS</string>
+    <string name="glonass" translatable="false">🇷🇺 GLONASS</string>
+    <string name="beidou" translatable="false">🇨🇳 BeiDou</string>
+    <string name="qzss" translatable="false">🇯🇵 QZSS</string>
     <string name="refresh_frequency">Refresh frequency</string>
     <string name="apply">Apply</string>
     <string name="satellite">Satellite&#160;</string>
     <string name="frequency">Frequency:&#160;</string>
-    <string name="snr">SNR:&#160;</string>
-    <string name="agc">AGC:&#160;</string>
+    <string name="snr" translatable="false">SNR:&#160;</string>
+    <string name="agc" translatable="false">AGC:&#160;</string>
     <string name="last_updated">Last updated:&#160;</string>
+    <string name="privacy_policy">Privacy Policy</string>
 </resources>

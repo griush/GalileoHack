@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.motion.widget.Debug;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -100,88 +101,93 @@ public class GeneralStatsPage extends Fragment {
     }
 
     private void DrawCapabilities() {
-        if (Capabilities == null) {
-            return;
-        }
 
-        String unknown = getString(R.string.unknown);
-        String supported = getString(R.string.supported);
-        String unsupported = getString(R.string.unsupported);
-
-        // Navigation messages
-
-        // API 34 Data
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-            int support = Capabilities.hasAccumulatedDeltaRange();
-            String adrText = unknown;
-            switch (support) {
-                case GnssCapabilities.CAPABILITY_UNKNOWN -> adrText = unknown;
-                case GnssCapabilities.CAPABILITY_SUPPORTED -> adrText = supported;
-                case GnssCapabilities.CAPABILITY_UNSUPPORTED -> adrText = unsupported;
+        try {
+            if (Capabilities == null) {
+                return;
             }
 
-            if (hasADR != null) {
-                hasADR.setText(adrText);
-            }
-            if (hasMsa != null) {
-                hasMsa.setText(Capabilities.hasMsa() ? supported : unsupported);
-            }
-            if (supportsSatellitePvt != null) {
-                supportsSatellitePvt.setText(Capabilities.hasSatellitePvt() ? supported : unsupported);
-            }
-        } else {
-            if (hasADR != null) {
-                hasADR.setText(unknown);
-            }
-            if (hasMsa != null) {
-                hasMsa.setText(unknown);
-            }
-            if (supportsSatellitePvt != null) {
-                supportsSatellitePvt.setText(unknown);
-            }
-        }
+            String unknown = getString(R.string.unknown);
+            String supported = getString(R.string.supported);
+            String unsupported = getString(R.string.unsupported);
 
-        // API 31 data
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            if (supportsNavigationMessages != null) {
-                supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? supported : unsupported);
-            }
-            if (supportsMeasurements != null) {
-                supportsMeasurements.setText(Capabilities.hasMeasurements() ? supported : unsupported);
-            }
-        } else {
-            if (supportsNavigationMessages != null) {
-                supportsNavigationMessages.setText(unknown);
-            }
-            if (supportsMeasurements != null) {
-                supportsMeasurements.setText(unknown);
-            }
-        }
+            // Navigation messages
 
-        // < API 30 data (supported by minimum)
-        if (hardwareYear != null) {
-            hardwareYear.setText(GnssModelYear != 0 ? String.format(Locale.US, "%d", GnssModelYear) : getString(R.string.unknown_before_2016));
-        }
-        if( hardwareName != null) {
-            hardwareName.setText(GnssModelName == null ? unknown : GnssModelName);
-        }
-        if (deviceLatitude != null) {
-            deviceLatitude.setText(String.valueOf(Latitude));
-        }
-        if (deviceLongitude != null) {
-            deviceLongitude.setText(String.valueOf(Longitude));
-        }
-        if (deviceAltitude != null) {
-            deviceAltitude.setText(String.valueOf(Altitude));
-        }
-        if (deviceAccuracy != null) {
-            deviceAccuracy.setText(String.valueOf(Accuracy));
-        }
-        if (deviceBearing != null) {
-            deviceBearing.setText(String.valueOf(Bearing));
-        }
-        if (deviceBearingAccuracy != null) {
-            deviceBearingAccuracy.setText(String.valueOf(BearingAccuracy));
+            // API 34 Data
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                int support = Capabilities.hasAccumulatedDeltaRange();
+                String adrText = unknown;
+                switch (support) {
+                    case GnssCapabilities.CAPABILITY_UNKNOWN -> adrText = unknown;
+                    case GnssCapabilities.CAPABILITY_SUPPORTED -> adrText = supported;
+                    case GnssCapabilities.CAPABILITY_UNSUPPORTED -> adrText = unsupported;
+                }
+
+                if (hasADR != null) {
+                    hasADR.setText(adrText);
+                }
+                if (hasMsa != null) {
+                    hasMsa.setText(Capabilities.hasMsa() ? supported : unsupported);
+                }
+                if (supportsSatellitePvt != null) {
+                    supportsSatellitePvt.setText(Capabilities.hasSatellitePvt() ? supported : unsupported);
+                }
+            } else {
+                if (hasADR != null) {
+                    hasADR.setText(unknown);
+                }
+                if (hasMsa != null) {
+                    hasMsa.setText(unknown);
+                }
+                if (supportsSatellitePvt != null) {
+                    supportsSatellitePvt.setText(unknown);
+                }
+            }
+
+            // API 31 data
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                if (supportsNavigationMessages != null) {
+                    supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? supported : unsupported);
+                }
+                if (supportsMeasurements != null) {
+                    supportsMeasurements.setText(Capabilities.hasMeasurements() ? supported : unsupported);
+                }
+            } else {
+                if (supportsNavigationMessages != null) {
+                    supportsNavigationMessages.setText(unknown);
+                }
+                if (supportsMeasurements != null) {
+                    supportsMeasurements.setText(unknown);
+                }
+            }
+
+            // < API 30 data (supported by minimum)
+            if (hardwareYear != null) {
+                hardwareYear.setText(GnssModelYear != 0 ? String.format(Locale.US, "%d", GnssModelYear) : getString(R.string.unknown_before_2016));
+            }
+            if (hardwareName != null) {
+                hardwareName.setText(GnssModelName == null ? unknown : GnssModelName);
+            }
+            if (deviceLatitude != null) {
+                deviceLatitude.setText(String.valueOf(Latitude));
+            }
+            if (deviceLongitude != null) {
+                deviceLongitude.setText(String.valueOf(Longitude));
+            }
+            if (deviceAltitude != null) {
+                deviceAltitude.setText(String.valueOf(Altitude));
+            }
+            if (deviceAccuracy != null) {
+                deviceAccuracy.setText(String.valueOf(Accuracy));
+            }
+            if (deviceBearing != null) {
+                deviceBearing.setText(String.valueOf(Bearing));
+            }
+            if (deviceBearingAccuracy != null) {
+                deviceBearingAccuracy.setText(String.valueOf(BearingAccuracy));
+            }
+        } catch (Exception e) {
+            Debug.logStack("GeneralStatsPage", "Could not update Stats UI: " + e, 0);
         }
     }
 }

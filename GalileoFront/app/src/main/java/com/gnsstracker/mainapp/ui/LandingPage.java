@@ -61,6 +61,7 @@ import java.util.LinkedList;
 public class LandingPage extends Fragment {
 
     Button GitHubButton;
+    Button PrivacyButton;
     MapView LocationMapView;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
 
@@ -113,6 +114,7 @@ public class LandingPage extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         GitHubButton = view.findViewById(R.id.GitHubButton);
+        PrivacyButton = view.findViewById(R.id.PrivacyButton);
         LocationMapView = view.findViewById(R.id.LocationMapView);
         LocationMapView.setTileSource(TileSourceFactory.MAPNIK);
         requestPermissionsIfNecessary(new String[] {
@@ -197,6 +199,14 @@ public class LandingPage extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent action = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/griush/GalileoHack"));
+                startActivity(action);
+            }
+        });
+
+        PrivacyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent action = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/griush/GalileoHack/blob/master/PRIVACY.md"));
                 startActivity(action);
             }
         });

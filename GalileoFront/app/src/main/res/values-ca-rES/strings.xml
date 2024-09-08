@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GNSS Tracker</string>
-    <string name="title_home">GNSS Tracker</string>
     <string name="location">Ubicació:</string>
     <string name="unknown">Desconegut</string>
-    <string name="supported">Disponible</string>
-    <string name="unsupported">No disponible</string>
-    <string name="gnss_chipset">Chip GNSS: </string>
+    <string name="supported">Compatible</string>
+    <string name="unsupported">No compatible</string>
+    <string name="gnss_chipset">Xip GNSS: </string>
     <string name="model_name">Nom:&#160;</string>
     <string name="model_year">Any:&#160;</string>
     <string name="unknown_before_2016">Desconegut (abans del 2016)</string>
     <string name="navigation_messages">Missatges de navegació:&#160;</string>
-    <string name="measurements">Medicions:&#160;</string>
+    <string name="measurements">Mesures:&#160;</string>
     <string name="adr">ADR:&#160;</string>
     <string name="msa">Msa:&#160;</string>
     <string name="satellite_pvt">PVT de satèl·lits:&#160;</string>
@@ -25,23 +23,17 @@
     <string name="satellite_list">Llista de satèl·lits</string>
     <string name="gnss_stats">Estadístiques</string>
     <string name="gnss_tracker_icon_description">GNSS Tracker icon</string>
-    <string name="gnss_tracker_description">Aquesta aplicació mostra informació captada pels sensors GNSS del telèfon. \n\nGNSS Tracker es el resultat de la HackUPC 2024.</string>
-    <string name="view_gnss_tracker_on_github">Veure GNSS Tracker en GitHub</string>
+    <string name="gnss_tracker_description">Aquesta aplicació mostra informació captada pels sensors GNSS del telèfon. \n\nGNSS Tracker és el resultat de la HackUPC 2024.</string>
+    <string name="view_gnss_tracker_on_github">Veure GNSS Tracker a GitHub</string>
     <string name="your_current_location">Ubicació actual:</string>
     <string name="gps_location">Ubicació GNSS</string>
-    <string name="network_location">Ubicació d\'internet</string>
-    <string name="fused_gps_network_location_android_12">Ubicació real (GPS + Network) (Android 12+)</string>
+    <string name="network_location">Ubicació de xarxa</string>
+    <string name="fused_gps_network_location_android_12">Ubicació real (GNSS + Xarxa) (Android 12+)</string>
     <string name="filters">Filtres</string>
-    <string name="galileo">🇪🇺 Galileo</string>
-    <string name="gps">🇺🇸 GPS</string>
-    <string name="glonass">🇷🇺 GLONASS</string>
-    <string name="beidou">🇨🇳 BeiDou</string>
-    <string name="qzss">🇯🇵 QZSS</string>
     <string name="refresh_frequency">Frequència d\'actualització</string>
     <string name="apply">Aplicar</string>
     <string name="satellite">Satèl·lit&#160;</string>
     <string name="frequency">Frequència:&#160;</string>
-    <string name="snr">SNR:&#160;</string>
-    <string name="agc">AGC:&#160;</string>
-    <string name="last_updated">Última actualizació:&#160;</string>
+    <string name="last_updated">Darrera actualizació:&#160;</string>
+    <string name="privacy_policy">Política de privacitat</string>
 </resources>
