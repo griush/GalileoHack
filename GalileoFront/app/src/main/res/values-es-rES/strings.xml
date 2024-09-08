@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">GNSS Tracker</string>
-    <string name="title_home">GNSS Tracker</string>
     <string name="location">Ubicación:</string>
     <string name="unknown">Desconocido</string>
-    <string name="supported">Disponible</string>
-    <string name="unsupported">No disponible</string>
+    <string name="supported">Compatible</string>
+    <string name="unsupported">No compatible</string>
     <string name="gnss_chipset">Chip GNSS: </string>
     <string name="model_name">Nombre:&#160;</string>
     <string name="model_year">Año:&#160;</string>
@@ -29,19 +27,13 @@
     <string name="view_gnss_tracker_on_github">Ver GNSS Tracker en GitHub</string>
     <string name="your_current_location">Ubicación actual:</string>
     <string name="gps_location">Ubicación GNSS</string>
-    <string name="network_location">Ubicación de internet</string>
-    <string name="fused_gps_network_location_android_12">Ubicación real (GPS + Network) (Android 12+)</string>
+    <string name="network_location">Ubicación de red</string>
+    <string name="fused_gps_network_location_android_12">Ubicación real (GNSS + Red) (Android 12+)</string>
     <string name="filters">Filtros</string>
-    <string name="galileo">🇪🇺 Galileo</string>
-    <string name="gps">🇺🇸 GPS</string>
-    <string name="glonass">🇷🇺 GLONASS</string>
-    <string name="beidou">🇨🇳 BeiDou</string>
-    <string name="qzss">🇯🇵 QZSS</string>
     <string name="refresh_frequency">Frecuéncia de actualización</string>
     <string name="apply">Aplicar</string>
     <string name="satellite">Satélite&#160;</string>
     <string name="frequency">Frecuéncia:&#160;</string>
-    <string name="snr">SNR:&#160;</string>
-    <string name="agc">AGC:&#160;</string>
     <string name="last_updated">Última actualización:&#160;</string>
+    <string name="privacy_policy">Política de privacidad</string>
 </resources>
