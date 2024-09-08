@@ -33,3 +33,10 @@ We reserve the right to update this privacy policy from time to time to reflect 
 If you have any questions or concerns about this privacy policy or our privacy practices, you may contact the owner and/or the maintainers and collaborators of this repository via their public contact methods.
 
 **Note:** This privacy policy applies solely to GNSS Tracker.
+
+
+# Changelog
+ - [8/9/2024]: Creation of the privacy policy
+
+
+_Note: date format is dd/mm/aaaa_
