@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.gnsstracker.mainapp.ui.LandingPage">
@@ -9,92 +10,111 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"-->
 
-   <LinearLayout
-       android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:layout_margin="8dp"
-       android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="8dp"
+        android:orientation="vertical">
 
-       <LinearLayout
-           android:layout_width="wrap_content"
-           android:layout_gravity="center"
-           android:textAlignment="center"
-           android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textAlignment="center">
 
-           <ImageView
-               android:layout_width="80dp"
-               android:layout_height="80dp"
-               android:layout_weight="0"
-               android:contentDescription="@string/gnss_tracker_icon_description"
-               android:src="@drawable/icon_splashscreen"
-               tools:ignore="InefficientWeight" />
+            <ImageView
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_weight="0"
+                android:contentDescription="@string/gnss_tracker_icon_description"
+                android:src="@drawable/icon_splashscreen"
+                tools:ignore="InefficientWeight" />
 
-           <TextView
-               android:layout_width="wrap_content"
-               android:layout_height="80dip"
-               android:gravity="center"
-               android:text="@string/app_name"
-               android:textSize="40sp"
-               android:textStyle="bold" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="80dip"
+                android:gravity="center"
+                android:text="@string/app_name"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
-       </LinearLayout>
+        </LinearLayout>
 
 
-       <TextView
-           android:layout_height="wrap_content"
-           android:layout_width="match_parent"
-           android:gravity="start"
-           android:text="@string/gnss_tracker_description" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/gnss_tracker_description" />
 
-       <Button
-           android:id="@+id/GitHubButton"
-           android:layout_width="match_parent"
-           android:layout_height="wrap_content"
-           android:layout_margin="8dp"
-           android:text="@string/view_gnss_tracker_on_github" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal">
 
-       <TextView
-           android:layout_marginTop="20dip"
-           android:layout_height="wrap_content"
-           android:layout_width="match_parent"
-           android:gravity="start"
-           android:textStyle="bold"
-           android:text="@string/your_current_location" />
+            <Button
+                android:id="@+id/GitHubButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1"
+                android:text="@string/view_gnss_tracker_on_github" />
 
-       <TextView
-           android:id="@+id/PrecisionLabel1"
-           android:layout_marginVertical="2dp"
-           android:layout_height="wrap_content"
-           android:layout_width="match_parent"
-           android:gravity="start"
-           android:textColor="#0080f7"
-           android:text="@string/gps_location" />
+            <Button
+                style="@style/Widget.Material3.Button.OutlinedButton"
+                android:id="@+id/PrivacyButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginBottom="8dp"
+                android:layout_weight="1.6"
+                android:text="@string/privacy_policy" />
+        </LinearLayout>
 
-       <TextView
-           android:id="@+id/PrecisionLabel3"
-           android:layout_marginVertical="2dp"
-           android:layout_height="wrap_content"
-           android:layout_width="match_parent"
-           android:textColor="#f700ef"
-           android:gravity="start"
-           android:text="@string/network_location" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dip"
+            android:gravity="start"
+            android:text="@string/your_current_location"
+            android:textStyle="bold" />
 
-       <TextView
-           android:id="@+id/PrecisionLabel2"
-           android:layout_marginVertical="2dp"
-           android:layout_height="wrap_content"
-           android:layout_width="match_parent"
-           android:gravity="start"
-           android:textColor="#bf8600"
-           android:text="@string/fused_gps_network_location_android_12" />
+        <TextView
+            android:id="@+id/PrecisionLabel1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
+            android:gravity="start"
+            android:text="@string/gps_location"
+            android:textColor="#0080f7" />
 
-       <org.osmdroid.views.MapView
-           android:layout_width="match_parent"
-           android:layout_height="fill_parent"
-           android:id="@+id/LocationMapView"
-           />
+        <TextView
+            android:id="@+id/PrecisionLabel3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
+            android:gravity="start"
+            android:text="@string/network_location"
+            android:textColor="#f700ef" />
 
-   </LinearLayout>
+        <TextView
+            android:id="@+id/PrecisionLabel2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="2dp"
+            android:gravity="start"
+            android:text="@string/fused_gps_network_location_android_12"
+            android:textColor="#bf8600" />
+
+        <org.osmdroid.views.MapView
+            android:id="@+id/LocationMapView"
+            android:layout_width="match_parent"
+            android:layout_height="fill_parent" />
+
+    </LinearLayout>
 
 
     <!--/ScrollView-->
