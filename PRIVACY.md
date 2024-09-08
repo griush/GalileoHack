@@ -6,11 +6,12 @@ The GNSS Tracker development team ("we", "our", or "us") is committed to protect
 
 ## 1. No User Data Collection
 
-Our App does not collect, access, use, or share any personal or sensitive user data, including but not limited to location, contacts, messages, or any other user information. We do not store or process any user data through our App.
+Our app does collect and process location data, in order to show the appropiate data.
+Our App does not store or share any personal or sensitive user data, including but not limited to location, contacts, messages, or any other user information. We do not store or process any user data through our App.
 
 ## 2. Data Handling Procedures
 
-Since no user data is collected by our App, there are no data handling, storage, or processing procedures in place. We ensure that no personal or sensitive user data is accessed, retained, or shared at any time.
+Data is not stored on-device, neither sent anywhere. We ensure that no personal or sensitive user data is retained or shared at any time. All used data is erased after use.
 
 ## 3. Data Retention and Deletion
 
