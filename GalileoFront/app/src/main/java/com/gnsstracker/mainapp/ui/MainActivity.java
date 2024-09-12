@@ -39,7 +39,8 @@ public class  MainActivity extends AppCompatActivity {
     private SatelliteDataHandler ddt;
     private static final int LOCATION_REQUEST_ID = 1;
     private static final String[] REQUIRED_PERMISSIONS = {
-            android.Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION
+            android.Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
     };
     private ActivityMainBinding binding;
 
@@ -47,8 +48,12 @@ public class  MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        SplashScreen.installSplashScreen(this);
+        SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
+
+        splashScreen.setKeepOnScreenCondition(() -> {
+            return hasPermissions(this);
+        });
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -108,9 +113,6 @@ public class  MainActivity extends AppCompatActivity {
                 return false;
             }
         }
-        // wtf is this here
-        // startHere();
-
         return true;
     }
 
