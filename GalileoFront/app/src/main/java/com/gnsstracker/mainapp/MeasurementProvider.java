@@ -356,9 +356,14 @@ public class MeasurementProvider {
     }
 
     public void registerNavigation() {
-        logRegistration(
-                "GpsNavigationMessage",
-                mLocationManager.registerGnssNavigationMessageCallback(gnssNavigationMessageListener));
+        try {
+            logRegistration(
+                    "GpsNavigationMessage",
+                    mLocationManager.registerGnssNavigationMessageCallback(gnssNavigationMessageListener));
+        } catch (Exception ex)
+        {
+
+        }
     }
 
     public void unregisterNavigation() {
