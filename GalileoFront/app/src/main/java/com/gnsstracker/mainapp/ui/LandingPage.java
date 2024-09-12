@@ -83,11 +83,6 @@ public class LandingPage extends Fragment {
         Configuration.getInstance().load(ctx, PreferenceManager.getDefaultSharedPreferences(ctx));
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this.getContext());
-        while (ContextCompat.checkSelfPermission(this.getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this.getActivity(), new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-
-
     }
 
     @Override
@@ -117,17 +112,11 @@ public class LandingPage extends Fragment {
         PrivacyButton = view.findViewById(R.id.PrivacyButton);
         LocationMapView = view.findViewById(R.id.LocationMapView);
         LocationMapView.setTileSource(TileSourceFactory.MAPNIK);
-        requestPermissionsIfNecessary(new String[] {
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE
-        });
 
         Context context = getContext();
 
 
         if (Build.VERSION.SDK_INT >= 31) {
-
             FusedLocationOverlay = new ColoredLocationNewOverlay(new IMyLocationProvider() {
                 LocationManager lm;
 
@@ -144,7 +133,11 @@ public class LandingPage extends Fragment {
                 @Override
                 @SuppressLint("MissingPermission")
                 public Location getLastKnownLocation() {
-                    return lm.getLastKnownLocation(LocationManager.FUSED_PROVIDER);
+                    try {
+                        return lm.getLastKnownLocation(LocationManager.FUSED_PROVIDER);
+                    } catch (Exception ex) {
+                        return null;
+                    }
                 }
 
                 @Override
@@ -167,7 +160,11 @@ public class LandingPage extends Fragment {
 
             @Override @SuppressLint("MissingPermission")
             public Location getLastKnownLocation() {
-                return lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                try {
+                    return lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+                } catch (Exception ex) {
+                    return null;
+                }
             }
 
             @Override public void destroy() {}
@@ -187,7 +184,11 @@ public class LandingPage extends Fragment {
 
             @Override @SuppressLint("MissingPermission")
             public Location getLastKnownLocation() {
-                return lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                try {
+                    return lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+                } catch (Exception ex) {
+                    return null;
+                }
             }
 
             @Override public void destroy() {}
@@ -206,7 +207,7 @@ public class LandingPage extends Fragment {
         PrivacyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent action = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/griush/GalileoHack/blob/master/PRIVACY.md"));
+                Intent action = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/griush/GalileoHack/blob/1.0.0-b0/PRIVACY.md"));
                 startActivity(action);
             }
         });
@@ -230,41 +231,9 @@ public class LandingPage extends Fragment {
                             IMapController mapController = LocationMapView.getController();
                             GeoPoint startPoint = new GeoPoint(latitude, longitude);
                             mapController.setCenter(startPoint);
-
-
                         }
                     }
                 });
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (int i = 0; i < grantResults.length; i++) {
-            permissionsToRequest.add(permissions[i]);
-        }
-        if (!permissionsToRequest.isEmpty()) {
-            ActivityCompat.requestPermissions(
-                    this.getActivity(),
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
-    }
-
-    private void requestPermissionsIfNecessary(String[] permissions) {
-        ArrayList<String> permissionsToRequest = new ArrayList<>();
-        for (String permission : permissions) {
-            if (ContextCompat.checkSelfPermission(this.getContext(), permission)
-                    != PackageManager.PERMISSION_GRANTED) {
-                permissionsToRequest.add(permission);
-            }
-        }
-        if (!permissionsToRequest.isEmpty()) {
-            ActivityCompat.requestPermissions(
-                    getActivity(),
-                    permissionsToRequest.toArray(new String[0]),
-                    REQUEST_PERMISSIONS_REQUEST_CODE);
-        }
     }
 
     /**

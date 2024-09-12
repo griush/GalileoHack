@@ -45,4 +45,11 @@
     <string name="agc" translatable="false">AGC:&#160;</string>
     <string name="last_updated">Last updated:&#160;</string>
     <string name="privacy_policy">Privacy Policy</string>
+    <string name="permissions_dialog_title">Permissions</string>
+    <string name="missing_permissions_dialog_title">Missing permissions</string>
+    <string name="permissions_dialog_explanation">GNSS Tracker requires fine location permission in order to fetch the GNSS and location data from the device. \nFileSystem access is also required to render in-app maps. \nCollected location data is only used to create the stats displayed to the user. \n\nYour data is not stored, shared, sold or sent anywhere. It is deleted once it has been used.</string>
+    <string name="missing_permissions_dialog_explanation">GNSS Tracker cannot work without location and internal storage access permissions. Please enable them in the settings and restart the app.</string>
+    <string name="dialog_ok">OK</string>
+    <string name="dialog_more_details">More details</string>
+    <string name="dialog_continue">Continue</string>
 </resources>
