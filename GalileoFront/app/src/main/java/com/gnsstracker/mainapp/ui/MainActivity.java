@@ -48,7 +48,6 @@ public class  MainActivity extends AppCompatActivity {
 
     private MeasurementProvider mMeasurementProvider;
 
-
     private boolean hasPermissions(String[] permissions) {
         for (String p : permissions) {
             if (ContextCompat.checkSelfPermission(this, p) != PackageManager.PERMISSION_GRANTED) {
@@ -57,9 +56,6 @@ public class  MainActivity extends AppCompatActivity {
         }
         return true;
     }
-
-
-    private boolean PERMISSION_DIALOG_OPEN = false;
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -71,10 +67,10 @@ public class  MainActivity extends AppCompatActivity {
 
         if(addition != 0) {
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Missing permissions");
+            builder.setTitle(getString(R.string.missing_permissions_dialog_title));
             builder.setCancelable(false);
-            builder.setMessage("GNSS Tracker cannot work without location and internal storage access permissions. Please enable them in the settings and restart the app.");
-            builder.setPositiveButton("OK", (dialog, which) -> {
+            builder.setMessage(getString(R.string.missing_permissions_dialog_explanation));
+            builder.setPositiveButton(getString(R.string.dialog_ok), (dialog, which) -> {
                 finish();
             });
             AlertDialog dialog = builder.create();
@@ -96,15 +92,15 @@ public class  MainActivity extends AppCompatActivity {
         }
 
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Permissions");
-        builder.setMessage("GNSS Tracker requires fine location permission in order to fetch the GNSS and location data from the device. \nFileSystem access is also required to render in-app maps. \nCollected location data is only used to create the stats displayed to the user. \n\nYour data is not stored, shared, sold or sent anywhere. It is deleted once it has been used.");
+        builder.setTitle(getString(R.string.permissions_dialog_title));
+        builder.setMessage(getString(R.string.permissions_dialog_explanation));
         builder.setCancelable(false);
-        builder.setNeutralButton("More details", (dialog, which) -> {
+        builder.setNeutralButton(getString(R.string.dialog_more_details), (dialog, which) -> {
             Intent action = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/griush/GalileoHack/blob/1.0.0-b0/PRIVACY.md"));
             startActivity(action);
             AskForPermissionsIfNeeded();
         });
-        builder.setPositiveButton("Continue", (dialog, which) -> {
+        builder.setPositiveButton(getString(R.string.dialog_continue), (dialog, which) -> {
             ActivityCompat.requestPermissions(this, permissions, 33);
             dialog.dismiss();
         });

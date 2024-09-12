@@ -36,4 +36,11 @@
     <string name="frequency">Frecuéncia:&#160;</string>
     <string name="last_updated">Última actualización:&#160;</string>
     <string name="privacy_policy">Política de privacidad</string>
+    <string name="permissions_dialog_title">Permisos</string>
+    <string name="permissions_dialog_explanation">GNSS Tracker requiere un permiso de ubicación precisa para obtener GNSS y los datos de ubicación del dispositivo. \nTambién se requiere acceso al sistema de archivos para representar los mapas de la aplicación. \nLos datos de ubicación recopilados sólo se utilizan para crear las estadísticas que se muestran al usuario. \n\nSus datos no se almacenan, comparten, venden ni se envían a ninguna parte. Los datos utilizados se eliminan una vez usados.</string>
+    <string name="missing_permissions_dialog_explanation">GNSS Tracker no funciona sin permisos de ubicacióny de escritura. Por favor, actívelos y vuelva a arrancar la app.</string>
+    <string name="dialog_ok">Ok</string>
+    <string name="dialog_more_details">Más detalles</string>
+    <string name="dialog_continue">Continua</string>
+    <string name="missing_permissions_dialog_title">Faltan permisos</string>
 </resources>

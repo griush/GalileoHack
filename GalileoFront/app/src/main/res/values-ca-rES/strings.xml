@@ -36,4 +36,11 @@
     <string name="frequency">Frequència:&#160;</string>
     <string name="last_updated">Darrera actualizació:&#160;</string>
     <string name="privacy_policy">Política de privacitat</string>
+    <string name="permissions_dialog_title">Permisos</string>
+    <string name="permissions_dialog_explanation">El GNSS Tracker requereix un permís d\'ubicació precisa per obtenir el GNSS i les dades d\'ubicació del dispositiu. \nTambé es requereix accés al sistema de fitxers per representar els mapes de l\'aplicació. \nLes dades d\'ubicació recopilades només s\'utilitzen per crear les estadístiques que es mostren a l\'usuari. \n\nLes vostres dades no s\'emmagatzemen, comparteixen, venen ni s\'envien enlloc. Les dades utilitzades s\'eliminen un cop ja s\'han fet servir.</string>
+    <string name="missing_permissions_dialog_explanation">El GNSS tracker no funciona sense permisos d\'ubicació i d\'escriptura. Si us plau, activeu-los des de la configuració i reinicieu l\'app</string>
+    <string name="dialog_ok">D\'acord</string>
+    <string name="dialog_more_details">Més detalls</string>
+    <string name="dialog_continue">Continua</string>
+    <string name="missing_permissions_dialog_title">Falten permisos</string>
 </resources>
