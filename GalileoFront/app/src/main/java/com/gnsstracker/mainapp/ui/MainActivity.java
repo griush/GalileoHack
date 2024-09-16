@@ -9,6 +9,7 @@ import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Window;
 
@@ -153,7 +154,10 @@ public class  MainActivity extends AppCompatActivity {
 
         LocationManager locationManager = mMeasurementProvider.getLocationManager();
 
-        GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            GeneralStatsPage.Capabilities = locationManager.getGnssCapabilities();
+        }
+
         GeneralStatsPage.GnssModelName = locationManager.getGnssHardwareModelName();
         GeneralStatsPage.GnssModelYear = locationManager.getGnssYearOfHardware();
         mMeasurementProvider.registerAll();

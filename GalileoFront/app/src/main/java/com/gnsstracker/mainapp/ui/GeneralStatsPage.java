@@ -103,61 +103,59 @@ public class GeneralStatsPage extends Fragment {
     private void DrawCapabilities() {
 
         try {
-            if (Capabilities == null) {
-                return;
-            }
-
             String unknown = getString(R.string.unknown);
             String supported = getString(R.string.supported);
             String unsupported = getString(R.string.unsupported);
 
-            // Navigation messages
+            if (Capabilities != null) {
+                // Navigation messages
 
-            // API 34 Data
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
-                int support = Capabilities.hasAccumulatedDeltaRange();
-                String adrText = unknown;
-                switch (support) {
-                    case GnssCapabilities.CAPABILITY_UNKNOWN -> adrText = unknown;
-                    case GnssCapabilities.CAPABILITY_SUPPORTED -> adrText = supported;
-                    case GnssCapabilities.CAPABILITY_UNSUPPORTED -> adrText = unsupported;
+                // API 34 Data
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.UPSIDE_DOWN_CAKE) {
+                    int support = Capabilities.hasAccumulatedDeltaRange();
+                    String adrText = unknown;
+                    switch (support) {
+                        case GnssCapabilities.CAPABILITY_UNKNOWN -> adrText = unknown;
+                        case GnssCapabilities.CAPABILITY_SUPPORTED -> adrText = supported;
+                        case GnssCapabilities.CAPABILITY_UNSUPPORTED -> adrText = unsupported;
+                    }
+
+                    if (hasADR != null) {
+                        hasADR.setText(adrText);
+                    }
+                    if (hasMsa != null) {
+                        hasMsa.setText(Capabilities.hasMsa() ? supported : unsupported);
+                    }
+                    if (supportsSatellitePvt != null) {
+                        supportsSatellitePvt.setText(Capabilities.hasSatellitePvt() ? supported : unsupported);
+                    }
+                } else {
+                    if (hasADR != null) {
+                        hasADR.setText(unknown);
+                    }
+                    if (hasMsa != null) {
+                        hasMsa.setText(unknown);
+                    }
+                    if (supportsSatellitePvt != null) {
+                        supportsSatellitePvt.setText(unknown);
+                    }
                 }
 
-                if (hasADR != null) {
-                    hasADR.setText(adrText);
-                }
-                if (hasMsa != null) {
-                    hasMsa.setText(Capabilities.hasMsa() ? supported : unsupported);
-                }
-                if (supportsSatellitePvt != null) {
-                    supportsSatellitePvt.setText(Capabilities.hasSatellitePvt() ? supported : unsupported);
-                }
-            } else {
-                if (hasADR != null) {
-                    hasADR.setText(unknown);
-                }
-                if (hasMsa != null) {
-                    hasMsa.setText(unknown);
-                }
-                if (supportsSatellitePvt != null) {
-                    supportsSatellitePvt.setText(unknown);
-                }
-            }
-
-            // API 31 data
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                if (supportsNavigationMessages != null) {
-                    supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? supported : unsupported);
-                }
-                if (supportsMeasurements != null) {
-                    supportsMeasurements.setText(Capabilities.hasMeasurements() ? supported : unsupported);
-                }
-            } else {
-                if (supportsNavigationMessages != null) {
-                    supportsNavigationMessages.setText(unknown);
-                }
-                if (supportsMeasurements != null) {
-                    supportsMeasurements.setText(unknown);
+                // API 31 data
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    if (supportsNavigationMessages != null) {
+                        supportsNavigationMessages.setText(Capabilities.hasNavigationMessages() ? supported : unsupported);
+                    }
+                    if (supportsMeasurements != null) {
+                        supportsMeasurements.setText(Capabilities.hasMeasurements() ? supported : unsupported);
+                    }
+                } else {
+                    if (supportsNavigationMessages != null) {
+                        supportsNavigationMessages.setText(unknown);
+                    }
+                    if (supportsMeasurements != null) {
+                        supportsMeasurements.setText(unknown);
+                    }
                 }
             }
 
