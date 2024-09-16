@@ -10,8 +10,8 @@ android {
         applicationId = "com.gnsstracker.mainapp"
         minSdk = 29
         targetSdk = 35
-        versionCode = 3
-        versionName = "1.0.0-b1"
+        versionCode = 4
+        versionName = "1.0.0-b2"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
