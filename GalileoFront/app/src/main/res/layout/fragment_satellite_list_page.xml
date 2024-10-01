@@ -19,6 +19,7 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/SatellitesRecyclerView"
+                android:contentDescription="@string/sat_list_desk"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:elevation="-20dip"
@@ -50,6 +51,7 @@
             android:id="@+id/floatingActionButton"
             style="@style/Widget.Material3.ExtendedFloatingActionButton.Secondary"
             android:layout_width="wrap_content"
+            android:contentDescription="@string/filters_and_options"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:layout_marginBottom="24dp"
