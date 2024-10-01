@@ -14,13 +14,13 @@ import android.widget.TextView;
 
 import com.gnsstracker.mainapp.R;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class DataLogPage extends Fragment {
 
     // Messages are added here
     // mainapp/SatelliteDataHandler.java at line 328
-    public static List<String> consoleContents;
+    public static ArrayList<String> consoleContents = new ArrayList<>();
 
     public DataLogPage() {
         // Required empty public constructor
