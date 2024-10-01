@@ -11,6 +11,7 @@
 
 package com.gnsstracker.mainapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.location.GnssClock;
 import android.location.GnssMeasurement;
@@ -26,9 +27,10 @@ import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gnsstracker.mainapp.ui.DataLogPage;
 import com.gnsstracker.mainapp.ui.MainActivity;
 import com.gnsstracker.mainapp.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.gnsstracker.mainapp.ui.satellitelist.SatelliteListPage;
@@ -42,13 +44,15 @@ import static android.location.GnssMeasurement.STATE_TOW_KNOWN;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class SatelliteDataHandler extends MainActivity implements MeasurementListener {
 
     public Activity activity;
 
     private boolean SET_RECYCLERVIEW_LAYOUT_MANAGER = false;
-    private GALIProcesser processer;
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -74,7 +78,6 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
         this.activity = _activity;
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
-        processer = new GALIProcesser(_activity);
     }
 
     LocationManager locationManager;
@@ -303,14 +306,26 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
     }
 
+    // Move to a general utils class but who cares
+    static String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = String.format("%02x", b); // Format each byte as a 2-digit hex value
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
     @Override
-    public void onGnssNavigationMessageReceived(GnssNavigationMessage event) throws MalformedURLException {
-        System.out.println("NEW EVENT "+event.getSvid()+", "+event.getType());
-        //Log.i("DEB","NEW EVENT "+event.getSvid()+", "+event.getType());
-        if(event.getType() == GnssNavigationMessage.TYPE_GAL_F || event.getType() == GnssNavigationMessage.TYPE_GAL_I)
-            Log.i("DEB","EVENT");
-        if(event.getType() != GnssNavigationMessage.TYPE_GAL_I) return;
-        processer.onNewPage(event.getData(),event.getSvid());
+    public void onGnssNavigationMessageReceived(@NonNull GnssNavigationMessage event) throws MalformedURLException {
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.US);
+        // Get the current time
+        String currentTime = sdf.format(new Date());
+
+        // Que pesaos amb warnings joder
+        @SuppressLint("DefaultLocale") String message = String.format("[%s] Nav: Svid(%d) %s", currentTime, event.getSvid(), bytesToHex(event.getData()));
+        Log.i("NAV", message);
+        DataLogPage.consoleContents.add(message);
     }
 
     @Override

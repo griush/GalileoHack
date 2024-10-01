@@ -14,5 +14,9 @@
         android:id="@+id/generalStatsPage"
         android:icon="@drawable/stats"
         android:title="@string/gnss_stats" />
+    <item
+        android:id="@+id/dataLogPage"
+        android:icon="@drawable/stats"
+        android:title="@string/data_log_page" />
 
 </menu>

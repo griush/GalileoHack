@@ -43,4 +43,5 @@
     <string name="dialog_more_details">Más detalles</string>
     <string name="dialog_continue">Continua</string>
     <string name="missing_permissions_dialog_title">Faltan permisos</string>
+    <string name="data_log_page">Data Log</string>
 </resources>

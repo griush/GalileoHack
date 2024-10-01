@@ -52,4 +52,5 @@
     <string name="dialog_ok">OK</string>
     <string name="dialog_more_details">More details</string>
     <string name="dialog_continue">Continue</string>
+    <string name="data_log_page">Data Log</string>
 </resources>
