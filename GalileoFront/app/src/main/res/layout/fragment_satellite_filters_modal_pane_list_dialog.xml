@@ -13,7 +13,6 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginBottom="12dp"
         android:layout_weight="1"
         android:text="@string/filters"
         android:textAlignment="center"
@@ -24,22 +23,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="0dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/EuropeToggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="0dip"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="4dp"
         android:layout_weight="1"
         android:checked="true"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:layoutDirection="inherit"
         android:minWidth="0dip"
         android:minHeight="0dip"
@@ -51,22 +48,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="0dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/UnitedStatesToggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="0dip"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="4dp"
         android:layout_weight="1"
         android:checked="true"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:layoutDirection="inherit"
         android:minWidth="0dip"
         android:minHeight="0dip"
@@ -78,22 +73,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="0dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/RussiaToggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="0dip"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="4dp"
         android:layout_weight="1"
         android:checked="true"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:layoutDirection="inherit"
         android:minWidth="0dip"
         android:minHeight="0dip"
@@ -105,22 +98,20 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginTop="0dp"
+        android:layout_marginBottom="0dp" />
 
     <com.google.android.material.materialswitch.MaterialSwitch
         android:id="@+id/ChinaToggle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="0dip"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="4dp"
         android:layout_weight="1"
         android:checked="true"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:layoutDirection="inherit"
         android:minWidth="0dip"
         android:minHeight="0dip"
@@ -132,9 +123,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="12dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="12dp"
-        android:layout_marginBottom="4dp" />
+        android:layout_marginBottom="0dp" />
 
 
     <com.google.android.material.materialswitch.MaterialSwitch
@@ -142,13 +133,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginLeft="0dip"
-        android:layout_marginTop="4dp"
-        android:layout_marginBottom="4dp"
         android:layout_marginEnd="16dp"
-        android:layout_marginRight="4dp"
         android:layout_weight="1"
         android:checked="true"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp"
         android:layoutDirection="inherit"
         android:minWidth="0dip"
         android:minHeight="0dip"
@@ -160,7 +149,7 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginTop="0dp"
         android:layout_marginEnd="0dp"
         android:layout_marginBottom="4dp"
         android:layout_weight="1" />
@@ -176,13 +165,14 @@
         android:layout_weight="1"
         android:text="@string/refresh_frequency"
         android:textAlignment="center"
-        android:textSize="20dp"
+        android:textSize="20sp"
         android:textStyle="bold" />
 
     <com.google.android.material.slider.Slider
         android:id="@+id/SpeedSlider"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/speed_slider_desc"
         android:layout_marginStart="16sp"
         android:layout_marginEnd="16sp"
         android:layout_marginBottom="16sp"
@@ -193,6 +183,7 @@
 
     <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
+        android:contentDescription="@string/speed_slider_desc"
         android:layout_height="2dp"
         android:layout_marginStart="0dp"
         android:layout_marginTop="4dp"
@@ -206,8 +197,8 @@
         android:layout_weight="1"
         android:orientation="horizontal">
 
-        <Space
-            android:layout_width="wrap_content"
+        <TextView
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
 
@@ -222,7 +213,7 @@
             android:layout_marginBottom="4dp"
             android:text="@string/apply"
             android:textAlignment="center"
-            android:textSize="14dp" />
+            android:textSize="15sp" />
     </LinearLayout>
 
 
