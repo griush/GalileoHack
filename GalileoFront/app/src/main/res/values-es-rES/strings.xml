@@ -48,4 +48,6 @@
     <string name="speed_slider_desc">Cambia la frecuencia de actualización</string>
     <string name="filters_and_options">Filtros y opciones</string>
     <string name="location_menu">Ubicación</string>
+    <string name="no_data_yet__raw_data_page">Los mensajes GNSS recibidos se mostrarán aquí</string>
+    <string name="raw_data_description">Los datos crudos recibidos a través del sensor</string>
 </resources>

@@ -72,12 +72,14 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
     private WebView OpenStreetMap;
     private SatelliteRecyclerViewHandler adapter;
+    private final SimpleDateFormat sdf;
 
     public SatelliteDataHandler(Activity _activity) {
 
         this.activity = _activity;
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
+        sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
     }
 
     LocationManager locationManager;
@@ -224,75 +226,9 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-
-
-            /*URL url = new URL(ServerHostname.ENDPOINT_SATELLITE);
-
-            HttpURLConnection client = (HttpURLConnection) url.openConnection();
-
-            // on below line setting method as post.
-            client.setRequestMethod("POST");
-
-            // on below line setting content type and accept type.
-            client.setRequestProperty("Content-Type", "application/json");
-            client.setRequestProperty("Accept", "application/json");
-
-            // on below line setting client.
-            client.setDoOutput(true);
-
-            // on below line we are creating an output stream and posting the data.
-            try (OutputStream os = client.getOutputStream()) {
-                byte[] input = json.getBytes("utf-8");
-                os.write(input, 0, input.length);
-                System.out.println(json.getBytes("utf-8"));
-            }
-
-            String JsonContent = "";
-
-            // on below line creating and initializing buffer reader.
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(client.getInputStream(), "utf-8"))) {
-
-                // on below line creating a string builder.
-                StringBuilder response = new StringBuilder();
-
-                // on below line creating a variable for response line.
-                String responseLine = null;
-
-                // on below line writing the response
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-
-                JsonContent = response.toString();
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                FetchResponse dataResponse = objectMapper.readValue(JsonContent, FetchResponse.class);
-
-                ServerSignalStrength = String.format("%.2f", dataResponse.signal);
-
-                try {
-                    locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
-                    @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (lastKnownLocation != null) {
-                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f",lastKnownLocation.getLongitude());
-                }
-            } catch (Exception ex)
-            {
-                DeviceLocation = ex.toString();
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ServerLocation = e.toString();
-            ServerSignalStrength = e.toString();
-        }*/
-
-
         }
         catch (Exception e) {
+            Log.e("NAV", e.toString());
         }
     }
 
@@ -318,7 +254,6 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
     @Override
     public void onGnssNavigationMessageReceived(@NonNull GnssNavigationMessage event) throws MalformedURLException {
-        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss", Locale.US);
         // Get the current time
         String currentTime = sdf.format(new Date());
 

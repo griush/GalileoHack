@@ -3,12 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.DataLogPage">
 
-    <TextView
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Porfa marti haz tu magia y crea un front guapo :)"
-        tools:ignore="RtlSymmetry" />
+        android:layout_margin="8dip"
+        app:cardCornerRadius="8dp"
+        >
 
+        <ScrollView
+            android:id="@+id/DataLogScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/DataLogTextView"
+            android:contentDescription="@string/raw_data_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:layout_gravity="top"
+            android:gravity="top"
+            android:fontFamily="@font/monospace"
+            android:padding="8dp"
+            android:paddingHorizontal="16dp"
+            android:hint="@string/no_data_yet__raw_data_page"
+            android:isScrollContainer="true"
+            android:textSize="14sp"
+            android:autofillHints=""/>
+
+        </ScrollView>
+    </com.google.android.material.card.MaterialCardView>
 </FrameLayout>

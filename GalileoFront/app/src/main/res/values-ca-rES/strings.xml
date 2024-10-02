@@ -48,4 +48,6 @@
     <string name="speed_slider_desc">Canvia la freqüència d\'actualització</string>
     <string name="filters_and_options">Filtres i opcions</string>
     <string name="location_menu">Ubicació</string>
+    <string name="no_data_yet__raw_data_page">Els missatges GNSS rebuts es mostraran aquí</string>
+    <string name="raw_data_description">Les dades crues rebudes a través del sensor</string>
 </resources>
