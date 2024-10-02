@@ -21,4 +21,10 @@
         android:label="@string/satellite_list"
         tools:layout="@layout/fragment_satellite_list_page" />
 
+    <fragment
+        android:id="@+id/dataLogPage"
+        android:name="com.gnsstracker.mainapp.ui.DataLogPage"
+        android:label="@string/data_log_page"
+        tools:layout="@layout/fragment_data_log_page" />
+
 </navigation>

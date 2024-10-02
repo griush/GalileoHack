@@ -52,8 +52,11 @@
     <string name="dialog_ok">OK</string>
     <string name="dialog_more_details">More details</string>
     <string name="dialog_continue">Continue</string>
+    <string name="data_log_page">Raw data</string>
     <string name="sat_list_desk">List of the satellites your device can see</string>
     <string name="speed_slider_desc">Change the refresh frequency of the satellites</string>
     <string name="filters_and_options">Filters and options</string>
     <string name="location_menu">Location</string>
+    <string name="no_data_yet__raw_data_page">GNSS received messages will show here</string>
+    <string name="raw_data_description">The raw data received by the sensors</string>
 </resources>

@@ -11,6 +11,7 @@
 
 package com.gnsstracker.mainapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.location.GnssClock;
 import android.location.GnssMeasurement;
@@ -26,9 +27,10 @@ import android.webkit.WebView;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.gnsstracker.mainapp.ui.DataLogPage;
 import com.gnsstracker.mainapp.ui.MainActivity;
 import com.gnsstracker.mainapp.ui.satellitelist.SatelliteRecyclerViewHandler;
 import com.gnsstracker.mainapp.ui.satellitelist.SatelliteListPage;
@@ -42,13 +44,15 @@ import static android.location.GnssMeasurement.STATE_TOW_KNOWN;
 import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class SatelliteDataHandler extends MainActivity implements MeasurementListener {
 
     public Activity activity;
 
     private boolean SET_RECYCLERVIEW_LAYOUT_MANAGER = false;
-    private GALIProcesser processer;
 
     private List<SatelliteWidgetEntryData> mData;
     private List<Integer> mIcon;
@@ -68,13 +72,14 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
     private WebView OpenStreetMap;
     private SatelliteRecyclerViewHandler adapter;
+    private final SimpleDateFormat sdf;
 
     public SatelliteDataHandler(Activity _activity) {
 
         this.activity = _activity;
         mData = new ArrayList<>();
         mIcon = new ArrayList<>();
-        processer = new GALIProcesser(_activity);
+        sdf = new SimpleDateFormat("HH:mm:ss", Locale.getDefault());
     }
 
     LocationManager locationManager;
@@ -221,75 +226,9 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
             } catch (JsonProcessingException e) {
                 throw new RuntimeException(e);
             }
-
-
-            /*URL url = new URL(ServerHostname.ENDPOINT_SATELLITE);
-
-            HttpURLConnection client = (HttpURLConnection) url.openConnection();
-
-            // on below line setting method as post.
-            client.setRequestMethod("POST");
-
-            // on below line setting content type and accept type.
-            client.setRequestProperty("Content-Type", "application/json");
-            client.setRequestProperty("Accept", "application/json");
-
-            // on below line setting client.
-            client.setDoOutput(true);
-
-            // on below line we are creating an output stream and posting the data.
-            try (OutputStream os = client.getOutputStream()) {
-                byte[] input = json.getBytes("utf-8");
-                os.write(input, 0, input.length);
-                System.out.println(json.getBytes("utf-8"));
-            }
-
-            String JsonContent = "";
-
-            // on below line creating and initializing buffer reader.
-            try (BufferedReader br = new BufferedReader(
-                    new InputStreamReader(client.getInputStream(), "utf-8"))) {
-
-                // on below line creating a string builder.
-                StringBuilder response = new StringBuilder();
-
-                // on below line creating a variable for response line.
-                String responseLine = null;
-
-                // on below line writing the response
-                while ((responseLine = br.readLine()) != null) {
-                    response.append(responseLine.trim());
-                }
-
-                JsonContent = response.toString();
-
-                ObjectMapper objectMapper = new ObjectMapper();
-                FetchResponse dataResponse = objectMapper.readValue(JsonContent, FetchResponse.class);
-
-                ServerSignalStrength = String.format("%.2f", dataResponse.signal);
-
-                try {
-                    locationManager = (LocationManager) activity.getSystemService(Context.LOCATION_SERVICE);
-
-                    @SuppressLint("MissingPermission") Location lastKnownLocation = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                if (lastKnownLocation != null) {
-                    DeviceLocation = "Lat: " + String.format("%.4f", lastKnownLocation.getLatitude()) + "\nLon: " + String.format("%.4f",lastKnownLocation.getLongitude());
-                }
-            } catch (Exception ex)
-            {
-                DeviceLocation = ex.toString();
-            }
-
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            ServerLocation = e.toString();
-            ServerSignalStrength = e.toString();
-        }*/
-
-
         }
         catch (Exception e) {
+            Log.e("NAV", e.toString());
         }
     }
 
@@ -303,14 +242,25 @@ public class SatelliteDataHandler extends MainActivity implements MeasurementLis
 
     }
 
+    // Move to a general utils class but who cares
+    static String bytesToHex(byte[] bytes) {
+        StringBuilder hexString = new StringBuilder();
+        for (byte b : bytes) {
+            String hex = String.format("%02x", b); // Format each byte as a 2-digit hex value
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
     @Override
-    public void onGnssNavigationMessageReceived(GnssNavigationMessage event) throws MalformedURLException {
-        System.out.println("NEW EVENT "+event.getSvid()+", "+event.getType());
-        //Log.i("DEB","NEW EVENT "+event.getSvid()+", "+event.getType());
-        if(event.getType() == GnssNavigationMessage.TYPE_GAL_F || event.getType() == GnssNavigationMessage.TYPE_GAL_I)
-            Log.i("DEB","EVENT");
-        if(event.getType() != GnssNavigationMessage.TYPE_GAL_I) return;
-        processer.onNewPage(event.getData(),event.getSvid());
+    public void onGnssNavigationMessageReceived(@NonNull GnssNavigationMessage event) throws MalformedURLException {
+        // Get the current time
+        String currentTime = sdf.format(new Date());
+
+        // Que pesaos amb warnings joder
+        @SuppressLint("DefaultLocale") String message = String.format("[%s] Nav: Svid(%d) %s", currentTime, event.getSvid(), bytesToHex(event.getData()));
+        Log.i("NAV", message);
+        DataLogPage.consoleContents.add(message);
     }
 
     @Override

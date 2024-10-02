@@ -17,5 +17,10 @@
         android:icon="@drawable/stats"
         android:contentDescription="@string/gnss_stats"
         android:title="@string/gnss_stats" />
+    <item
+        android:id="@+id/dataLogPage"
+        android:icon="@drawable/binary"
+        android:contentDescription="@string/data_log_page"
+        android:title="@string/data_log_page" />
 
 </menu>

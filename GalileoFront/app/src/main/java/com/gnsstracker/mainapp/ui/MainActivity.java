@@ -120,7 +120,7 @@ public class  MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.landingPage, R.id.generalStatsPage, R.id.satelliteListPage)
+                R.id.landingPage, R.id.generalStatsPage, R.id.satelliteListPage, R.id.dataLogPage)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
 

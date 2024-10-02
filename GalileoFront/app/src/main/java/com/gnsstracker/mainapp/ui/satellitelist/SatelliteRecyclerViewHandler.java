@@ -4,6 +4,7 @@ package com.gnsstracker.mainapp.ui.satellitelist;
 import static android.location.GnssStatus.*;
 
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gnsstracker.mainapp.R;
 import com.gnsstracker.mainapp.SatelliteWidgetEntryData;
+import com.google.android.material.card.MaterialCardView;
+import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.List;
 
@@ -29,6 +32,10 @@ public class SatelliteRecyclerViewHandler extends RecyclerView.Adapter<Satellite
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.satellite_recycler_view_item, parent, false);
+        int color = SurfaceColors.SURFACE_1.getColor(view.getContext());
+        Drawable bg = view.getBackground();
+        bg.setTint(color);
+        view.setBackground(bg);
         return new ViewHolder(view);
     }
 

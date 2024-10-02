@@ -43,8 +43,11 @@
     <string name="dialog_more_details">Més detalls</string>
     <string name="dialog_continue">Continua</string>
     <string name="missing_permissions_dialog_title">Falten permisos</string>
+    <string name="data_log_page">Dades crues</string>
     <string name="sat_list_desk">Llista de satèl·lits el vostre dispositiu pot veure</string>
     <string name="speed_slider_desc">Canvia la freqüència d\'actualització</string>
     <string name="filters_and_options">Filtres i opcions</string>
     <string name="location_menu">Ubicació</string>
+    <string name="no_data_yet__raw_data_page">Els missatges GNSS rebuts es mostraran aquí</string>
+    <string name="raw_data_description">Les dades crues rebudes a través del sensor</string>
 </resources>
