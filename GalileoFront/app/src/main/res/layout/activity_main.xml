@@ -24,8 +24,10 @@
         android:id="@+id/nav_view"
         android:layout_width="fill_parent"
         android:layout_height="80dp"
+        app:labelVisibilityMode="labeled"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_nav_menu">
 

@@ -43,7 +43,7 @@
     <string name="dialog_more_details">Más detalles</string>
     <string name="dialog_continue">Continua</string>
     <string name="missing_permissions_dialog_title">Faltan permisos</string>
-    <string name="data_log_page">Data Log</string>
+    <string name="data_log_page">Datos crudos</string>
     <string name="sat_list_desk">Lista de satélites tu dispositivo puede ver</string>
     <string name="speed_slider_desc">Cambia la frecuencia de actualización</string>
     <string name="filters_and_options">Filtros y opciones</string>
