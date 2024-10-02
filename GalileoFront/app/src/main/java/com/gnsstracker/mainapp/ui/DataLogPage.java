@@ -93,6 +93,9 @@ public class DataLogPage extends Fragment {
         for(int i = 0; i < consoleContents.size(); i++)
         {
             sb.append(consoleContents.get(i));
+
+            // Per que cony aixo no cambia el resultat >:(
+            // sb.append(consoleContents.get(consoleContents.size() - i - 1));
             sb.append("\n");
         }
         consoleContents.clear();
