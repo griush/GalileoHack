@@ -18,6 +18,7 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.gnsstracker.mainapp.R;
+import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.ArrayList;
 
@@ -49,7 +50,10 @@ public class DataLogPage extends Fragment {
                              Bundle savedInstanceState) {
         var view = inflater.inflate(R.layout.fragment_data_log_page, container, false);
         logView = view.findViewById(R.id.DataLogTextView);
+
         scrollView = view.findViewById(R.id.DataLogScrollView);
+        int color = SurfaceColors.SURFACE_1.getColor(this.getContext());
+        scrollView.setBackgroundColor(color);
 
         dataTimer = new CountDownTimer(500, 10) {
             @Override
