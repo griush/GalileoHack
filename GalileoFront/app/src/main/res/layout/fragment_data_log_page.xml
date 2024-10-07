@@ -29,6 +29,7 @@
             android:gravity="top"
             android:fontFamily="@font/monospace"
             android:padding="8dp"
+            android:minHeight="120dp"
             android:paddingHorizontal="16dp"
             android:hint="@string/no_data_yet__raw_data_page"
             android:isScrollContainer="true"
