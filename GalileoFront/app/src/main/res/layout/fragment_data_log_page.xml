@@ -19,9 +19,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
+            <!--  android:contentDescription="@string/raw_data_description" -->
         <TextView
             android:id="@+id/DataLogTextView"
-            android:contentDescription="@string/raw_data_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textIsSelectable="true"
@@ -31,7 +32,7 @@
             android:padding="8dp"
             android:minHeight="120dp"
             android:paddingHorizontal="16dp"
-            android:hint="@string/no_data_yet__raw_data_page"
+            android:text="@string/no_data_yet__raw_data_page"
             android:isScrollContainer="true"
             android:textSize="14sp"
             android:autofillHints=""/>

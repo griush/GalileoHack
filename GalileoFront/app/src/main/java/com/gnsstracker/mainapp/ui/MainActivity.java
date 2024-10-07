@@ -31,6 +31,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.gnsstracker.mainapp.databinding.ActivityMainBinding;
+import com.google.android.material.color.DynamicColors;
 import com.google.android.material.elevation.SurfaceColors;
 
 import java.util.List;
@@ -111,6 +112,7 @@ public class  MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        DynamicColors.applyToActivitiesIfAvailable(this.getApplication());
         SplashScreen.installSplashScreen(this);
         super.onCreate(savedInstanceState);
 

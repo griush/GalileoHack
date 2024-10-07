@@ -85,7 +85,7 @@ public class DataLogPage extends Fragment {
             scrollView.scrollBy(0, delta);
         }
         // END maintain on bottom if user is on bottom
-        
+
         StringBuilder sb = new StringBuilder();
         for(int i = 0; i < consoleContents.size(); i++)
         {
