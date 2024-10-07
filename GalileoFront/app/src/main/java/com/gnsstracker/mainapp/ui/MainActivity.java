@@ -4,6 +4,8 @@ import static java.lang.Thread.sleep;
 
 import android.Manifest;
 import android.app.AlertDialog;
+import android.app.UiModeManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.ColorDrawable;
@@ -11,6 +13,7 @@ import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.View;
 import android.view.Window;
 
 
@@ -135,8 +138,9 @@ public class  MainActivity extends AppCompatActivity {
 
         Window window = getWindow();
         window.setNavigationBarColor(color);
+        window.setNavigationBarContrastEnforced(true);
         window.setStatusBarColor(color);
-
+        window.setStatusBarContrastEnforced(true);
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(color));
 
         BottomNavigationView navigationView = findViewById(R.id.nav_view);
