@@ -121,7 +121,7 @@ public class SatelliteListPage extends Fragment {
         });
 
 
-        SatellitesViewHandler = new SatelliteRecyclerViewHandler(CurrentSatelliteData);
+        SatellitesViewHandler = new SatelliteRecyclerViewHandler(CurrentSatelliteData, getActivity());
         SatellitesView = view.findViewById(R.id.SatellitesRecyclerView);
         SatellitesView.setAdapter(SatellitesViewHandler);
         SatellitesView.setLayoutManager(new LinearLayoutManager(getContext()));

@@ -3,6 +3,9 @@ package com.gnsstracker.mainapp.ui.satellitelist;
 
 import static android.location.GnssStatus.*;
 
+import static androidx.core.content.res.ResourcesCompat.getCachedFont;
+import static androidx.core.content.res.ResourcesCompat.getColor;
+
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -12,10 +15,14 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 
+import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.gnsstracker.mainapp.R;
 import com.gnsstracker.mainapp.SatelliteWidgetEntryData;
+import com.gnsstracker.mainapp.ui.MainActivity;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.elevation.SurfaceColors;
 
@@ -24,9 +31,11 @@ import java.util.List;
 public class SatelliteRecyclerViewHandler extends RecyclerView.Adapter<SatelliteRecyclerViewHandler.ViewHolder> {
 
     private List<SatelliteWidgetEntryData> SatellitesData;
+    private FragmentActivity Activity;
 
-    public SatelliteRecyclerViewHandler(List<SatelliteWidgetEntryData> data) {
+    public SatelliteRecyclerViewHandler(List<SatelliteWidgetEntryData> data, FragmentActivity activity) {
         this.SatellitesData = data;
+        Activity = activity;
     }
 
     @Override
@@ -46,12 +55,16 @@ public class SatelliteRecyclerViewHandler extends RecyclerView.Adapter<Satellite
         holder.SatelliteNumber.setText(GetFlagFromId(item.ConstellationType) + " id " + item.Svid);
         holder.SignalStrength.setText(String.format("%.2f", item.Cn0DbHz) + " dBHz");
 
+        int RED = Activity.getColor(R.color.COLOR_RED);
+        int YELLOW = Activity.getColor(R.color.COLOR_YELLOW);
+        int GREEN = Activity.getColor(R.color.COLOR_GREEN);
+
         if(item.Cn0DbHz > 20)
-            holder.SignalStrength.setTextColor(Color.argb(255, 0, 255, 128));
+            holder.SignalStrength.setTextColor(GREEN);
         else if (item.Cn0DbHz > 10)
-            holder.SignalStrength.setTextColor(Color.argb(255, 255, 255, 0));
+            holder.SignalStrength.setTextColor(YELLOW);
         else
-            holder.SignalStrength.setTextColor(Color.argb(255, 255, 50, 0));
+            holder.SignalStrength.setTextColor(RED);
 
         holder.Frequency.setText(formatDoubleAsGHz(item.CarrierFrequencyHz));
 
@@ -61,11 +74,11 @@ public class SatelliteRecyclerViewHandler extends RecyclerView.Adapter<Satellite
         holder.AGCDisplay.setText(String.format("%.2f", item.AGC) + " dB");
 
         if(item.AGC < -3)
-            holder.AGCDisplay.setTextColor(Color.argb(255, 0, 255, 128));
+            holder.AGCDisplay.setTextColor(GREEN);
         else if (item.AGC <= 3)
-            holder.AGCDisplay.setTextColor(Color.argb(255, 255, 255, 0));
+            holder.AGCDisplay.setTextColor(YELLOW);
         else
-            holder.AGCDisplay.setTextColor(Color.argb(255, 255, 50, 0));
+            holder.AGCDisplay.setTextColor(RED);
     }
 
     @Override

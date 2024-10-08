@@ -89,7 +89,7 @@
             android:layout_marginVertical="2dp"
             android:gravity="start"
             android:text="@string/gps_location"
-            android:textColor="#0080f7" />
+            android:textColor="@color/GNSS_LOCATION_LABEL_COLOR" />
 
         <TextView
             android:id="@+id/PrecisionLabel3"
@@ -98,7 +98,7 @@
             android:layout_marginVertical="2dp"
             android:gravity="start"
             android:text="@string/network_location"
-            android:textColor="#f700ef" />
+            android:textColor="@color/NETWORK_LOCATION_LABEL_COLOR"/>
 
         <TextView
             android:id="@+id/PrecisionLabel2"
@@ -107,7 +107,7 @@
             android:layout_marginVertical="2dp"
             android:gravity="start"
             android:text="@string/fused_gps_network_location_android_12"
-            android:textColor="#bf8600" />
+            android:textColor="@color/FUSED_LOCATION_LABEL_COLOR" />
 
         <org.osmdroid.views.MapView
             android:id="@+id/LocationMapView"

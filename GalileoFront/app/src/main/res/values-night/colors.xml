@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="GNSS_LOCATION_LABEL_COLOR" >#2D9AFF</color>
+    <color name="NETWORK_LOCATION_LABEL_COLOR" >#FF49F9</color>
+    <color name="FUSED_LOCATION_LABEL_COLOR" >#FFC337</color>
+    <color name="COLOR_GREEN" >#4CFFAA</color>
+    <color name="COLOR_YELLOW" >#FFFF59</color>
+    <color name="COLOR_RED" >#FF5252</color>
+    <color name="COLOR_TERM" >#eeeeee</color>
+</resources>

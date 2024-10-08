@@ -80,25 +80,18 @@ public class DataLogPage extends Fragment {
         int sh = scrollView.getHeight();
         int delta = bottom - (sy + sh);
 
-        if(delta < 100 && delta > 0)
+        if(delta < 300 && delta > 0)
         {
             scrollView.scrollBy(0, delta);
         }
         // END maintain on bottom if user is on bottom
 
-
-
         StringBuilder sb = new StringBuilder();
-        sb.append(logView.getText());
         for(int i = 0; i < consoleContents.size(); i++)
         {
             sb.append(consoleContents.get(i));
-
-            // Per que cony aixo no cambia el resultat >:(
-            // sb.append(consoleContents.get(consoleContents.size() - i - 1));
             sb.append("\n");
         }
-        consoleContents.clear();
         logView.setText(sb.toString());
 
     }
