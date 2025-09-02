@@ -23,7 +23,7 @@
     <string name="satellite_list">Llista de satèl·lits</string>
     <string name="gnss_stats">Estadístiques</string>
     <string name="gnss_tracker_icon_description">GNSS Tracker icon</string>
-    <string name="gnss_tracker_description">Aquesta aplicació mostra informació captada pels sensors GNSS del telèfon. \n\nGNSS Tracker és el resultat de la HackUPC 2024.</string>
+    <string name="gnss_tracker_description">Aquesta aplicació mostra informació captada pels sensors GNSS del telèfon.</string>
     <string name="view_gnss_tracker_on_github">Veure GNSS Tracker a GitHub</string>
     <string name="your_current_location">Ubicació actual:</string>
     <string name="gps_location">Ubicació GNSS</string>
