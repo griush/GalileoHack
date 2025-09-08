@@ -7,8 +7,8 @@
     <string name="supported">Supported</string>
     <string name="unsupported">Unsupported</string>
     <string name="gnss_chipset">GNSS Chipset:</string>
-    <string name="model_name">Model name:&#160;</string>
-    <string name="model_year">Model year:&#160;</string>
+    <string name="model_name">Model:&#160;</string>
+    <string name="model_year">Year:&#160;</string>
     <string name="unknown_before_2016">Unknown (before 2016)</string>
     <string name="navigation_messages">Navigation Messages:&#160;</string>
     <string name="measurements">Measurements:&#160;</string>
@@ -57,6 +57,6 @@
     <string name="speed_slider_desc">Change the refresh frequency of the satellites</string>
     <string name="filters_and_options">Filters and options</string>
     <string name="location_menu">Location</string>
-    <string name="no_data_yet__raw_data_page">GNSS received messages will show here</string>
+    <string name="no_data_yet__raw_data_page">The GNSS received messages will show here</string>
     <string name="raw_data_description">The raw data received by the sensors</string>
 </resources>

@@ -5,9 +5,9 @@
     <string name="supported">Compatible</string>
     <string name="unsupported">No compatible</string>
     <string name="gnss_chipset">Xip GNSS: </string>
-    <string name="model_name">Nom:&#160;</string>
+    <string name="model_name">Model:&#160;</string>
     <string name="model_year">Any:&#160;</string>
-    <string name="unknown_before_2016">Desconegut (abans del 2016)</string>
+    <string name="unknown_before_2016">Desconegut (previ al 2016)</string>
     <string name="navigation_messages">Missatges de navegació:&#160;</string>
     <string name="measurements">Mesures:&#160;</string>
     <string name="adr">ADR:&#160;</string>
@@ -41,7 +41,7 @@
     <string name="missing_permissions_dialog_explanation">El GNSS tracker no funciona sense permisos d\'ubicació i d\'escriptura. Si us plau, activeu-los des de la configuració i reinicieu l\'app</string>
     <string name="dialog_ok">D\'acord</string>
     <string name="dialog_more_details">Més detalls</string>
-    <string name="dialog_continue">Continua</string>
+    <string name="dialog_continue">Continuar</string>
     <string name="missing_permissions_dialog_title">Falten permisos</string>
     <string name="data_log_page">Dades crues</string>
     <string name="sat_list_desk">Llista de satèl·lits el vostre dispositiu pot veure</string>
