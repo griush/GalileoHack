@@ -34,6 +34,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.gnsstracker.mainapp.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -63,6 +64,8 @@ public class LandingPage extends Fragment {
     Button GitHubButton;
     Button PrivacyButton;
     MapView LocationMapView;
+
+    TextView FusedLocationLabel;
     private final int REQUEST_PERMISSIONS_REQUEST_CODE = 1;
 
     private FusedLocationProviderClient fusedLocationClient;
@@ -112,6 +115,7 @@ public class LandingPage extends Fragment {
         PrivacyButton = view.findViewById(R.id.PrivacyButton);
         LocationMapView = view.findViewById(R.id.LocationMapView);
         LocationMapView.setTileSource(TileSourceFactory.MAPNIK);
+        FusedLocationLabel = view.findViewById(R.id.FusedLocationLabel);
 
         Context context = getContext();
 
@@ -146,6 +150,8 @@ public class LandingPage extends Fragment {
             }, LocationMapView, 191, 134, 0);
             FusedLocationOverlay.enableMyLocation();
             LocationMapView.getOverlays().add(FusedLocationOverlay);
+        } else {
+            FusedLocationLabel.setText(R.string.no_fused_location_available);
         }
 
         GPSLocationOverlay = new ColoredLocationNewOverlay(new IMyLocationProvider() {

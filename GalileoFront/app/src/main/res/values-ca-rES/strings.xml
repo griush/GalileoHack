@@ -28,7 +28,7 @@
     <string name="your_current_location">Ubicació actual:</string>
     <string name="gps_location">Ubicació GNSS</string>
     <string name="network_location">Ubicació de xarxa</string>
-    <string name="fused_gps_network_location_android_12">Ubicació real (GNSS + Xarxa) (Android 12+)</string>
+    <string name="fused_gps_network_location_android_12">Ubicació real (GNSS + Xarxa)</string>
     <string name="filters">Filtres</string>
     <string name="refresh_frequency">Frequència d\'actualització</string>
     <string name="apply">Aplicar</string>
@@ -50,4 +50,5 @@
     <string name="location_menu">Ubicació</string>
     <string name="no_data_yet__raw_data_page">Els missatges GNSS rebuts es mostraran aquí</string>
     <string name="raw_data_description">Les dades crues rebudes a través del sensor</string>
+    <string name="no_fused_location_available">La ubicació fusionada només funciona a partir d\'Android 12</string>
 </resources>

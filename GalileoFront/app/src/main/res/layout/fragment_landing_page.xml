@@ -105,7 +105,7 @@
             android:textColor="@color/NETWORK_LOCATION_LABEL_COLOR"/>
 
         <TextView
-            android:id="@+id/PrecisionLabel2"
+            android:id="@+id/FusedLocationLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"

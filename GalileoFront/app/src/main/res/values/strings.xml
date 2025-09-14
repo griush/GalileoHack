@@ -30,7 +30,7 @@
     <string name="your_current_location">Your current location:</string>
     <string name="gps_location">GNSS location</string>
     <string name="network_location">Network location</string>
-    <string name="fused_gps_network_location_android_12">Fused (GNSS + Network) location (Android 12+)</string>
+    <string name="fused_gps_network_location_android_12">Fused (GNSS + Network) location</string>
     <string name="filters">Filters</string>
     <string name="galileo" translatable="false">🇪🇺 Galileo</string>
     <string name="gps" translatable="false">🇺🇸 GPS</string>
@@ -59,4 +59,5 @@
     <string name="location_menu">Location</string>
     <string name="no_data_yet__raw_data_page">The GNSS received messages will show here</string>
     <string name="raw_data_description">The raw data received by the sensors</string>
+    <string name="no_fused_location_available">Fused location is only available on devices running Android 12 or newer</string>
 </resources>

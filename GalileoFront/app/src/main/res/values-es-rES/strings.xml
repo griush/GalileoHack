@@ -28,7 +28,7 @@
     <string name="your_current_location">Ubicación actual:</string>
     <string name="gps_location">Ubicación GNSS</string>
     <string name="network_location">Ubicación de red</string>
-    <string name="fused_gps_network_location_android_12">Ubicación real (GNSS + Red) (Android 12+)</string>
+    <string name="fused_gps_network_location_android_12">Ubicación real (GNSS + Red)</string>
     <string name="filters">Filtros</string>
     <string name="refresh_frequency">Frecuéncia de actualización</string>
     <string name="apply">Aplicar</string>
@@ -50,4 +50,5 @@
     <string name="location_menu">Ubicación</string>
     <string name="no_data_yet__raw_data_page">Los mensajes GNSS recibidos se mostrarán aquí</string>
     <string name="raw_data_description">Los datos crudos recibidos a través del sensor</string>
+    <string name="no_fused_location_available">La ubicació fusionada solo funciona a partir de Android 12</string>
 </resources>
