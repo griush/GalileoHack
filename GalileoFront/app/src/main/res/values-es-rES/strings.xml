@@ -5,9 +5,9 @@
     <string name="supported">Compatible</string>
     <string name="unsupported">No compatible</string>
     <string name="gnss_chipset">Chip GNSS: </string>
-    <string name="model_name">Nombre:&#160;</string>
+    <string name="model_name">Modelo:&#160;</string>
     <string name="model_year">Año:&#160;</string>
-    <string name="unknown_before_2016">Desconocido (antes del 2016)</string>
+    <string name="unknown_before_2016">Desconocido (previo a 2016)</string>
     <string name="navigation_messages">Mensajes de navegación:&#160;</string>
     <string name="measurements">Mediciones:&#160;</string>
     <string name="adr">ADR:&#160;</string>
@@ -23,12 +23,12 @@
     <string name="satellite_list">Lista de satélites</string>
     <string name="gnss_stats">Estadisticas</string>
     <string name="gnss_tracker_icon_description">GNSS Tracker icon</string>
-    <string name="gnss_tracker_description">Esta aplicacióm muestra información captada por los sensores GNSS del teléfono. \n\nGNSS Tracker es el resultado de la HackUPC 2024.</string>
+    <string name="gnss_tracker_description">Esta aplicación muestra información captada por los sensores GNSS del teléfono.</string>
     <string name="view_gnss_tracker_on_github">Ver GNSS Tracker en GitHub</string>
     <string name="your_current_location">Ubicación actual:</string>
     <string name="gps_location">Ubicación GNSS</string>
     <string name="network_location">Ubicación de red</string>
-    <string name="fused_gps_network_location_android_12">Ubicación real (GNSS + Red) (Android 12+)</string>
+    <string name="fused_gps_network_location_android_12">Ubicación real (GNSS + Red)</string>
     <string name="filters">Filtros</string>
     <string name="refresh_frequency">Frecuéncia de actualización</string>
     <string name="apply">Aplicar</string>
@@ -50,4 +50,5 @@
     <string name="location_menu">Ubicación</string>
     <string name="no_data_yet__raw_data_page">Los mensajes GNSS recibidos se mostrarán aquí</string>
     <string name="raw_data_description">Los datos crudos recibidos a través del sensor</string>
+    <string name="no_fused_location_available">La ubicació fusionada solo funciona a partir de Android 12</string>
 </resources>

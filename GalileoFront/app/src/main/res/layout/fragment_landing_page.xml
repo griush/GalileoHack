@@ -23,8 +23,8 @@
             android:textAlignment="center">
 
             <ImageView
-                android:layout_width="80dp"
-                android:layout_height="80dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:layout_weight="0"
                 android:contentDescription="@string/gnss_tracker_icon_description"
                 android:src="@drawable/icon_splashscreen"
@@ -32,7 +32,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="80dip"
+                android:layout_height="60dip"
                 android:gravity="center"
                 android:text="@string/app_name"
                 android:textSize="40sp"
@@ -60,18 +60,22 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1"
-                android:text="@string/view_gnss_tracker_on_github" />
+                android:text="@string/view_gnss_tracker_on_github"
+                android:visibility="gone" />
 
             <Button
-                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:id="@+id/PrivacyButton"
+                style="@style/Widget.Material3.Button.OutlinedButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginBottom="8dp"
                 android:layout_weight="1.6"
-                android:text="@string/privacy_policy" />
+                android:insetLeft="0dp"
+                android:insetRight="12dp"
+                android:text="@string/privacy_policy"
+                android:visibility="visible" />
         </LinearLayout>
 
         <TextView
@@ -101,7 +105,7 @@
             android:textColor="@color/NETWORK_LOCATION_LABEL_COLOR"/>
 
         <TextView
-            android:id="@+id/PrecisionLabel2"
+            android:id="@+id/FusedLocationLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginVertical="2dp"

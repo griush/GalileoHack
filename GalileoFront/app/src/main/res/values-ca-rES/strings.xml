@@ -5,9 +5,9 @@
     <string name="supported">Compatible</string>
     <string name="unsupported">No compatible</string>
     <string name="gnss_chipset">Xip GNSS: </string>
-    <string name="model_name">Nom:&#160;</string>
+    <string name="model_name">Model:&#160;</string>
     <string name="model_year">Any:&#160;</string>
-    <string name="unknown_before_2016">Desconegut (abans del 2016)</string>
+    <string name="unknown_before_2016">Desconegut (previ al 2016)</string>
     <string name="navigation_messages">Missatges de navegació:&#160;</string>
     <string name="measurements">Mesures:&#160;</string>
     <string name="adr">ADR:&#160;</string>
@@ -23,12 +23,12 @@
     <string name="satellite_list">Llista de satèl·lits</string>
     <string name="gnss_stats">Estadístiques</string>
     <string name="gnss_tracker_icon_description">GNSS Tracker icon</string>
-    <string name="gnss_tracker_description">Aquesta aplicació mostra informació captada pels sensors GNSS del telèfon. \n\nGNSS Tracker és el resultat de la HackUPC 2024.</string>
+    <string name="gnss_tracker_description">Aquesta aplicació mostra informació captada pels sensors GNSS del telèfon.</string>
     <string name="view_gnss_tracker_on_github">Veure GNSS Tracker a GitHub</string>
     <string name="your_current_location">Ubicació actual:</string>
     <string name="gps_location">Ubicació GNSS</string>
     <string name="network_location">Ubicació de xarxa</string>
-    <string name="fused_gps_network_location_android_12">Ubicació real (GNSS + Xarxa) (Android 12+)</string>
+    <string name="fused_gps_network_location_android_12">Ubicació real (GNSS + Xarxa)</string>
     <string name="filters">Filtres</string>
     <string name="refresh_frequency">Frequència d\'actualització</string>
     <string name="apply">Aplicar</string>
@@ -41,7 +41,7 @@
     <string name="missing_permissions_dialog_explanation">El GNSS tracker no funciona sense permisos d\'ubicació i d\'escriptura. Si us plau, activeu-los des de la configuració i reinicieu l\'app</string>
     <string name="dialog_ok">D\'acord</string>
     <string name="dialog_more_details">Més detalls</string>
-    <string name="dialog_continue">Continua</string>
+    <string name="dialog_continue">Continuar</string>
     <string name="missing_permissions_dialog_title">Falten permisos</string>
     <string name="data_log_page">Dades crues</string>
     <string name="sat_list_desk">Llista de satèl·lits el vostre dispositiu pot veure</string>
@@ -50,4 +50,5 @@
     <string name="location_menu">Ubicació</string>
     <string name="no_data_yet__raw_data_page">Els missatges GNSS rebuts es mostraran aquí</string>
     <string name="raw_data_description">Les dades crues rebudes a través del sensor</string>
+    <string name="no_fused_location_available">La ubicació fusionada només funciona a partir d\'Android 12</string>
 </resources>
